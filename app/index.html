@@ -56,6 +56,7 @@
   .big911{display:block;text-align:center;background:#C12727;color:#fff;font-size:21px;font-weight:800;
           border-radius:14px;padding:15px;text-decoration:none;margin:0 0 12px}
   .gold{background:#FFF8E1;border:1.5px solid #E3C766}
+  .promo{background:#EAF7EA;border-radius:9px;padding:7px 10px;font-size:13.5px;margin-top:8px;line-height:1.45}
   .msg{background:#fff;border:1px solid #E4E1D8;border-radius:14px;padding:18px;text-align:center;color:#5A6B82}
   .foot{text-align:center;font-size:12.5px;color:#8A94A6;margin-top:26px;line-height:1.6}
   a.sheetlink{color:#12275f;font-weight:700}
@@ -355,12 +356,13 @@ var loadServices = once(function(){
         '<div class="warn"><div class="ttl">' + esc(rows[0][0]) + '</div><div class="det">' + esc(rows[1][0]) + '</div></div>';
     }
   }).catch(function(){});
-  fetchSheet("Services & Referrals", "A6:E120").then(function(rows){
+  fetchSheet("Services & Referrals", "A6:F120").then(function(rows){
     var html = "", lastCat = null;
     rows.filter(function(r){ return r[1]; }).forEach(function(r){
       if (r[0] && r[0] !== lastCat) { html += '<div class="sect">' + esc(r[0].toUpperCase()) + '</div>'; lastCat = r[0]; }
       html += '<div class="card"><div class="ttl">' + esc(r[1]) + '</div>' + phoneHTML(r[2]) +
-        webHTML(r[3]) + (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + '</div>';
+        webHTML(r[3]) + (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') +
+        (r[5] ? '<div class="promo">🎉 <strong>Current promo:</strong> ' + esc(r[5]) + '</div>' : '') + '</div>';
     });
     document.getElementById("svcList").innerHTML = html || '<div class="msg">No services listed yet.</div>';
   }).catch(function(){ errBox(document.getElementById("svcList"), "services"); });
