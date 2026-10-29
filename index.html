@@ -5,24 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kerns Ridge Community</title>
 <link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#12275f">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Kerns Ridge">
 <style>
-  body{font-family:Arial,sans-serif;background:#12275f;color:#fff;text-align:center;padding-top:16vh;margin:0}
+  body{font-family:Arial,sans-serif;background:#12275f;color:#fff;text-align:center;padding:10vh 20px 40px;margin:0}
   img{width:120px;height:120px}
-  a{color:#ffd97a;font-size:20px}
+  .btn{display:inline-block;background:#16a765;color:#fff;font-size:22px;font-weight:bold;
+       padding:18px 34px;border-radius:14px;text-decoration:none;margin:26px 0 10px}
+  .tip{background:rgba(255,255,255,.12);border-radius:12px;padding:16px 18px;max-width:420px;margin:22px auto 0;font-size:16px;line-height:1.5}
 </style>
 <script>
-  setTimeout(function(){ window.location.replace("https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=1316244943"); }, 600);
+  var SHEET = "https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=1316244943";
+  var installed = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  if (installed) { window.location.replace(SHEET); }
 </script>
 </head>
 <body>
   <img src="icon.svg" alt="Kerns Ridge">
   <h2>Kerns Ridge Community</h2>
-  <p>Opening the neighborhood sheet...</p>
-  <p><a href="https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=1316244943">Tap here if it doesn't open</a></p>
+  <a class="btn" href="https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=1316244943">Open Kerns Ridge</a>
+  <div class="tip">
+    <strong>Want this as an app icon?</strong><br>
+    Android: tap the three dots at the top, then "Add to Home screen."<br>
+    iPhone: tap the Share button, then "Add to Home Screen."<br>
+    After that, this icon opens the sheet directly.
+  </div>
 </body>
 </html>
