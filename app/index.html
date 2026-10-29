@@ -239,7 +239,7 @@ var loadDirectory = once(function(){
     rows.forEach(function(r){
       if (!r[0]) return;
       dirData.push({ lot:r[0], addr:r[1]||"", name:r[2]||"", candy:r[3]||"",
-                     cams:r[4]||"", teams:[r[5],r[6],r[7],r[8]].filter(Boolean) });
+                     cams:r[4]||"", fb:[r[5],r[6]].filter(Boolean), bb:[r[7],r[8]].filter(Boolean) });
     });
     renderDir();
   }).catch(function(){ errBox(document.getElementById("dirList"), "the directory"); });
@@ -259,7 +259,8 @@ function renderDir(){
       (d.addr ? '<span class="addr">' + esc(d.addr) + '</span>' : '') + '</div>' +
       (d.name ? '<div class="name">' + esc(d.name) + '</div>' : '') +
       (chips ? '<div class="chips">' + chips + '</div>' : '') +
-      (d.teams.length ? '<div class="teams">🏈 ' + esc(d.teams.join(" · ")) + '</div>' : '') +
+      (d.fb.length ? '<div class="teams">🏈 ' + esc(d.fb.join(" · ")) + '</div>' : '') +
+      (d.bb.length ? '<div class="teams">🏀 ' + esc(d.bb.join(" · ")) + '</div>' : '') +
       '</div>';
   }).join("") || '<div class="msg">No lots match that search.</div>';
 }
