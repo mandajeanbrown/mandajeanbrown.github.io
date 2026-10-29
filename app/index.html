@@ -277,12 +277,37 @@ var loadEvents = once(function(){
   }).catch(function(){ errBox(document.getElementById("evList"), "events"); });
 });
 
+/* App-store links: the sheet only exposes the word "Download" to the app,
+   so the real store addresses live here (taken from the sheet's own formulas). */
+var APP_LINKS = [
+  { match: /duke energy/i, play: "https://play.google.com/store/apps/details?id=com.dukeenergy.customerapp.release&hl=en&gl=us",
+    ios: "https://itunes.apple.com/us/app/duke-energy/id1325217974?mt=8" },
+  { match: /cams/i, play: "https://play.google.com/store/apps/details?id=com.vantacahome.camsconnects&hl=en_US", ios: "" },
+  { match: /salisbury connect/i, play: "https://play.google.com/store/apps/details?id=com.ridewithvia.salisburyconnect&hl=en-us&gl=us", ios: "" }
+];
+function storeChips(who, playCell, iosCell){
+  var entry = null;
+  APP_LINKS.forEach(function(e){ if (e.match.test(who)) entry = e; });
+  var name = who.split("(")[0].trim();
+  var chips = "";
+  if (playCell) {
+    var purl = (entry && entry.play) || ("https://play.google.com/store/search?q=" + encodeURIComponent(name) + "&c=apps");
+    chips += '<a class="chip" style="text-decoration:none" target="_blank" rel="noopener" href="' + purl + '">▶️ Google Play app</a>';
+  }
+  if (iosCell) {
+    var iurl = (entry && entry.ios) || ("https://apps.apple.com/us/search?term=" + encodeURIComponent(name));
+    chips += '<a class="chip" style="text-decoration:none" target="_blank" rel="noopener" href="' + iurl + '">🍎 App Store app</a>';
+  }
+  return chips ? '<div class="chips">' + chips + '</div>' : '';
+}
+
 /* ---------- New Here ---------- */
 var loadNewHere = once(function(){
   fetchSheet("New Here?", "A15:F31").then(function(rows){
     document.getElementById("nhList").innerHTML = rows.filter(function(r){ return r[0]; }).map(function(r){
       return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' + phoneHTML(r[1]) +
-        webHTML(r[4]) + (r[5] ? '<div class="det">' + esc(r[5]) + '</div>' : '') + '</div>';
+        webHTML(r[4]) + storeChips(r[0], r[2], r[3]) +
+        (r[5] ? '<div class="det">' + esc(r[5]) + '</div>' : '') + '</div>';
     }).join("");
   }).catch(function(){ errBox(document.getElementById("nhList"), "local numbers"); });
   fetchSheet("New Here?", "A33:F45").then(function(rows){
