@@ -77,6 +77,7 @@
       <button class="btn" data-go="directory">🏠 Directory</button>
       <button class="btn" data-go="events">📅 Local Events</button>
       <button class="btn" data-go="lend">🤝 Lend &amp; Borrow</button>
+      <button class="btn" data-go="forsale">🏷️ For Sale</button>
       <button class="btn" data-go="emergency">🚨 Emergencies</button>
       <button class="btn" data-go="services">🔧 Services</button>
       <button class="btn" data-go="schools">🎓 Schools</button>
@@ -144,6 +145,15 @@
     <div id="svcBanner"></div>
     <div class="card"><div class="det">Neighbors helping neighbors... who did your fence, your lawn, your plumbing? This list is read-only — post your recommendation in the Kerns Ridge Facebook group and it will be added here.</div></div>
     <div id="svcList"><div class="msg">Loading...</div></div>
+  </div>
+
+  <!-- FOR SALE -->
+  <div class="screen" id="screen-forsale">
+    <button class="back" data-go="home">← Home</button>
+    <div class="card"><div class="det">Neighbors selling to neighbors... furniture, gear, and everything in between. Contact the seller directly to arrange pickup.</div></div>
+    <div class="sect">🏷️ FOR SALE</div>
+    <div id="saleList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener">➕ List something for sale →</a><br><a class="sheetlink" href="https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=305937666" target="_blank" rel="noopener">Update your listing's status in the sheet →</a></div>
   </div>
 
   <!-- SCHOOLS -->
@@ -458,7 +468,34 @@ var loadLend = once(function(){
     document.getElementById("borrowList").innerHTML = lendCards(rows, "borrow");
   }).catch(function(){ errBox(document.getElementById("borrowList"), "borrow requests"); });
 });
-var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere,
+var loadForSale = once(function(){
+  fetchSheet("For Sale", "A5:I80").then(function(rows){
+    var real = rows.filter(function(r){ return r[0] && !/nothing here yet/i.test(r[0]); });
+    if (!real.length) {
+      document.getElementById("saleList").innerHTML =
+        '<div class="msg">Nothing for sale yet — be the first to list something with the button below.</div>';
+      return;
+    }
+    document.getElementById("saleList").innerHTML = real.map(function(r){
+      var photo = "";
+      if (r[7]) {
+        var m = /\/d\/([\w-]+)/.exec(r[7]);
+        var src = m ? "https://drive.google.com/thumbnail?id=" + m[1] + "&sz=w800" : r[7];
+        photo = '<img src="' + esc(src) + '" alt="" style="width:100%;border-radius:10px;margin:0 0 8px">';
+      }
+      var status = (r[8] && r[8] !== "For Sale") ? ' <span class="chip">' + esc(r[8]) + '</span>' : '';
+      return '<div class="card">' + photo +
+        '<div class="ttl">' + esc(r[0]) + status + '</div>' +
+        '<div style="margin:5px 0"><span class="chip">💲 ' + esc(r[2] || "") + '</span>' +
+        (r[1] ? ' <span class="chip">' + esc(r[1]) + '</span>' : '') + '</div>' +
+        '<div class="sub">' + esc(r[3] || "") + (r[4] ? ' · Lot ' + esc(r[4]) : '') + '</div>' +
+        (r[5] ? '<div class="det">📞 ' + esc(r[5]) + '</div>' : '') +
+        (r[6] ? '<div class="det">' + esc(r[6]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("saleList"), "for sale listings"); });
+});
+
+var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, forsale: loadForSale,
                 emergency: loadEmergency, schools: loadSchools, services: loadServices,
                 helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend };
 </script>
