@@ -175,9 +175,6 @@ var FORMS = {
   halloween: "https://docs.google.com/forms/d/e/1FAIpQLSd1V7KA0kFN2-q6mWovkwE0I-X3UOGxfvklhCu4S5FkoKN20A/viewform",
   christmas: "https://docs.google.com/forms/d/e/1FAIpQLSeIAXKqvliVOSBccjNGTOlln-A0W1afu_DK85z9Mb1OoNR5Vw/viewform"
 };
-var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere,
-                emergency: loadEmergency, schools: loadSchools, services: loadServices,
-                helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend };
 
 function show(name){
   document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("on"); });
@@ -432,6 +429,9 @@ var loadLend = once(function(){
     document.getElementById("borrowList").innerHTML = lendCards(rows, "borrow");
   }).catch(function(){ errBox(document.getElementById("borrowList"), "borrow requests"); });
 });
+var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere,
+                emergency: loadEmergency, schools: loadSchools, services: loadServices,
+                helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend };
 </script>
 </body>
 </html>
