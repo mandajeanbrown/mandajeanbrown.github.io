@@ -150,7 +150,7 @@
   <!-- FOR SALE -->
   <div class="screen" id="screen-forsale">
     <button class="back" data-go="home">← Home</button>
-    <div class="card"><div class="det">Neighbors selling to neighbors... furniture, gear, and everything in between. Contact the seller directly to arrange pickup.</div></div>
+    <div class="card"><div class="det">Neighbors selling to neighbors... furniture, gear, and everything in between. Message the seller on Facebook Messenger to arrange pickup and swap photos.</div></div>
     <div class="sect">🏷️ FOR SALE</div>
     <div id="saleList"><div class="msg">Loading...</div></div>
     <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener">➕ List something for sale →</a><br><a class="sheetlink" href="https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=305937666" target="_blank" rel="noopener">Update your listing's status in the sheet →</a></div>
@@ -469,7 +469,7 @@ var loadLend = once(function(){
   }).catch(function(){ errBox(document.getElementById("borrowList"), "borrow requests"); });
 });
 var loadForSale = once(function(){
-  fetchSheet("For Sale", "A5:I80").then(function(rows){
+  fetchSheet("For Sale", "A5:H80").then(function(rows){
     var real = rows.filter(function(r){ return r[0] && !/nothing here yet/i.test(r[0]); });
     if (!real.length) {
       document.getElementById("saleList").innerHTML =
@@ -477,14 +477,8 @@ var loadForSale = once(function(){
       return;
     }
     document.getElementById("saleList").innerHTML = real.map(function(r){
-      var photo = "";
-      if (r[7]) {
-        var m = /\/d\/([\w-]+)/.exec(r[7]);
-        var src = m ? "https://drive.google.com/thumbnail?id=" + m[1] + "&sz=w800" : r[7];
-        photo = '<img src="' + esc(src) + '" alt="" style="width:100%;border-radius:10px;margin:0 0 8px">';
-      }
-      var status = (r[8] && r[8] !== "For Sale") ? ' <span class="chip">' + esc(r[8]) + '</span>' : '';
-      return '<div class="card">' + photo +
+      var status = (r[7] && r[7] !== "For Sale") ? ' <span class="chip">' + esc(r[7]) + '</span>' : '';
+      return '<div class="card">' +
         '<div class="ttl">' + esc(r[0]) + status + '</div>' +
         '<div style="margin:5px 0"><span class="chip">💲 ' + esc(r[2] || "") + '</span>' +
         (r[1] ? ' <span class="chip">' + esc(r[1]) + '</span>' : '') + '</div>' +
