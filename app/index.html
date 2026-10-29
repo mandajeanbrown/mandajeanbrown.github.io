@@ -127,7 +127,7 @@
     <div id="freeList"><div class="msg">Loading...</div></div>
     <div class="sect">🔎 LOOKING TO BORROW</div>
     <div id="borrowList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="sheetlink" href="https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=825582879" target="_blank" rel="noopener">Add yours in the sheet →</a></div>
+    <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLScd-Iu57D5WekRZRmRfkmeWDk1Eio9EizM0MmUaB_Li1a3P9w/viewform" target="_blank" rel="noopener">➕ Add yours — lend, give away, or borrow →</a><br><a class="sheetlink" href="https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=825582879" target="_blank" rel="noopener">Update your listing's status in the sheet →</a></div>
   </div>
 
   <!-- EMERGENCY -->
@@ -156,8 +156,9 @@
   <!-- HELP WANTED -->
   <div class="screen" id="screen-helpwanted">
     <button class="back" data-go="home">← Home</button>
-    <div class="card"><div class="det">Jobs and help wanted posted by your neighbors... yard work, handyman help, child care, and more. Neighbors get first shot at the work. To be listed, post what you need in the Kerns Ridge Facebook group.</div></div>
+    <div class="card"><div class="det">Jobs and help wanted posted by your neighbors... yard work, handyman help, child care, and more. Neighbors get first shot at the work. To be listed, tap the button below or post in the Kerns Ridge Facebook group.</div></div>
     <div id="hwList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLSe0iHBjI4YzqkWtoYx5eGpwC0jHYd-tYUNkha2plJXa0YZptA/viewform" target="_blank" rel="noopener">➕ Post a job / ask for help →</a></div>
   </div>
 
   <!-- WINNERS -->
@@ -375,7 +376,7 @@ var loadHelpWanted = once(function(){
     var real = rows.filter(function(r){ return r[1]; });
     if (!real.length) {
       document.getElementById("hwList").innerHTML =
-        '<div class="msg">No listings yet — be the first to post in the Facebook group.</div>';
+        '<div class="msg">No listings yet — be the first to post one.</div>';
       return;
     }
     document.getElementById("hwList").innerHTML = real.map(function(r){
@@ -431,7 +432,7 @@ var loadWinners = once(function(){
 /* ---------- Lend & Borrow ---------- */
 function lendCards(rows, kind){
   var real = rows.filter(function(r){ return r[0] && !/^nothing here yet/i.test(r[0]); });
-  if (!real.length) return '<div class="msg">Nothing here yet — be the first to add yours in the sheet.</div>';
+  if (!real.length) return '<div class="msg">Nothing here yet — be the first to add yours with the button below.</div>';
   return real.map(function(r){
     var chips = "";
     if (kind === "lend" && r[1]) chips += '<span class="chip">' + esc(r[1]) + '</span>';
