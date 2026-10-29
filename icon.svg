@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#10245c"/>
+      <stop offset="0.62" stop-color="#274b9b"/>
+      <stop offset="0.85" stop-color="#e8a83e"/>
+      <stop offset="1" stop-color="#f2b544"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffd76a" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#ffd76a" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="tile"><rect width="512" height="512" rx="96"/></clipPath>
+  </defs>
+  <g clip-path="url(#tile)">
+    <rect width="512" height="512" fill="url(#sky)"/>
+    <circle cx="256" cy="330" r="190" fill="url(#glow)"/>
+    <circle cx="96" cy="90" r="3.5" fill="#cfe0ff"/>
+    <circle cx="150" cy="140" r="2.5" fill="#cfe0ff"/>
+    <circle cx="392" cy="80" r="3" fill="#cfe0ff"/>
+    <circle cx="430" cy="150" r="2.5" fill="#cfe0ff"/>
+    <!-- house -->
+    <rect x="300" y="196" width="26" height="58" rx="5" fill="#c46b45"/>
+    <path d="M96 268 L256 148 L416 268 L382 268 L382 392 L130 392 L130 268 Z" fill="#e08a5f"/>
+    <path d="M84 272 L256 142 L428 272 L398 272 L256 168 L114 272 Z" fill="#12275f"/>
+    <rect x="168" y="238" width="52" height="58" rx="4" fill="#ffd34d"/>
+    <rect x="292" y="238" width="52" height="58" rx="4" fill="#ffd34d"/>
+    <rect x="168" y="318" width="52" height="58" rx="4" fill="#ffd34d"/>
+    <rect x="292" y="318" width="52" height="58" rx="4" fill="#ffd34d"/>
+    <rect x="234" y="322" width="44" height="70" rx="6" fill="#12275f"/>
+    <!-- hills -->
+    <path d="M0 356 Q130 316 268 348 T512 336 V512 H0 Z" fill="#1d9e5f"/>
+    <path d="M0 404 Q170 356 330 396 T512 388 V512 H0 Z" fill="#12824c"/>
+    <path d="M0 452 Q200 408 512 448 V512 H0 Z" fill="#0d6b3e"/>
+  </g>
+</svg>
