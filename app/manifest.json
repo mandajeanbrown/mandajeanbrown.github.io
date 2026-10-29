@@ -1,0 +1,12 @@
+{
+  "name": "Kerns Ridge Community",
+  "short_name": "Kerns Ridge",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#12275f",
+  "theme_color": "#12275f",
+  "icons": [
+    {"src": "../icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}
+  ]
+}

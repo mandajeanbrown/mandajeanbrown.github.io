@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kerns Ridge Community</title>
+<link rel="icon" type="image/svg+xml" href="../icon.svg">
+<link rel="apple-touch-icon" href="../apple%20touch%20icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#12275f">
+<meta name="color-scheme" content="light">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kerns Ridge">
+<style>
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,'Segoe UI',Arial,sans-serif;background:#F6F3EC;color:#1c2430;margin:0;padding:0 0 40px}
+  header{background:#12275f;color:#fff;padding:16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+  header img{width:42px;height:42px}
+  header .t{font-size:20px;font-weight:700;line-height:1.15}
+  header .s{font-size:13px;opacity:.85}
+  .wrap{max-width:560px;margin:0 auto;padding:14px}
+  .screen{display:none}
+  .screen.on{display:block}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .btn{display:flex;align-items:center;justify-content:center;text-align:center;gap:6px;
+       background:#F5F0E6;border:1px solid #E0D7BE;border-radius:14px;color:#1c2430;
+       font-size:16px;font-weight:700;padding:18px 10px;text-decoration:none;cursor:pointer;min-height:64px}
+  .btn.wide{grid-column:1/-1}
+  .btn.green{background:#6BC275;border-color:#57A662;color:#10330F}
+  .btn:active{filter:brightness(.96)}
+  .sect{font-size:13px;font-weight:700;letter-spacing:.06em;color:#5A6B82;margin:20px 2px 4px}
+  .back{display:inline-block;background:none;border:none;color:#12275f;font-size:16px;font-weight:700;padding:8px 0;cursor:pointer}
+  .search{width:100%;font-size:17px;padding:13px 14px;border:1.5px solid #C9CFDA;border-radius:12px;margin:6px 0 4px;background:#fff}
+  .count{font-size:13px;color:#5A6B82;margin:4px 2px 10px}
+  .card{background:#fff;border:1px solid #E4E1D8;border-radius:14px;padding:13px 14px;margin:0 0 10px}
+  .card .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .lot{font-weight:800;font-size:16px;color:#12275f}
+  .addr{font-size:14px;color:#445}
+  .name{font-size:16px;font-weight:600;margin-top:2px}
+  .chips{margin-top:7px;display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-size:12.5px;font-weight:700;background:#EEF4FB;color:#274B73;border-radius:999px;padding:3px 9px}
+  .teams{font-size:13px;color:#5A6B82;margin-top:7px}
+  .ev .date{display:inline-block;font-weight:800;font-size:13.5px;color:#12275f;background:#DCE9F7;border-radius:8px;padding:3px 9px;margin-bottom:6px}
+  .ev .title{font-size:16.5px;font-weight:700}
+  .ev .meta{font-size:14px;color:#445;margin-top:2px}
+  .ev .det{font-size:13.5px;color:#5A6B82;margin-top:5px}
+  .msg{background:#fff;border:1px solid #E4E1D8;border-radius:14px;padding:18px;text-align:center;color:#5A6B82}
+  .foot{text-align:center;font-size:12.5px;color:#8A94A6;margin-top:26px;line-height:1.6}
+  a.sheetlink{color:#12275f;font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <img src="../icon.svg" alt="">
+  <div><div class="t">Kerns Ridge</div><div class="s">Neighborhood Community</div></div>
+</header>
+
+<div class="wrap">
+
+  <!-- HOME -->
+  <div class="screen on" id="screen-home">
+    <div class="grid">
+      <button class="btn wide green" data-go="sheet" data-gid="856995946">🆕 New Here? Start Here</button>
+      <button class="btn" data-go="directory">🏠 Directory</button>
+      <button class="btn" data-go="sheet" data-gid="1253550114" data-range="A135">🗺️ Lot Map</button>
+      <button class="btn" data-go="events">📅 Local Events</button>
+      <button class="btn" data-go="sheet" data-gid="1994568865">🎓 Schools</button>
+      <button class="btn" data-go="sheet" data-gid="247615436">🚨 Emergencies</button>
+      <button class="btn" data-go="sheet" data-gid="145879355">🔧 Services</button>
+      <button class="btn" data-go="sheet" data-gid="0">📹 Cameras</button>
+      <button class="btn" data-go="sheet" data-gid="13515352">💼 Help Wanted</button>
+      <button class="btn" data-go="sheet" data-gid="556652258">🏆 Winners Circle</button>
+      <button class="btn" data-go="sheet" data-gid="825582879">🤝 Lend &amp; Borrow</button>
+      <button class="btn" data-go="form" data-form="halloween">🎃 Halloween Vote</button>
+      <button class="btn" data-go="form" data-form="christmas">🎄 Christmas Vote</button>
+    </div>
+    <div class="foot">Directory and Local Events open right here in the app.<br>
+    The other buttons open that page of the neighborhood sheet.</div>
+  </div>
+
+  <!-- DIRECTORY -->
+  <div class="screen" id="screen-directory">
+    <button class="back" data-go="home">← Home</button>
+    <input class="search" id="dirSearch" type="search" placeholder="Search name, address, or lot #" autocomplete="off">
+    <div class="count" id="dirCount"></div>
+    <div id="dirList"><div class="msg">Loading the directory...</div></div>
+    <div class="foot"><a class="sheetlink" id="dirEdit" href="#" target="_blank" rel="noopener">Add or edit your own row in the sheet →</a></div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="screen" id="screen-events">
+    <button class="back" data-go="home">← Home</button>
+    <div class="sect">UPCOMING AROUND EAST SPENCER &amp; SALISBURY</div>
+    <div id="evList"><div class="msg">Loading events...</div></div>
+    <div class="foot">New events are added every Monday. Confirm details before you head out... they can change.</div>
+  </div>
+
+</div>
+
+<script>
+var SID = "1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM";
+var SHEET = "https://docs.google.com/spreadsheets/d/" + SID + "/edit";
+var FORMS = {
+  halloween: "https://docs.google.com/forms/d/e/1FAIpQLSd1V7KA0kFN2-q6mWovkwE0I-X3UOGxfvklhCu4S5FkoKN20A/viewform",
+  christmas: "https://docs.google.com/forms/d/e/1FAIpQLSeIAXKqvliVOSBccjNGTOlln-A0W1afu_DK85z9Mb1OoNR5Vw/viewform"
+};
+document.getElementById("dirEdit").href = SHEET + "#gid=1253550114";
+
+function show(name){
+  document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("on"); });
+  document.getElementById("screen-" + name).classList.add("on");
+  window.scrollTo(0,0);
+  if (name === "directory") loadDirectory();
+  if (name === "events") loadEvents();
+}
+document.querySelectorAll("[data-go]").forEach(function(el){
+  el.addEventListener("click", function(){
+    var go = el.getAttribute("data-go");
+    if (go === "sheet") {
+      var url = SHEET + "#gid=" + el.getAttribute("data-gid");
+      var r = el.getAttribute("data-range"); if (r) url += "&range=" + r;
+      window.open(url, "_blank");
+    } else if (go === "form") {
+      window.open(FORMS[el.getAttribute("data-form")], "_blank");
+    } else { show(go); }
+  });
+});
+
+function fetchSheet(name, range){
+  var url = "https://docs.google.com/spreadsheets/d/" + SID +
+            "/gviz/tq?tqx=out:json&headers=1&range=" + range + "&sheet=" + encodeURIComponent(name);
+  return fetch(url).then(function(r){ return r.text(); }).then(function(t){
+    var j = JSON.parse(t.substring(t.indexOf("{"), t.lastIndexOf("}") + 1));
+    return j.table.rows.map(function(row){
+      return (row.c || []).map(function(c){
+        if (!c) return "";
+        return (c.f != null ? String(c.f) : (c.v != null ? String(c.v) : "")).trim();
+      });
+    });
+  });
+}
+function esc(s){ return s.replace(/[&<>"']/g, function(m){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]; }); }
+function errBox(el, what){
+  el.innerHTML = '<div class="msg">Could not load ' + what + ' just now.<br><br>' +
+    '<a class="sheetlink" href="' + SHEET + '" target="_blank" rel="noopener">Open the sheet instead →</a></div>';
+}
+
+/* ---------- Directory ---------- */
+var dirData = null;
+function loadDirectory(){
+  if (dirData) { renderDir(); return; }
+  fetchSheet("Neighborhood Directory", "A5:I300").then(function(rows){
+    dirData = [];
+    rows.forEach(function(r){
+      if (!r[0]) return;
+      dirData.push({ lot:r[0], addr:r[1]||"", name:r[2]||"", candy:r[3]||"",
+                     cams:r[4]||"", teams:[r[5],r[6],r[7],r[8]].filter(Boolean) });
+    });
+    renderDir();
+  }).catch(function(){ errBox(document.getElementById("dirList"), "the directory"); });
+}
+function renderDir(){
+  var q = document.getElementById("dirSearch").value.toLowerCase().trim();
+  var list = dirData.filter(function(d){
+    return !q || (d.lot + " " + d.addr + " " + d.name).toLowerCase().indexOf(q) >= 0;
+  });
+  document.getElementById("dirCount").textContent =
+    list.length + (list.length === 1 ? " lot" : " lots") + (q ? " match your search" : " in Kerns Ridge");
+  document.getElementById("dirList").innerHTML = list.map(function(d){
+    var chips = "";
+    if (/yes/i.test(d.candy)) chips += '<span class="chip">🎃 Handing out candy</span>';
+    if (/yes/i.test(d.cams))  chips += '<span class="chip">📹 Cameras</span>';
+    return '<div class="card"><div class="top"><span class="lot">Lot ' + esc(d.lot) + '</span>' +
+      (d.addr ? '<span class="addr">' + esc(d.addr) + '</span>' : '') + '</div>' +
+      (d.name ? '<div class="name">' + esc(d.name) + '</div>' : '') +
+      (chips ? '<div class="chips">' + chips + '</div>' : '') +
+      (d.teams.length ? '<div class="teams">🏈 ' + esc(d.teams.join(" · ")) + '</div>' : '') +
+      '</div>';
+  }).join("") || '<div class="msg">No lots match that search.</div>';
+}
+document.getElementById("dirSearch").addEventListener("input", function(){ if (dirData) renderDir(); });
+
+/* ---------- Events ---------- */
+var evLoaded = false;
+function loadEvents(){
+  if (evLoaded) return;
+  fetchSheet("Local Events", "A4:E300").then(function(rows){
+    var evs = rows.filter(function(r){ return r[1]; });
+    document.getElementById("evList").innerHTML = evs.map(function(r){
+      return '<div class="card ev"><span class="date">' + esc(r[0]) + (r[2] ? ' · ' + esc(r[2]) : '') + '</span>' +
+        '<div class="title">' + esc(r[1]) + '</div>' +
+        (r[3] ? '<div class="meta">📍 ' + esc(r[3]) + '</div>' : '') +
+        (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + '</div>';
+    }).join("") || '<div class="msg">No events listed right now.</div>';
+    evLoaded = true;
+  }).catch(function(){ errBox(document.getElementById("evList"), "events"); });
+}
+</script>
+</body>
+</html>
