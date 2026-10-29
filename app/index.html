@@ -225,7 +225,7 @@ function phoneHTML(text){
 function webHTML(text){
   if (!text || text === "-") return "";
   var tok = text.split(/\s+/)[0];
-  if (!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(tok)) return "";
+  if (!/^[a-z0-9.-]+\.[a-z]{2,}(\/\S*)?$/i.test(tok)) return "";
   return '<div class="sub">🌐 <a class="weblink" href="https://' + esc(tok) + '" target="_blank" rel="noopener">' + esc(text) + '</a></div>';
 }
 function once(fn){ var done = false; return function(){ if (done) return; done = true; fn(); }; }
@@ -288,7 +288,7 @@ var loadNewHere = once(function(){
   fetchSheet("New Here?", "A33:F45").then(function(rows){
     document.getElementById("nhTrash").innerHTML = rows.filter(function(r){ return r[0]; }).map(function(r){
       return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' +
-        (r[1] ? '<div class="sub">' + esc(r[1]) + '</div>' : '') +
+        (r[1] ? '<div class="sub">' + esc(r[1]) + '</div>' : '') + webHTML(r[4]) +
         (r[5] ? '<div class="det">' + esc(r[5]) + '</div>' : '') + '</div>';
     }).join("");
   }).catch(function(){ errBox(document.getElementById("nhTrash"), "trash info"); });
