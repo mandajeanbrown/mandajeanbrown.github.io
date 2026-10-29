@@ -25,11 +25,12 @@
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
   .btn{display:flex;align-items:center;justify-content:center;text-align:center;gap:6px;
        background:#F5F0E6;border:1px solid #E0D7BE;border-radius:14px;color:#1c2430;
-       font-size:16px;font-weight:700;padding:18px 10px;text-decoration:none;cursor:pointer;min-height:64px}
+       font-size:16px;font-weight:700;padding:18px 10px;text-decoration:none;cursor:pointer;min-height:64px;width:100%}
   .btn.wide{grid-column:1/-1}
   .btn.green{background:#6BC275;border-color:#57A662;color:#10330F}
   .btn:active{filter:brightness(.96)}
-  .sect{font-size:13px;font-weight:700;letter-spacing:.06em;color:#5A6B82;margin:20px 2px 4px}
+  .sect{font-size:13px;font-weight:700;letter-spacing:.06em;color:#274B73;background:#DCE9F7;border-radius:9px;padding:8px 11px;margin:20px 0 10px}
+  .sect:first-of-type{margin-top:8px}
   .back{display:inline-block;background:none;border:none;color:#12275f;font-size:16px;font-weight:700;padding:8px 0;cursor:pointer}
   .search{width:100%;font-size:17px;padding:13px 14px;border:1.5px solid #C9CFDA;border-radius:12px;margin:6px 0 4px;background:#fff}
   .count{font-size:13px;color:#5A6B82;margin:4px 2px 10px}
@@ -38,13 +39,22 @@
   .lot{font-weight:800;font-size:16px;color:#12275f}
   .addr{font-size:14px;color:#445}
   .name{font-size:16px;font-weight:600;margin-top:2px}
+  .ttl{font-size:16.5px;font-weight:700}
+  .sub{font-size:14px;color:#445;margin-top:2px}
+  .det{font-size:13.5px;color:#5A6B82;margin-top:5px;line-height:1.45}
   .chips{margin-top:7px;display:flex;gap:6px;flex-wrap:wrap}
   .chip{font-size:12.5px;font-weight:700;background:#EEF4FB;color:#274B73;border-radius:999px;padding:3px 9px}
+  .chip.green{background:#E4F3E4;color:#256B2E}
   .teams{font-size:13px;color:#5A6B82;margin-top:7px}
+  .phone{display:inline-block;font-size:17px;font-weight:800;color:#12275f;text-decoration:none;margin-top:3px}
+  .weblink{color:#1B5FBF;font-weight:600;text-decoration:none;word-break:break-all}
   .ev .date{display:inline-block;font-weight:800;font-size:13.5px;color:#12275f;background:#DCE9F7;border-radius:8px;padding:3px 9px;margin-bottom:6px}
-  .ev .title{font-size:16.5px;font-weight:700}
-  .ev .meta{font-size:14px;color:#445;margin-top:2px}
-  .ev .det{font-size:13.5px;color:#5A6B82;margin-top:5px}
+  .warn{background:#FDECEC;border:1.5px solid #D9534F;border-radius:14px;padding:14px;margin:0 0 12px}
+  .warn .ttl{color:#8B1A1A}
+  .warn .det{color:#6E3434}
+  .big911{display:block;text-align:center;background:#C12727;color:#fff;font-size:21px;font-weight:800;
+          border-radius:14px;padding:15px;text-decoration:none;margin:0 0 12px}
+  .gold{background:#FFF8E1;border:1.5px solid #E3C766}
   .msg{background:#fff;border:1px solid #E4E1D8;border-radius:14px;padding:18px;text-align:center;color:#5A6B82}
   .foot{text-align:center;font-size:12.5px;color:#8A94A6;margin-top:26px;line-height:1.6}
   a.sheetlink{color:#12275f;font-weight:700}
@@ -61,22 +71,33 @@
   <!-- HOME -->
   <div class="screen on" id="screen-home">
     <div class="grid">
-      <button class="btn wide green" data-go="sheet" data-gid="856995946">🆕 New Here? Start Here</button>
+      <button class="btn wide green" data-go="newhere">🆕 New Here? Start Here</button>
       <button class="btn" data-go="directory">🏠 Directory</button>
       <button class="btn" data-go="sheet" data-gid="1253550114" data-range="A135">🗺️ Lot Map</button>
       <button class="btn" data-go="events">📅 Local Events</button>
-      <button class="btn" data-go="sheet" data-gid="1994568865">🎓 Schools</button>
-      <button class="btn" data-go="sheet" data-gid="247615436">🚨 Emergencies</button>
-      <button class="btn" data-go="sheet" data-gid="145879355">🔧 Services</button>
+      <button class="btn" data-go="lend">🤝 Lend &amp; Borrow</button>
+      <button class="btn" data-go="emergency">🚨 Emergencies</button>
+      <button class="btn" data-go="services">🔧 Services</button>
+      <button class="btn" data-go="schools">🎓 Schools</button>
+      <button class="btn" data-go="helpwanted">💼 Help Wanted</button>
+      <button class="btn" data-go="winners">🏆 Winners Circle</button>
       <button class="btn" data-go="sheet" data-gid="0">📹 Cameras</button>
-      <button class="btn" data-go="sheet" data-gid="13515352">💼 Help Wanted</button>
-      <button class="btn" data-go="sheet" data-gid="556652258">🏆 Winners Circle</button>
-      <button class="btn" data-go="sheet" data-gid="825582879">🤝 Lend &amp; Borrow</button>
       <button class="btn" data-go="form" data-form="halloween">🎃 Halloween Vote</button>
       <button class="btn" data-go="form" data-form="christmas">🎄 Christmas Vote</button>
     </div>
-    <div class="foot">Directory and Local Events open right here in the app.<br>
-    The other buttons open that page of the neighborhood sheet.</div>
+    <div class="foot">Almost everything opens right here in the app now.<br>
+    Lot Map and Cameras open the sheet... and voting opens the ballot form.</div>
+  </div>
+
+  <!-- NEW HERE -->
+  <div class="screen" id="screen-newhere">
+    <button class="back" data-go="home">← Home</button>
+    <div class="card"><div class="ttl">Welcome to Kerns Ridge 🏡</div>
+      <div class="det">The local numbers and trash info new neighbors usually need, all in one place. Everything here updates live from the neighborhood sheet.</div></div>
+    <div class="sect">LOCAL NUMBERS &amp; INFO</div>
+    <div id="nhList"><div class="msg">Loading...</div></div>
+    <div class="sect">TRASH &amp; BULK PICKUP</div>
+    <div id="nhTrash"><div class="msg">Loading...</div></div>
   </div>
 
   <!-- DIRECTORY -->
@@ -85,7 +106,7 @@
     <input class="search" id="dirSearch" type="search" placeholder="Search name, address, or lot #" autocomplete="off">
     <div class="count" id="dirCount"></div>
     <div id="dirList"><div class="msg">Loading the directory...</div></div>
-    <div class="foot"><a class="sheetlink" id="dirEdit" href="#" target="_blank" rel="noopener">Add or edit your own row in the sheet →</a></div>
+    <div class="foot"><a class="sheetlink" href="https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=1253550114" target="_blank" rel="noopener">Add or edit your own row in the sheet →</a></div>
   </div>
 
   <!-- EVENTS -->
@@ -94,6 +115,56 @@
     <div class="sect">UPCOMING AROUND EAST SPENCER &amp; SALISBURY</div>
     <div id="evList"><div class="msg">Loading events...</div></div>
     <div class="foot">New events are added every Monday. Confirm details before you head out... they can change.</div>
+  </div>
+
+  <!-- LEND & BORROW -->
+  <div class="screen" id="screen-lend">
+    <button class="back" data-go="home">← Home</button>
+    <div class="card"><div class="det">Neighbors helping neighbors. Contact each other directly to arrange pickup, and please bring borrowed things back clean and on time.</div></div>
+    <div class="sect">🙋 HAPPY TO LEND</div>
+    <div id="lendList"><div class="msg">Loading...</div></div>
+    <div class="sect">🎁 FREE STUFF &amp; CURB ALERTS</div>
+    <div id="freeList"><div class="msg">Loading...</div></div>
+    <div class="sect">🔎 LOOKING TO BORROW</div>
+    <div id="borrowList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="sheetlink" href="https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=825582879" target="_blank" rel="noopener">Add yours in the sheet →</a></div>
+  </div>
+
+  <!-- EMERGENCY -->
+  <div class="screen" id="screen-emergency">
+    <button class="back" data-go="home">← Home</button>
+    <a class="big911" href="tel:911">🚨 Life-threatening emergency? Call 911</a>
+    <div class="card"><div class="det">The non-emergency numbers below are for everything else... reporting, questions, and follow-ups. Tap a number to call.</div></div>
+    <div id="emList"><div class="msg">Loading...</div></div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="screen" id="screen-services">
+    <button class="back" data-go="home">← Home</button>
+    <div id="svcBanner"></div>
+    <div class="card"><div class="det">Neighbors helping neighbors... who did your fence, your lawn, your plumbing? This list is read-only — post your recommendation in the Kerns Ridge Facebook group and it will be added here.</div></div>
+    <div id="svcList"><div class="msg">Loading...</div></div>
+  </div>
+
+  <!-- SCHOOLS -->
+  <div class="screen" id="screen-schools">
+    <button class="back" data-go="home">← Home</button>
+    <div class="card"><div class="det">Public, private, and charter options near Kerns Ridge, plus the state scholarship programs. Tuition figures are each school's published rates... always confirm current numbers with the school.</div></div>
+    <div id="schList"><div class="msg">Loading...</div></div>
+  </div>
+
+  <!-- HELP WANTED -->
+  <div class="screen" id="screen-helpwanted">
+    <button class="back" data-go="home">← Home</button>
+    <div class="card"><div class="det">Jobs and help wanted posted by your neighbors... yard work, handyman help, child care, and more. Neighbors get first shot at the work. To be listed, post what you need in the Kerns Ridge Facebook group.</div></div>
+    <div id="hwList"><div class="msg">Loading...</div></div>
+  </div>
+
+  <!-- WINNERS -->
+  <div class="screen" id="screen-winners">
+    <button class="back" data-go="home">← Home</button>
+    <div class="card"><div class="det">Bragging rights live here... every neighborhood champion gets their name up in lights, from cook-offs and contests to pick'ems.</div></div>
+    <div id="winList"><div class="msg">Loading...</div></div>
   </div>
 
 </div>
@@ -105,14 +176,15 @@ var FORMS = {
   halloween: "https://docs.google.com/forms/d/e/1FAIpQLSd1V7KA0kFN2-q6mWovkwE0I-X3UOGxfvklhCu4S5FkoKN20A/viewform",
   christmas: "https://docs.google.com/forms/d/e/1FAIpQLSeIAXKqvliVOSBccjNGTOlln-A0W1afu_DK85z9Mb1OoNR5Vw/viewform"
 };
-document.getElementById("dirEdit").href = SHEET + "#gid=1253550114";
+var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere,
+                emergency: loadEmergency, schools: loadSchools, services: loadServices,
+                helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend };
 
 function show(name){
   document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("on"); });
   document.getElementById("screen-" + name).classList.add("on");
   window.scrollTo(0,0);
-  if (name === "directory") loadDirectory();
-  if (name === "events") loadEvents();
+  if (LOADERS[name]) LOADERS[name]();
 }
 document.querySelectorAll("[data-go]").forEach(function(el){
   el.addEventListener("click", function(){
@@ -127,9 +199,10 @@ document.querySelectorAll("[data-go]").forEach(function(el){
   });
 });
 
-function fetchSheet(name, range){
+function fetchSheet(name, range, headers){
   var url = "https://docs.google.com/spreadsheets/d/" + SID +
-            "/gviz/tq?tqx=out:json&headers=1&range=" + range + "&sheet=" + encodeURIComponent(name);
+            "/gviz/tq?tqx=out:json&headers=" + (headers == null ? 1 : headers) +
+            "&range=" + range + "&sheet=" + encodeURIComponent(name);
   return fetch(url).then(function(r){ return r.text(); }).then(function(t){
     var j = JSON.parse(t.substring(t.indexOf("{"), t.lastIndexOf("}") + 1));
     return j.table.rows.map(function(row){
@@ -140,16 +213,30 @@ function fetchSheet(name, range){
     });
   });
 }
-function esc(s){ return s.replace(/[&<>"']/g, function(m){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]; }); }
+function esc(s){ return String(s||"").replace(/[&<>"']/g, function(m){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]; }); }
 function errBox(el, what){
   el.innerHTML = '<div class="msg">Could not load ' + what + ' just now.<br><br>' +
     '<a class="sheetlink" href="' + SHEET + '" target="_blank" rel="noopener">Open the sheet instead →</a></div>';
 }
+function phoneHTML(text){
+  var digits = (text || "").replace(/\D/g, "");
+  if (digits.length >= 7 || digits === "811") {
+    var num = digits.length === 10 ? "1" + digits : digits;
+    return '<a class="phone" href="tel:+' + num + '">' + esc(text) + '</a>';
+  }
+  return text ? '<div class="sub">' + esc(text) + '</div>' : '';
+}
+function webHTML(text){
+  if (!text || text === "-") return "";
+  var tok = text.split(/\s+/)[0];
+  if (!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(tok)) return "";
+  return '<div class="sub">🌐 <a class="weblink" href="https://' + esc(tok) + '" target="_blank" rel="noopener">' + esc(text) + '</a></div>';
+}
+function once(fn){ var done = false; return function(){ if (done) return; done = true; fn(); }; }
 
 /* ---------- Directory ---------- */
 var dirData = null;
-function loadDirectory(){
-  if (dirData) { renderDir(); return; }
+var loadDirectory = once(function(){
   fetchSheet("Neighborhood Directory", "A5:I300").then(function(rows){
     dirData = [];
     rows.forEach(function(r){
@@ -159,7 +246,7 @@ function loadDirectory(){
     });
     renderDir();
   }).catch(function(){ errBox(document.getElementById("dirList"), "the directory"); });
-}
+});
 function renderDir(){
   var q = document.getElementById("dirSearch").value.toLowerCase().trim();
   var list = dirData.filter(function(d){
@@ -182,20 +269,170 @@ function renderDir(){
 document.getElementById("dirSearch").addEventListener("input", function(){ if (dirData) renderDir(); });
 
 /* ---------- Events ---------- */
-var evLoaded = false;
-function loadEvents(){
-  if (evLoaded) return;
+var loadEvents = once(function(){
   fetchSheet("Local Events", "A4:E300").then(function(rows){
     var evs = rows.filter(function(r){ return r[1]; });
     document.getElementById("evList").innerHTML = evs.map(function(r){
       return '<div class="card ev"><span class="date">' + esc(r[0]) + (r[2] ? ' · ' + esc(r[2]) : '') + '</span>' +
-        '<div class="title">' + esc(r[1]) + '</div>' +
-        (r[3] ? '<div class="meta">📍 ' + esc(r[3]) + '</div>' : '') +
+        '<div class="ttl">' + esc(r[1]) + '</div>' +
+        (r[3] ? '<div class="sub">📍 ' + esc(r[3]) + '</div>' : '') +
         (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + '</div>';
     }).join("") || '<div class="msg">No events listed right now.</div>';
-    evLoaded = true;
   }).catch(function(){ errBox(document.getElementById("evList"), "events"); });
+});
+
+/* ---------- New Here ---------- */
+var loadNewHere = once(function(){
+  fetchSheet("New Here?", "A15:F31").then(function(rows){
+    document.getElementById("nhList").innerHTML = rows.filter(function(r){ return r[0]; }).map(function(r){
+      return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' + phoneHTML(r[1]) +
+        webHTML(r[4]) + (r[5] ? '<div class="det">' + esc(r[5]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("nhList"), "local numbers"); });
+  fetchSheet("New Here?", "A33:F45").then(function(rows){
+    document.getElementById("nhTrash").innerHTML = rows.filter(function(r){ return r[0]; }).map(function(r){
+      return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' +
+        (r[1] ? '<div class="sub">' + esc(r[1]) + '</div>' : '') +
+        (r[5] ? '<div class="det">' + esc(r[5]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("nhTrash"), "trash info"); });
+});
+
+/* ---------- Emergency ---------- */
+var loadEmergency = once(function(){
+  fetchSheet("Emergency & Safety", "A4:D30").then(function(rows){
+    document.getElementById("emList").innerHTML = rows.filter(function(r){ return r[0] && r[1] !== "911"; }).map(function(r){
+      return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' + phoneHTML(r[1]) +
+        webHTML(r[2]) + (r[3] ? '<div class="det">' + esc(r[3]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("emList"), "emergency numbers"); });
+});
+
+/* ---------- Schools ---------- */
+var loadSchools = once(function(){
+  fetchSheet("Schools", "A4:F80").then(function(rows){
+    var html = "";
+    rows.forEach(function(r){
+      var filled = r.filter(Boolean).length;
+      if (!filled) return;
+      if (filled === 1) { html += '<div class="sect">' + esc(r[0]) + '</div>'; return; }
+      html += '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' + phoneHTML(r[1]) +
+        (r[2] ? '<div class="chips"><span class="chip">🕐 ' + esc(r[2]) + '</span></div>' : '') +
+        webHTML(r[3]) +
+        (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') +
+        (r[5] ? '<div class="det">💵 ' + esc(r[5]) + '</div>' : '') + '</div>';
+    });
+    document.getElementById("schList").innerHTML = html;
+  }).catch(function(){ errBox(document.getElementById("schList"), "schools"); });
+});
+
+/* ---------- Services ---------- */
+var loadServices = once(function(){
+  fetchSheet("Services & Referrals", "A1:E5", 0).then(function(rows){
+    if (rows[0] && rows[1]) {
+      document.getElementById("svcBanner").innerHTML =
+        '<div class="warn"><div class="ttl">' + esc(rows[0][0]) + '</div><div class="det">' + esc(rows[1][0]) + '</div></div>';
+    }
+  }).catch(function(){});
+  fetchSheet("Services & Referrals", "A6:E120").then(function(rows){
+    var html = "", lastCat = null;
+    rows.filter(function(r){ return r[1]; }).forEach(function(r){
+      if (r[0] && r[0] !== lastCat) { html += '<div class="sect">' + esc(r[0].toUpperCase()) + '</div>'; lastCat = r[0]; }
+      html += '<div class="card"><div class="ttl">' + esc(r[1]) + '</div>' + phoneHTML(r[2]) +
+        webHTML(r[3]) + (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + '</div>';
+    });
+    document.getElementById("svcList").innerHTML = html || '<div class="msg">No services listed yet.</div>';
+  }).catch(function(){ errBox(document.getElementById("svcList"), "services"); });
+});
+
+/* ---------- Help Wanted ---------- */
+var loadHelpWanted = once(function(){
+  fetchSheet("Help Wanted", "A4:D40").then(function(rows){
+    var real = rows.filter(function(r){ return r[1]; });
+    if (!real.length) {
+      document.getElementById("hwList").innerHTML =
+        '<div class="msg">No listings yet — be the first to post in the Facebook group.</div>';
+      return;
+    }
+    document.getElementById("hwList").innerHTML = real.map(function(r){
+      return '<div class="card"><div class="ttl">' + esc(r[1]) + '</div>' +
+        (r[0] ? '<div class="chips"><span class="chip">📅 ' + esc(r[0]) + '</span></div>' : '') +
+        (r[2] ? '<div class="det">' + esc(r[2]) + '</div>' : '') +
+        (r[3] && /^https?:/i.test(r[3]) ? '<div class="sub">💬 <a class="weblink" href="' + esc(r[3]) + '" target="_blank" rel="noopener">See the Facebook post</a></div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("hwList"), "help wanted"); });
+});
+
+/* ---------- Winners Circle ---------- */
+var loadWinners = once(function(){
+  fetchSheet("Winners Circle", "A1:E60", 0).then(function(rows){
+    function findRow(txt){ return rows.findIndex(function(r){ return (r[0]||"").indexOf(txt) >= 0; }); }
+    var html = "";
+    var li = findRow("LATEST COMPETITION");
+    if (li >= 0 && rows[li+1]) {
+      html += '<div class="sect">🌶️ LATEST COMPETITION</div><div class="card gold"><div class="ttl">' +
+        esc(rows[li+1][0]) + '</div>' +
+        (rows[li+2] ? '<div class="det">' + esc(rows[li+2][0]) + '</div>' : '') + '</div>';
+    }
+    var hi = findRow("HALL OF FAME");
+    if (hi >= 0) {
+      html += '<div class="sect">🏆 HALL OF FAME</div>';
+      for (var i = hi + 2; i < rows.length; i++) {
+        var r = rows[i];
+        if (!r[0] || (r[0]||"").indexOf("COMING UP") >= 0) break;
+        if (r[1] === "Competition") continue;
+        html += '<div class="card"><div class="ttl">🏆 ' + esc(r[1]||"") + ' — ' + esc(r[2]||"") + '</div>' +
+          '<div class="chips"><span class="chip">📅 ' + esc(r[0]) + '</span></div>' +
+          (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + '</div>';
+      }
+    }
+    var ci = findRow("COMING UP");
+    if (ci >= 0) {
+      html += '<div class="sect">🔜 COMING UP — YOUR NAME COULD BE HERE</div>';
+      for (var j = ci + 1; j < rows.length; j++) {
+        var c = rows[j];
+        if (!c[0]) continue;
+        var vote = "";
+        if (/halloween/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.halloween + '" target="_blank" rel="noopener">Tap to vote 🎃</a>';
+        if (/christmas/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.christmas + '" target="_blank" rel="noopener">Tap to vote 🎄</a>';
+        html += '<div class="card"><div class="ttl">' + esc(c[1]||"") + '</div>' +
+          (c[0] ? '<div class="chips"><span class="chip">📅 ' + esc(c[0]) + '</span></div>' : '') +
+          (c[2] ? '<div class="det">' + esc(c[2]) + vote + '</div>' : '') + '</div>';
+      }
+    }
+    document.getElementById("winList").innerHTML = html || '<div class="msg">Nothing here yet.</div>';
+  }).catch(function(){ errBox(document.getElementById("winList"), "winners"); });
+});
+
+/* ---------- Lend & Borrow ---------- */
+function lendCards(rows, kind){
+  var real = rows.filter(function(r){ return r[0] && !/^nothing here yet/i.test(r[0]); });
+  if (!real.length) return '<div class="msg">Nothing here yet — be the first to add yours in the sheet.</div>';
+  return real.map(function(r){
+    var chips = "";
+    if (kind === "lend" && r[1]) chips += '<span class="chip">' + esc(r[1]) + '</span>';
+    if (kind === "borrow" && r[1]) chips += '<span class="chip">⏰ Needed by ' + esc(r[1]) + '</span>';
+    if (r[6]) chips += '<span class="chip green">' + esc(r[6]) + '</span>';
+    var who = [r[2], r[3] ? "Lot " + r[3] : ""].filter(Boolean).join(" · ");
+    return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' +
+      (chips ? '<div class="chips">' + chips + '</div>' : '') +
+      (kind === "free" && r[1] ? '<div class="sub">📍 ' + esc(r[1]) + '</div>' : '') +
+      (who ? '<div class="sub">👤 ' + esc(who) + '</div>' : '') +
+      (r[4] ? '<div class="sub">📞 ' + esc(r[4]) + '</div>' : '') +
+      (r[5] ? '<div class="det">' + esc(r[5]) + '</div>' : '') + '</div>';
+  }).join("");
 }
+var loadLend = once(function(){
+  fetchSheet("Lend & Borrow", "A5:G17").then(function(rows){
+    document.getElementById("lendList").innerHTML = lendCards(rows, "lend");
+  }).catch(function(){ errBox(document.getElementById("lendList"), "lend listings"); });
+  fetchSheet("Lend & Borrow", "A19:G29").then(function(rows){
+    document.getElementById("freeList").innerHTML = lendCards(rows, "free");
+  }).catch(function(){ errBox(document.getElementById("freeList"), "free stuff"); });
+  fetchSheet("Lend & Borrow", "A31:G90").then(function(rows){
+    document.getElementById("borrowList").innerHTML = lendCards(rows, "borrow");
+  }).catch(function(){ errBox(document.getElementById("borrowList"), "borrow requests"); });
+});
 </script>
 </body>
 </html>
