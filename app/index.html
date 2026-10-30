@@ -78,6 +78,8 @@
       <button class="btn" data-go="events">📅 Local Events</button>
       <button class="btn" data-go="lend">🤝 Lend &amp; Borrow</button>
       <button class="btn" data-go="forsale">🏷️ For Sale</button>
+      <button class="btn" data-go="rides">🚗 Rides &amp; Carpool</button>
+      <button class="btn" data-go="pets">🐾 Lost &amp; Found Pets</button>
       <button class="btn" data-go="emergency">🚨 Emergencies</button>
       <button class="btn" data-go="services">🔧 Services</button>
       <button class="btn" data-go="schools">🎓 Schools</button>
@@ -154,6 +156,24 @@
     <div class="sect">🏷️ FOR SALE</div>
     <div id="saleList"><div class="msg">Loading...</div></div>
     <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener">➕ List something for sale →</a><br><a class="sheetlink" href="https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=305937666" target="_blank" rel="noopener">Update your listing's status in the sheet →</a></div>
+  </div>
+
+  <!-- RIDES & CARPOOL -->
+  <div class="screen" id="screen-rides">
+    <button class="back" data-go="home">← Home</button>
+    <div class="card"><div class="det">Neighbors helping neighbors get places... airport runs, school carpools, commutes, church, appointments. Message each other on Facebook Messenger to work out pickup.</div></div>
+    <div class="sect">🚗 RIDES &amp; CARPOOL</div>
+    <div id="ridesList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLSebnK9IRCiTrqep1sy0m188SoslVUoeXFpCNN0Lsxl0Ajk3sQ/viewform" target="_blank" rel="noopener">➕ Offer or ask for a ride →</a><br><a class="sheetlink" href="https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=1336539313" target="_blank" rel="noopener">Update your post's status in the sheet →</a></div>
+  </div>
+
+  <!-- LOST & FOUND PETS -->
+  <div class="screen" id="screen-pets">
+    <button class="back" data-go="home">← Home</button>
+    <div class="card"><div class="det">Lost a pet, or found one wandering? Check here first... and message the owner or finder on Facebook Messenger, the fastest way to swap photos and get pets home.</div></div>
+    <div class="sect">🐾 LOST &amp; FOUND PETS</div>
+    <div id="petsList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLSeULpC4p_VfkzaMRzdHvgKhja-cxYQbvOdD1Qw8iMzinL7oLg/viewform" target="_blank" rel="noopener">➕ Post a lost or found pet →</a><br><a class="sheetlink" href="https://docs.google.com/spreadsheets/d/1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM/edit#gid=1113066983" target="_blank" rel="noopener">Update a pet's status in the sheet →</a></div>
   </div>
 
   <!-- SCHOOLS -->
@@ -489,7 +509,50 @@ var loadForSale = once(function(){
   }).catch(function(){ errBox(document.getElementById("saleList"), "for sale listings"); });
 });
 
-var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, forsale: loadForSale,
+var loadRides = once(function(){
+  fetchSheet("Rides & Carpool", "A5:K80").then(function(rows){
+    var real = rows.filter(function(r){ return r[0] && !/nothing here yet/i.test(r[0]); });
+    if (!real.length) {
+      document.getElementById("ridesList").innerHTML =
+        '<div class="msg">No rides posted yet — be the first to offer or ask with the button below.</div>';
+      return;
+    }
+    document.getElementById("ridesList").innerHTML = real.map(function(r){
+      var status = (r[10] && r[10] !== "Open") ? ' <span class="chip">' + esc(r[10]) + '</span>' : '';
+      return '<div class="card"><div class="ttl">' + esc(r[1] || "") + ' → ' + esc(r[2] || "") + status + '</div>' +
+        '<div style="margin:5px 0"><span class="chip">' + esc(r[0]) + '</span>' +
+        (r[3] ? ' <span class="chip">🕐 ' + esc(r[3]) + '</span>' : '') +
+        (r[4] ? ' <span class="chip">' + esc(r[4]) + '</span>' : '') +
+        (r[5] ? ' <span class="chip">💺 ' + esc(r[5]) + '</span>' : '') + '</div>' +
+        '<div class="sub">' + esc(r[6] || "") + (r[7] ? ' · Lot ' + esc(r[7]) : '') + '</div>' +
+        (r[8] ? '<div class="det">💬 ' + esc(r[8]) + '</div>' : '') +
+        (r[9] ? '<div class="det">' + esc(r[9]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("ridesList"), "ride posts"); });
+});
+
+var loadPets = once(function(){
+  fetchSheet("Lost & Found Pets", "A5:J80").then(function(rows){
+    var real = rows.filter(function(r){ return r[0] && !/no lost or found/i.test(r[0]); });
+    if (!real.length) {
+      document.getElementById("petsList").innerHTML =
+        '<div class="msg">No lost or found pets right now — and that\'s the way we like it!</div>';
+      return;
+    }
+    document.getElementById("petsList").innerHTML = real.map(function(r){
+      return '<div class="card"><div class="ttl">🐾 ' + esc(r[0] || "") + '</div>' +
+        '<div style="margin:5px 0"><span class="chip">' + esc(r[1] || "") + '</span>' +
+        (r[9] ? ' <span class="chip">' + esc(r[9]) + '</span>' : '') + '</div>' +
+        (r[2] ? '<div class="det">' + esc(r[2]) + '</div>' : '') +
+        '<div class="sub">📍 ' + esc(r[3] || "") + (r[4] ? ' · ' + esc(r[4]) : '') + '</div>' +
+        '<div class="sub">' + esc(r[5] || "") + (r[6] ? ' · Lot ' + esc(r[6]) : '') + '</div>' +
+        (r[7] ? '<div class="det">💬 ' + esc(r[7]) + '</div>' : '') +
+        (r[8] ? '<div class="det">' + esc(r[8]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("petsList"), "pet posts"); });
+});
+
+var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, forsale: loadForSale, rides: loadRides, pets: loadPets,
                 emergency: loadEmergency, schools: loadSchools, services: loadServices,
                 helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend };
 </script>
