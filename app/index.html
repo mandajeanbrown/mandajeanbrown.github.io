@@ -123,8 +123,8 @@
       <button class="btn" data-go="helpwanted">💼 Help Wanted</button>
       <button class="btn wide" data-go="winners">🏆 Winners Circle</button>
       <button class="btn wide" data-go="votes">🗳️ Community Competitions</button>
+      <button class="btn wide" id="notifyBtn" style="background:#12275f;color:#fff;border-color:#12275f">🔔 Notify Me</button>
     </div>
-    <button class="btn wide" id="notifyBtn" style="background:#12275f;color:#fff;border-color:#12275f;margin-top:8px;min-height:52px">🔔 Notify Me</button>
     <div class="foot">Everything opens right here in the app.</div>
   </div>
 
@@ -386,7 +386,8 @@ var loadEvents = once(function(){
     });
     document.getElementById("evList").innerHTML = evs.map(function(r){
       var hasDate = !!Date.parse(String(r[0] || "").replace(/^[A-Za-z]+,\s*/, ""));
-      var rsvp = hasDate ? '<a class="postbtn" href="' + RSVP_FORM + '?' + RSVP_EVENT_ENTRY + '=' +
+      var isKR = /kerns ridge/i.test(r[3] || "");
+      var rsvp = (hasDate && isKR) ? '<a class="postbtn" href="' + RSVP_FORM + '?' + RSVP_EVENT_ENTRY + '=' +
         encodeURIComponent(r[1] || "") + '" target="_blank" rel="noopener">📋 RSVP for this event</a>' : '';
       return '<div class="card ev"><span class="date">' + esc(r[0]) + (r[2] ? ' · ' + esc(r[2]) : '') + '</span>' +
         '<div class="ttl">' + esc(r[1]) + '</div>' +
