@@ -81,10 +81,12 @@
       <button class="btn wide green" data-go="newhere">🆕 New Here? Start Here</button>
       <button class="btn" data-go="directory">🏠 Directory</button>
       <button class="btn" data-go="events">📅 Local Events</button>
+      <button class="btn" data-go="updates">📣 Updates</button>
       <button class="btn" data-go="lend">🤝 Lend &amp; Borrow</button>
       <button class="btn" data-go="forsale">🏷️ For Sale</button>
       <button class="btn" data-go="rides">🚗 Rides &amp; Carpool</button>
       <button class="btn" data-go="pets">🐾 Lost &amp; Found Pets</button>
+      <button class="btn" data-go="packages">📦 Lost &amp; Found Packages</button>
       <button class="btn" data-go="emergency">🚨 Emergencies</button>
       <button class="btn" data-go="services">🔧 Services</button>
       <button class="btn" data-go="schools">🎓 Schools</button>
@@ -97,7 +99,7 @@
 
   <!-- NEW HERE -->
   <div class="screen" id="screen-newhere">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="ttl">Welcome to Kerns Ridge 🏡</div>
       <div class="det">The local numbers and trash info new neighbors usually need, all in one place.</div></div>
     <div class="sect">LOCAL NUMBERS &amp; INFO</div>
@@ -108,7 +110,7 @@
 
   <!-- DIRECTORY -->
   <div class="screen" id="screen-directory">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <input class="search" id="dirSearch" type="search" placeholder="Search name, address, or lot #" autocomplete="off">
     <div class="count" id="dirCount"></div>
     <div id="dirList"><div class="msg">Loading the directory...</div></div>
@@ -117,26 +119,34 @@
 
   <!-- EVENTS -->
   <div class="screen" id="screen-events">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <div class="sect">UPCOMING AROUND EAST SPENCER &amp; SALISBURY</div>
     <div id="evList"><div class="msg">Loading events...</div></div>
     <div class="foot">New events are added every Monday. Confirm details before you head out... they can change.</div>
   </div>
 
+  <!-- UPDATES -->
+  <div class="screen" id="screen-updates">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">What is happening with the shared stuff... street lights, water, trash, roads. If neighbors are talking about it, the latest status lives here.</div></div>
+    <div class="sect">📣 NEIGHBORHOOD UPDATES</div>
+    <div id="updList"><div class="msg">Loading...</div></div>
+  </div>
+
   <!-- LEND & BORROW -->
   <div class="screen" id="screen-lend">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Neighbors helping neighbors. Contact each other directly to arrange pickup, and please bring borrowed things back clean and on time.</div></div>
     <div class="sect">🙋 HAPPY TO LEND</div>
     <div id="lendList"><div class="msg">Loading...</div></div>
     <div class="sect">🔎 LOOKING TO BORROW</div>
     <div id="borrowList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLScd-Iu57D5WekRZRmRfkmeWDk1Eio9EizM0MmUaB_Li1a3P9w/viewform" target="_blank" rel="noopener">➕ Add yours — lend, give away, or borrow →</a></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLScd-Iu57D5WekRZRmRfkmeWDk1Eio9EizM0MmUaB_Li1a3P9w/viewform" target="_blank" rel="noopener">➕ Add yours — lend, give away, or borrow</a></div>
   </div>
 
   <!-- EMERGENCY -->
   <div class="screen" id="screen-emergency">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <a class="big911" href="tel:911">🚨 Life-threatening emergency? Call 911</a>
     <div class="card"><div class="det">The non-emergency numbers below are for everything else... reporting, questions, and follow-ups. Tap a number to call.</div></div>
     <div id="emList"><div class="msg">Loading...</div></div>
@@ -144,7 +154,7 @@
 
   <!-- SERVICES -->
   <div class="screen" id="screen-services">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <div id="svcBanner"></div>
     <div class="card"><div class="det">Neighbors helping neighbors... who did your fence, your lawn, your plumbing? This list is read-only — post your recommendation in the Kerns Ridge Facebook group and it will be added here.</div></div>
     <div id="svcList"><div class="msg">Loading...</div></div>
@@ -152,58 +162,67 @@
 
   <!-- FOR SALE -->
   <div class="screen" id="screen-forsale">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Neighbors selling to neighbors... furniture, gear, and everything in between. Message the seller on Facebook Messenger to arrange pickup and swap photos. Free stuff and curb alerts are right below the for sale items.</div></div>
     <div class="sect">🏷️ FOR SALE</div>
     <div id="saleList"><div class="msg">Loading...</div></div>
     <div class="sect">🎁 FREE STUFF &amp; CURB ALERTS</div>
     <div id="freeList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener">➕ List something for sale →</a></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener">➕ List something</a></div>
   </div>
 
   <!-- RIDES & CARPOOL -->
   <div class="screen" id="screen-rides">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Neighbors helping neighbors get places... airport runs, school carpools, commutes, church, appointments. Message each other on Facebook Messenger to work out pickup.</div></div>
     <div class="sect">🚗 RIDES &amp; CARPOOL</div>
     <div id="ridesList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSebnK9IRCiTrqep1sy0m188SoslVUoeXFpCNN0Lsxl0Ajk3sQ/viewform" target="_blank" rel="noopener">➕ Offer or ask for a ride →</a></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSebnK9IRCiTrqep1sy0m188SoslVUoeXFpCNN0Lsxl0Ajk3sQ/viewform" target="_blank" rel="noopener">➕ Offer or ask for a ride</a></div>
   </div>
 
   <!-- LOST & FOUND PETS -->
   <div class="screen" id="screen-pets">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Lost a pet, or found one wandering? Check here first... and message the owner or finder on Facebook Messenger, the fastest way to swap photos and get pets home.</div></div>
     <div class="sect">🐾 LOST &amp; FOUND PETS</div>
     <div id="petsList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSeULpC4p_VfkzaMRzdHvgKhja-cxYQbvOdD1Qw8iMzinL7oLg/viewform" target="_blank" rel="noopener">➕ Post a lost or found pet →</a></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSeULpC4p_VfkzaMRzdHvgKhja-cxYQbvOdD1Qw8iMzinL7oLg/viewform" target="_blank" rel="noopener">➕ Post a lost or found pet</a></div>
+  </div>
+
+  <!-- LOST & FOUND PACKAGES -->
+  <div class="screen" id="screen-packages">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">A package landed at the wrong house, or yours says delivered but never showed up? Check here... and message each other on Facebook Messenger to arrange the handoff.</div></div>
+    <div class="sect">📦 LOST &amp; FOUND PACKAGES</div>
+    <div id="pkgList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSczple8ahqgJtdB311EZIMldUKEGoxjTRHVfP-XP0X8Dx_YbA/viewform" target="_blank" rel="noopener">➕ Post a lost or found package</a></div>
   </div>
 
   <!-- SCHOOLS -->
   <div class="screen" id="screen-schools">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Public, private, and charter options near Kerns Ridge, plus the state scholarship programs. Tuition figures are each school's published rates... always confirm current numbers with the school.</div></div>
     <div id="schList"><div class="msg">Loading...</div></div>
   </div>
 
   <!-- HELP WANTED -->
   <div class="screen" id="screen-helpwanted">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Jobs and help wanted posted by your neighbors... yard work, handyman help, child care, and more. Neighbors get first shot at the work. To be listed, tap the button below or post in the Kerns Ridge Facebook group.</div></div>
     <div id="hwList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSe0iHBjI4YzqkWtoYx5eGpwC0jHYd-tYUNkha2plJXa0YZptA/viewform" target="_blank" rel="noopener">➕ Post a job / ask for help →</a></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSe0iHBjI4YzqkWtoYx5eGpwC0jHYd-tYUNkha2plJXa0YZptA/viewform" target="_blank" rel="noopener">➕ Post a job / ask for help</a></div>
   </div>
 
   <!-- WINNERS -->
   <div class="screen" id="screen-winners">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Bragging rights live here... every neighborhood champion gets their name up in lights, from cook-offs and contests to pick'ems.</div></div>
     <div id="winList"><div class="msg">Loading...</div></div>
   </div>
 
   <!-- VOTES -->
   <div class="screen" id="screen-votes">
-    <button class="back" data-go="home">← Home</button>
+    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Vote in this year's community competitions... winners get crowned in the Winners Circle. Tap a competition to open its ballot.</div></div>
     <div class="grid">
       <button class="btn" data-go="form" data-form="halloween">🎃 Halloween Vote</button>
@@ -223,6 +242,8 @@
 <script>
 var SID = "1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM";
 var SHEET = "https://docs.google.com/spreadsheets/d/" + SID + "/edit";
+var RSVP_FORM = "https://docs.google.com/forms/d/e/1FAIpQLScTR1RaZ_i910O-9dWh2OqPhXCQ-xy-qIwiBEAFwSEcV38K9A/viewform";
+var RSVP_EVENT_ENTRY = "entry.1423850769";
 var FORMS = {
   halloween: "https://docs.google.com/forms/d/e/1FAIpQLSd1V7KA0kFN2-q6mWovkwE0I-X3UOGxfvklhCu4S5FkoKN20A/viewform",
   christmas: "https://docs.google.com/forms/d/e/1FAIpQLSeIAXKqvliVOSBccjNGTOlln-A0W1afu_DK85z9Mb1OoNR5Vw/viewform",
@@ -333,10 +354,13 @@ var loadEvents = once(function(){
       return d >= today.getTime(); /* drop events before today */
     });
     document.getElementById("evList").innerHTML = evs.map(function(r){
+      var hasDate = !!Date.parse(String(r[0] || "").replace(/^[A-Za-z]+,\s*/, ""));
+      var rsvp = hasDate ? '<a class="postbtn" href="' + RSVP_FORM + '?' + RSVP_EVENT_ENTRY + '=' +
+        encodeURIComponent(r[1] || "") + '" target="_blank" rel="noopener">📋 RSVP for this event</a>' : '';
       return '<div class="card ev"><span class="date">' + esc(r[0]) + (r[2] ? ' · ' + esc(r[2]) : '') + '</span>' +
         '<div class="ttl">' + esc(r[1]) + '</div>' +
         (r[3] ? '<div class="sub">📍 ' + esc(r[3]) + '</div>' : '') +
-        (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + '</div>';
+        (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + rsvp + '</div>';
     }).join("") || '<div class="msg">No events listed right now.</div>';
   }).catch(function(){ errBox(document.getElementById("evList"), "events"); });
 });
@@ -396,18 +420,32 @@ var loadEmergency = once(function(){
 /* ---------- Schools ---------- */
 var loadSchools = once(function(){
   fetchSheet("Schools", "A4:F80").then(function(rows){
-    var html = "";
+    var html = "", open = false;
     rows.forEach(function(r){
       var filled = r.filter(Boolean).length;
       if (!filled) return;
-      if (filled === 1) { html += '<div class="sect">' + esc(r[0]) + '</div>'; return; }
+      if (filled === 1) {
+        if (open) html += '</div>';
+        html += '<div class="sect sectToggle">' + esc(r[0]) + '<span class="sectArrow">▸</span></div><div class="sectBody" style="display:none">';
+        open = true; return;
+      }
       html += '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' + phoneHTML(r[1]) +
         (r[2] ? '<div class="chips"><span class="chip">🕐 ' + esc(r[2]) + '</span></div>' : '') +
         webHTML(r[3]) +
         (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') +
         (r[5] ? '<div class="det">💵 ' + esc(r[5]) + '</div>' : '') + '</div>';
     });
-    document.getElementById("schList").innerHTML = html;
+    if (open) html += '</div>';
+    var schEl = document.getElementById("schList");
+    schEl.innerHTML = html;
+    schEl.querySelectorAll(".sectToggle").forEach(function(h){
+      h.addEventListener("click", function(){
+        var body = h.nextElementSibling;
+        var closed = body.style.display === "none";
+        body.style.display = closed ? "" : "none";
+        h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
+      });
+    });
   }).catch(function(){ errBox(document.getElementById("schList"), "schools"); });
 });
 
@@ -424,7 +462,7 @@ var loadServices = once(function(){
     rows.filter(function(r){ return r[1]; }).forEach(function(r){
       if (r[0] && r[0] !== lastCat) {
         if (open) html += '</div>';
-        html += '<div class="sect sectToggle">' + esc(r[0].toUpperCase()) + '<span class="sectArrow">▾</span></div><div class="sectBody">';
+        html += '<div class="sect sectToggle">' + esc(r[0].toUpperCase()) + '<span class="sectArrow">▸</span></div><div class="sectBody" style="display:none">';
         lastCat = r[0]; open = true;
       }
       html += '<div class="card"><div class="ttl">' + esc(r[1]) + '</div>' + phoneHTML(r[2]) +
@@ -604,9 +642,51 @@ var loadPets = once(function(){
   }).catch(function(){ errBox(document.getElementById("petsList"), "pet posts"); });
 });
 
+/* ---------- Updates ---------- */
+var loadUpdates = once(function(){
+  fetchSheet("Neighborhood Updates", "A4:D60").then(function(rows){
+    var real = rows.filter(function(r){ return r[1]; });
+    if (!real.length) {
+      document.getElementById("updList").innerHTML =
+        '<div class="msg">No updates right now... everything is running like it should.</div>';
+      return;
+    }
+    document.getElementById("updList").innerHTML = real.map(function(r){
+      return '<div class="card"><div class="ttl">' + esc(r[1] || "") + '</div>' +
+        '<div style="margin:5px 0">' +
+        (r[2] ? '<span class="chip">' + esc(r[2]) + '</span>' : '') +
+        (r[0] ? ' <span class="chip">📅 ' + esc(r[0]) + '</span>' : '') + '</div>' +
+        (r[3] ? '<div class="det">' + esc(r[3]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("updList"), "updates"); });
+});
+
+/* ---------- Packages ---------- */
+var loadPackages = once(function(){
+  fetchSheet("Lost & Found Packages", "A5:J80").then(function(rows){
+    var real = rows.filter(function(r){ return r[0] && !/no lost or found/i.test(r[0]); });
+    if (!real.length) {
+      document.getElementById("pkgList").innerHTML =
+        '<div class="msg">No lost or found packages right now — every package is where it belongs!</div>';
+      return;
+    }
+    document.getElementById("pkgList").innerHTML = real.map(function(r){
+      return '<div class="card"><div class="ttl">📦 ' + esc(r[0] || "") + '</div>' +
+        '<div style="margin:5px 0"><span class="chip">' + esc(r[1] || "") + '</span>' +
+        (r[9] ? ' <span class="chip">' + esc(r[9]) + '</span>' : '') + '</div>' +
+        (r[2] ? '<div class="det">' + esc(r[2]) + '</div>' : '') +
+        '<div class="sub">📍 ' + esc(r[3] || "") + (r[4] ? ' · ' + esc(r[4]) : '') + '</div>' +
+        '<div class="sub">' + esc(r[5] || "") + (r[6] ? ' · Lot ' + esc(r[6]) : '') + '</div>' +
+        (r[7] ? '<div class="det">💬 ' + esc(r[7]) + '</div>' : '') +
+        (r[8] ? '<div class="det">' + esc(r[8]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("pkgList"), "package posts"); });
+});
+
 var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, forsale: loadForSale, rides: loadRides, pets: loadPets,
                 emergency: loadEmergency, schools: loadSchools, services: loadServices,
-                helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend };
+                helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend,
+                updates: loadUpdates, packages: loadPackages };
 </script>
 </body>
 </html>
