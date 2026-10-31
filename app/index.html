@@ -70,6 +70,32 @@
   a.sheetlink{color:#12275f;font-weight:700}
   a.postbtn{display:block;background:#16a765;color:#fff;font-size:17px;font-weight:700;text-align:center;padding:16px 14px;border-radius:14px;text-decoration:none;margin-top:6px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
 </style>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "2e0a9422-7fcf-43c1-bee6-386a4923c5f5",
+      serviceWorkerPath: "/OneSignalSDKWorker.js",
+      serviceWorkerParam: { scope: "/" },
+      notifyButton: { enable: false }
+    });
+    var btn = document.getElementById("notifyBtn");
+    if (!btn) return;
+    function paint(){
+      btn.textContent = OneSignal.User.PushSubscription.optedIn
+        ? "🔔 You are getting notifications — tap to turn off"
+        : "🔔 Get notified when something new is added";
+    }
+    paint();
+    OneSignal.User.PushSubscription.addEventListener("change", paint);
+    btn.addEventListener("click", async function(){
+      if (OneSignal.User.PushSubscription.optedIn) { await OneSignal.User.PushSubscription.optOut(); }
+      else { await OneSignal.User.PushSubscription.optIn(); }
+      paint();
+    });
+  });
+</script>
 </head>
 <body>
 <header>
@@ -98,6 +124,7 @@
       <button class="btn wide" data-go="winners">🏆 Winners Circle</button>
       <button class="btn wide" data-go="votes">🗳️ Community Competitions</button>
     </div>
+    <button class="btn wide" id="notifyBtn" style="background:#12275f;color:#fff;border-color:#12275f;margin-top:8px;min-height:52px">🔔 Get notified when something new is added</button>
     <div class="foot">Everything opens right here in the app.</div>
   </div>
 
