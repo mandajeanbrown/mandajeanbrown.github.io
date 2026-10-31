@@ -87,6 +87,12 @@
       <button class="btn wide" data-go="winners">🏆 Winners Circle</button>
       <button class="btn" data-go="form" data-form="halloween">🎃 Halloween Vote</button>
       <button class="btn" data-go="form" data-form="christmas">🎄 Christmas Vote</button>
+      <button class="btn" data-go="form" data-form="garden">🌸 Flower Garden Vote</button>
+      <button class="btn" data-go="form" data-form="lawn">⛳ Golf Course Lawn Vote</button>
+      <button class="btn" data-go="form" data-form="porch">🚪 Porch / Front Door Vote</button>
+      <button class="btn" data-go="form" data-form="petcostume">🐶 Pet Costume Vote</button>
+      <button class="btn" data-go="form" data-form="street">🏘️ Holiday Street Vote</button>
+      <button class="btn" data-go="form" data-form="photo">📸 Photo of the Year Vote</button>
     </div>
     <div class="foot">Everything opens right here in the app.<br>
     Only the voting buttons leave... they open the ballot form.</div>
@@ -205,7 +211,13 @@ var SID = "1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM";
 var SHEET = "https://docs.google.com/spreadsheets/d/" + SID + "/edit";
 var FORMS = {
   halloween: "https://docs.google.com/forms/d/e/1FAIpQLSd1V7KA0kFN2-q6mWovkwE0I-X3UOGxfvklhCu4S5FkoKN20A/viewform",
-  christmas: "https://docs.google.com/forms/d/e/1FAIpQLSeIAXKqvliVOSBccjNGTOlln-A0W1afu_DK85z9Mb1OoNR5Vw/viewform"
+  christmas: "https://docs.google.com/forms/d/e/1FAIpQLSeIAXKqvliVOSBccjNGTOlln-A0W1afu_DK85z9Mb1OoNR5Vw/viewform",
+  garden: "https://docs.google.com/forms/d/e/1FAIpQLSeUB0VqBxHeqjIEDzpGXnKXsuzLGVSaHjIl0f9EqWGOres8KA/viewform",
+  lawn: "https://docs.google.com/forms/d/e/1FAIpQLSdPV0PX78BQ-PkCE1xGZFHHhzEVGiKdwCwWVLigVs6qXH1-_Q/viewform",
+  porch: "https://docs.google.com/forms/d/e/1FAIpQLSe5lks38UNApW8lczrIpSsN-HbZ07ueUk6Pt4P65ee_0svPew/viewform",
+  petcostume: "https://docs.google.com/forms/d/e/1FAIpQLSfYXDDoqbi_abMoGAGSJOyeCqa5er_Q4YAjumlmwn2zTY5nSQ/viewform",
+  street: "https://docs.google.com/forms/d/e/1FAIpQLSfyl5cIHZCqgpAileXNXnctFxMChib91afBYHpOxpNMWIBJsA/viewform",
+  photo: "https://docs.google.com/forms/d/e/1FAIpQLScgeXT0JrDBNhkXMihNQrDhG8B2imvGaknynLDfvRqHcJOv0Q/viewform"
 };
 
 function show(name){
@@ -450,6 +462,12 @@ var loadWinners = once(function(){
         var vote = "";
         if (/halloween/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.halloween + '" target="_blank" rel="noopener">Tap to vote 🎃</a>';
         if (/christmas/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.christmas + '" target="_blank" rel="noopener">Tap to vote 🎄</a>';
+        if (/flower garden/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.garden + '" target="_blank" rel="noopener">Tap to vote 🌸</a>';
+        if (/golf course lawn/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.lawn + '" target="_blank" rel="noopener">Tap to vote ⛳</a>';
+        if (/porch/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.porch + '" target="_blank" rel="noopener">Tap to vote 🚪</a>';
+        if (/pet costume/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.petcostume + '" target="_blank" rel="noopener">Tap to vote 🐶</a>';
+        if (/holiday street/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.street + '" target="_blank" rel="noopener">Tap to vote 🏘️</a>';
+        if (/photo of the year/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.photo + '" target="_blank" rel="noopener">Tap to vote 📸</a>';
         html += '<div class="card"><div class="ttl">' + esc(c[1]||"") + '</div>' +
           (c[0] ? '<div class="chips"><span class="chip">📅 ' + esc(c[0]) + '</span></div>' : '') +
           (c[2] ? '<div class="det">' + esc(c[2]) + vote + '</div>' : '') + '</div>';
