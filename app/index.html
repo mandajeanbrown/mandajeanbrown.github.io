@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kerns Ridge Community</title>
-<link rel="icon" type="image/svg+xml" href="../icon-kr.svg">
+<link rel="icon" type="image/png" href="../icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
@@ -17,9 +17,10 @@
   *{box-sizing:border-box}
   body{font-family:-apple-system,'Segoe UI',Arial,sans-serif;background:#F6F3EC;color:#1c2430;margin:0;padding:0 0 40px}
   header{background:#12275f;color:#fff;padding:16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
-  header img{width:42px;height:42px}
+  header img{width:42px;height:42px;border-radius:9px}
   header .t{font-size:20px;font-weight:700;line-height:1.15}
   header .s{font-size:13px;opacity:.85}
+  .banner{width:100%;display:block;border-radius:14px;margin-bottom:12px}
   .wrap{max-width:560px;margin:0 auto;padding:14px}
   .screen{display:none}
   .screen.on{display:block}
@@ -99,7 +100,7 @@
 </head>
 <body>
 <header>
-  <img src="../icon-kr.svg" alt="Kerns Ridge logo">
+  <img src="../icon-192.png" alt="Kerns Ridge logo">
   <div><div class="t">Kerns Ridge</div><div class="s">Neighborhood Community</div></div>
 </header>
 
@@ -131,6 +132,7 @@
   <!-- NEW HERE -->
   <div class="screen" id="screen-newhere">
     <button class="back" data-go="home">Home</button>
+    <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
     <div class="card"><div class="ttl">Welcome to Kerns Ridge 🏡</div>
       <div class="det">The local numbers and trash info new neighbors usually need, all in one place.</div></div>
     <div class="sect">LOCAL NUMBERS &amp; INFO</div>
