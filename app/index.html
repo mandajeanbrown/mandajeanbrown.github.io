@@ -84,8 +84,8 @@
     if (!btn) return;
     function paint(){
       btn.textContent = OneSignal.User.PushSubscription.optedIn
-        ? "🔔 You are getting notifications — tap to turn off"
-        : "🔔 Get notified when something new is added";
+        ? "🔔 Notify Me: ON (tap to turn off)"
+        : "🔔 Notify Me";
     }
     paint();
     OneSignal.User.PushSubscription.addEventListener("change", paint);
@@ -124,7 +124,7 @@
       <button class="btn wide" data-go="winners">🏆 Winners Circle</button>
       <button class="btn wide" data-go="votes">🗳️ Community Competitions</button>
     </div>
-    <button class="btn wide" id="notifyBtn" style="background:#12275f;color:#fff;border-color:#12275f;margin-top:8px;min-height:52px">🔔 Get notified when something new is added</button>
+    <button class="btn wide" id="notifyBtn" style="background:#12275f;color:#fff;border-color:#12275f;margin-top:8px;min-height:52px">🔔 Notify Me</button>
     <div class="foot">Everything opens right here in the app.</div>
   </div>
 
