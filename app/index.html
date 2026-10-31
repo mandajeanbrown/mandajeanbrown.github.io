@@ -52,6 +52,7 @@
   .ev .date{display:inline-block;font-weight:800;font-size:13.5px;color:#12275f;background:#DCE9F7;border-radius:8px;padding:3px 9px;margin-bottom:6px}
   .warn{background:#FDECEC;border:1.5px solid #D9534F;border-radius:14px;padding:14px;margin:0 0 12px}
   .warn .ttl{color:#8B1A1A}
+  .warn .bttl{font-size:clamp(11px, 3.6vw, 14px);font-weight:700;color:#8B1A1A;white-space:nowrap}
   .warn .det{color:#6E3434}
   .big911{display:block;text-align:center;background:#C12727;color:#fff;font-size:21px;font-weight:800;
           border-radius:14px;padding:15px;text-decoration:none;margin:0 0 12px}
@@ -411,7 +412,7 @@ var loadServices = once(function(){
   fetchSheet("Services & Referrals", "A1:E5", 0).then(function(rows){
     if (rows[0] && rows[1]) {
       document.getElementById("svcBanner").innerHTML =
-        '<div class="warn"><div class="ttl">' + esc(rows[0][0]) + '</div><div class="det">' + esc(rows[1][0]) + '</div></div>';
+        '<div class="warn"><div class="bttl">' + esc(rows[0][0]) + '</div><div class="det">' + esc(rows[1][0]) + '</div></div>';
     }
   }).catch(function(){});
   fetchSheet("Services & Referrals", "A6:F120").then(function(rows){
