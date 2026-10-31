@@ -42,7 +42,7 @@
   .back{display:block;width:100%;background:#12275f;border:none;color:#fff;font-size:18px;font-weight:700;padding:16px;border-radius:14px;cursor:pointer;margin:0 0 14px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
   .back::before{content:"🏠 "}
   .search{width:100%;font-size:17px;padding:13px 14px;border:1.5px solid #C9CFDA;border-radius:12px;margin:6px 0 4px;background:#fff}
-  .count{font-size:13px;color:#5A6B82;margin:4px 2px 10px}
+  .count{font-size:13px;color:#000000;margin:4px 2px 10px}
   .card{background:#fff;border:1px solid #E4E1D8;border-radius:14px;padding:13px 14px;margin:0 0 10px}
   .card .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
   .lot{font-weight:800;font-size:16px;color:#12275f}
@@ -50,23 +50,25 @@
   .name{font-size:16px;font-weight:600;margin-top:2px}
   .ttl{font-size:16.5px;font-weight:700}
   .sub{font-size:14px;color:#445;margin-top:2px}
-  .det{font-size:13.5px;color:#5A6B82;margin-top:5px;line-height:1.45}
+  .det{font-size:13.5px;color:#000000;margin-top:5px;line-height:1.45}
   .chips{margin-top:7px;display:flex;gap:6px;flex-wrap:wrap}
   .chip{font-size:12.5px;font-weight:700;background:#EEF4FB;color:#274B73;border-radius:999px;padding:3px 9px}
   .chip.blue{background:#E1EBFC;color:#1D4FB8}
-  .teams{font-size:13px;color:#5A6B82;margin-top:7px}
+  .teams{font-size:13px;color:#000000;margin-top:7px}
   .phone{display:inline-block;font-size:17px;font-weight:800;color:#12275f;text-decoration:none;margin-top:3px}
   .weblink{color:#1B5FBF;font-weight:600;text-decoration:none;word-break:break-all}
   .ev .date{display:inline-block;font-weight:800;font-size:13.5px;color:#12275f;background:#DCE9F7;border-radius:8px;padding:3px 9px;margin-bottom:6px}
   .warn{background:#FDECEC;border:1.5px solid #D9534F;border-radius:14px;padding:14px;margin:0 0 12px}
   .warn .ttl{color:#8B1A1A}
   .warn .bttl{font-size:clamp(11px, 3.6vw, 14px);font-weight:700;color:#8B1A1A;white-space:nowrap}
-  .warn .det{color:#6E3434}
+  .warn .det{color:#000000}
   .big911{display:block;text-align:center;background:#C12727;color:#fff;font-size:21px;font-weight:800;
           border-radius:14px;padding:15px;text-decoration:none;margin:0 0 12px}
   .gold{background:#FFF8E1;border:1.5px solid #E3C766}
   .promo{background:#EAF7EA;border-radius:9px;padding:7px 10px;font-size:13.5px;margin-top:8px;line-height:1.45}
-  .msg{background:#fff;border:1px solid #E4E1D8;border-radius:14px;padding:18px;text-align:center;color:#5A6B82}
+  #dirMap svg{width:100%;height:auto;display:block}
+  .lot{cursor:pointer}
+  .msg{background:#fff;border:1px solid #E4E1D8;border-radius:14px;padding:18px;text-align:center;color:#000000}
   .foot{text-align:center;font-size:12.5px;color:#8A94A6;margin-top:26px;line-height:1.6}
   a.sheetlink{color:#12275f;font-weight:700}
   a.postbtn{display:block;background:#2563EB;color:#fff;font-size:17px;font-weight:700;text-align:center;padding:16px 14px;border-radius:14px;text-decoration:none;margin-top:6px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
@@ -134,7 +136,7 @@
     <button class="back" data-go="home">Home</button>
     <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
     <div class="card"><div class="ttl">Welcome to Kerns Ridge 🏡</div>
-      <div class="det">The local numbers and trash info new neighbors usually need, all in one place.</div></div>
+      <div class="det">Local numbers and trash info every new neighbor needs.</div></div>
     <div class="sect sectToggle">LOCAL NUMBERS &amp; INFO<span class="sectArrow">▸</span></div>
     <div class="sectBody" style="display:none"><div id="nhList"><div class="msg">Loading...</div></div></div>
     <div class="sect sectToggle">TRASH &amp; BULK PICKUP<span class="sectArrow">▸</span></div>
@@ -144,6 +146,7 @@
   <!-- DIRECTORY -->
   <div class="screen" id="screen-directory">
     <button class="back" data-go="home">Home</button>
+    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div class="det">Tap a lot to see its info. Blue lots have info added.</div><div id="dirMap"><div class="msg">Loading...</div></div></div>
     <input class="search" id="dirSearch" type="search" placeholder="Search name, address, or lot #" autocomplete="off">
     <div class="count" id="dirCount"></div>
     <div id="dirList"><div class="msg">Loading the directory...</div></div>
@@ -161,7 +164,7 @@
   <!-- UPDATES -->
   <div class="screen" id="screen-updates">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">What is happening with the shared stuff... street lights, water, trash, roads. If neighbors are talking about it, the latest status lives here.</div></div>
+    <div class="card"><div class="det">The latest on street lights, water, trash, and roads.</div></div>
     <div class="sect">📣 NEIGHBORHOOD UPDATES</div>
     <div id="updList"><div class="msg">Loading...</div></div>
   </div>
@@ -169,7 +172,7 @@
   <!-- LEND & BORROW -->
   <div class="screen" id="screen-lend">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Neighbors helping neighbors. Contact each other directly to arrange pickup, and please bring borrowed things back clean and on time.</div></div>
+    <div class="card"><div class="det">Borrow from neighbors. Message them to arrange pickup. Bring things back clean and on time.</div></div>
     <div class="sect">🙋 HAPPY TO LEND</div>
     <div id="lendList"><div class="msg">Loading...</div></div>
     <div class="sect">🔎 LOOKING TO BORROW</div>
@@ -181,7 +184,7 @@
   <div class="screen" id="screen-emergency">
     <button class="back" data-go="home">Home</button>
     <a class="big911" href="tel:911">🚨 Life-threatening emergency? Call 911</a>
-    <div class="card"><div class="det">The non-emergency numbers below are for everything else... reporting, questions, and follow-ups. Tap a number to call.</div></div>
+    <div class="card"><div class="det">For everything that is not an emergency. Tap a number to call.</div></div>
     <div id="emList"><div class="msg">Loading...</div></div>
   </div>
 
@@ -189,14 +192,14 @@
   <div class="screen" id="screen-services">
     <button class="back" data-go="home">Home</button>
     <div id="svcBanner"></div>
-    <div class="card"><div class="det">Neighbors helping neighbors... who did your fence, your lawn, your plumbing? This list is read-only — post your recommendation in the Kerns Ridge Facebook group and it will be added here.</div></div>
+    <div class="card"><div class="det">Businesses your neighbors recommend. To add one, post it in the Kerns Ridge Facebook group.</div></div>
     <div id="svcList"><div class="msg">Loading...</div></div>
   </div>
 
   <!-- FOR SALE -->
   <div class="screen" id="screen-forsale">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Neighbors selling to neighbors... furniture, gear, and everything in between. Message the seller on Facebook Messenger to arrange pickup and swap photos. Free stuff and curb alerts are right below the for sale items.</div></div>
+    <div class="card"><div class="det">Neighbors selling to neighbors. Message the seller on Facebook Messenger to arrange pickup. Free stuff is below.</div></div>
     <div class="sect">🏷️ FOR SALE</div>
     <div id="saleList"><div class="msg">Loading...</div></div>
     <div class="sect">🎁 FREE STUFF &amp; CURB ALERTS</div>
@@ -207,7 +210,7 @@
   <!-- RIDES & CARPOOL -->
   <div class="screen" id="screen-rides">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Neighbors helping neighbors get places... airport runs, school carpools, commutes, church, appointments. Message each other on Facebook Messenger to work out pickup.</div></div>
+    <div class="card"><div class="det">Rides from neighbors: airport runs, carpools, commutes. Message each other on Facebook Messenger to set up pickup.</div></div>
     <div class="sect">🚗 RIDES &amp; CARPOOL</div>
     <div id="ridesList"><div class="msg">Loading...</div></div>
     <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSebnK9IRCiTrqep1sy0m188SoslVUoeXFpCNN0Lsxl0Ajk3sQ/viewform" target="_blank" rel="noopener">➕ Offer or ask for a ride</a></div>
@@ -216,7 +219,7 @@
   <!-- LOST & FOUND PETS -->
   <div class="screen" id="screen-pets">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Lost a pet, or found one wandering? Check here first... and message the owner or finder on Facebook Messenger, the fastest way to swap photos and get pets home.</div></div>
+    <div class="card"><div class="det">Lost or found a pet? Check here first. Message the owner or finder on Facebook Messenger to swap photos.</div></div>
     <div class="sect">🐾 LOST &amp; FOUND PETS</div>
     <div id="petsList"><div class="msg">Loading...</div></div>
     <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSeULpC4p_VfkzaMRzdHvgKhja-cxYQbvOdD1Qw8iMzinL7oLg/viewform" target="_blank" rel="noopener">➕ Post a lost or found pet</a></div>
@@ -225,7 +228,7 @@
   <!-- LOST & FOUND PACKAGES -->
   <div class="screen" id="screen-packages">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">A package landed at the wrong house, or yours says delivered but never showed up? Check here... and message each other on Facebook Messenger to arrange the handoff.</div></div>
+    <div class="card"><div class="det">Package at the wrong house, or marked delivered but missing? Message each other on Facebook Messenger to arrange the handoff.</div></div>
     <div class="sect">📦 LOST &amp; FOUND PACKAGES</div>
     <div id="pkgList"><div class="msg">Loading...</div></div>
     <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSczple8ahqgJtdB311EZIMldUKEGoxjTRHVfP-XP0X8Dx_YbA/viewform" target="_blank" rel="noopener">➕ Post a lost or found package</a></div>
@@ -234,14 +237,14 @@
   <!-- SCHOOLS -->
   <div class="screen" id="screen-schools">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Public, private, and charter options near Kerns Ridge, plus the state scholarship programs. Tuition figures are each school's published rates... always confirm current numbers with the school.</div></div>
+    <div class="card"><div class="det">Public, private, and charter schools near Kerns Ridge, plus state scholarships. Tuition is each school's published rate. Confirm current rates with the school.</div></div>
     <div id="schList"><div class="msg">Loading...</div></div>
   </div>
 
   <!-- HELP WANTED -->
   <div class="screen" id="screen-helpwanted">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Jobs and help wanted posted by your neighbors... yard work, handyman help, child care, and more. Neighbors get first shot at the work. To be listed, tap the button below or post in the Kerns Ridge Facebook group.</div></div>
+    <div class="card"><div class="det">Jobs posted by neighbors. To be listed, tap the button below or post in the Kerns Ridge Facebook group.</div></div>
     <div id="hwList"><div class="msg">Loading...</div></div>
     <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSe0iHBjI4YzqkWtoYx5eGpwC0jHYd-tYUNkha2plJXa0YZptA/viewform" target="_blank" rel="noopener">➕ Post a job / ask for help</a></div>
   </div>
@@ -249,14 +252,14 @@
   <!-- WINNERS -->
   <div class="screen" id="screen-winners">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Bragging rights live here... every neighborhood champion gets their name up in lights, from cook-offs and contests to pick'ems.</div></div>
+    <div class="card"><div class="det">Every neighborhood champion, from cook-offs to contests.</div></div>
     <div id="winList"><div class="msg">Loading...</div></div>
   </div>
 
   <!-- VOTES -->
   <div class="screen" id="screen-votes">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Vote in this year's community competitions... winners get crowned in the Winners Circle. Tap a competition to open its ballot.</div></div>
+    <div class="card"><div class="det">Vote in this year's competitions. Winners are crowned in the Winners Circle. Tap one to open its ballot.</div></div>
     <div class="grid">
       <button class="btn" data-go="form" data-form="halloween">🎃 Halloween Vote</button>
       <button class="btn" data-go="form" data-form="christmas">🎄 Christmas Vote</button>
@@ -323,7 +326,7 @@ function fetchSheet(name, range, headers){
 }
 function esc(s){ return String(s||"").replace(/[&<>"']/g, function(m){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]; }); }
 function errBox(el, what){
-  el.innerHTML = '<div class="msg">Could not load ' + what + ' just now. Check your connection and try again in a moment.</div>';
+  el.innerHTML = '<div class="msg">Could not load ' + what + '. Check your connection and try again.</div>';
 }
 function phoneHTML(text){
   var digits = (text || "").replace(/\D/g, "");
@@ -343,6 +346,75 @@ function once(fn){ var done = false; return function(){ if (done) return; done =
 
 /* ---------- Directory ---------- */
 var dirData = null;
+/*MAPGEN-BEGIN*/
+var LOT_POS = { 1:[968,148], 2:[968,184], 3:[968,220], 4:[968,256], 5:[950,300], 6:[918,352], 7:[872,452], 8:[841,452], 9:[810,452], 10:[779,452], 11:[748,452], 12:[717,452], 13:[686,452], 14:[655,452], 15:[624,452], 16:[593,452], 17:[562,452], 18:[540,478], 19:[512,506], 20:[440,478], 21:[486,446], 22:[428,452], 23:[397,452], 24:[366,452], 25:[335,452], 26:[304,452], 27:[272,446], 28:[264,488], 29:[284,524], 30:[232,544], 31:[196,522], 32:[184,476], 33:[192,434], 34:[300,398], 35:[271,394], 36:[242,390], 37:[213,386], 38:[184,382], 39:[155,378], 40:[128,344], 41:[104,312], 42:[88,276], 43:[86,238], 44:[100,202], 45:[128,172], 46:[158,182], 47:[172,216], 48:[174,254], 49:[192,206], 50:[238,196], 51:[270,196], 52:[302,196], 53:[334,196], 54:[366,196], 55:[398,196], 56:[430,196], 57:[462,196], 58:[494,196], 59:[526,196], 60:[588,186], 61:[610,150], 62:[640,120], 63:[672,98], 64:[708,84], 65:[744,74], 66:[784,72], 67:[815,72], 68:[846,72], 69:[877,72], 70:[908,72], 71:[939,72], 72:[970,72], 73:[974,102], 74:[898,140], 75:[912,176], 76:[916,214], 77:[914,250], 78:[906,286], 79:[892,322], 80:[866,356], 81:[830,388], 82:[812,348], 83:[814,310], 84:[816,272], 85:[818,234], 86:[820,196], 87:[738,140], 88:[736,176], 89:[734,212], 90:[732,248], 91:[730,284], 92:[728,320], 93:[726,356], 94:[690,392], 95:[658,392], 96:[626,392], 97:[632,352], 98:[634,314], 99:[636,276], 100:[638,238], 101:[640,200], 102:[664,158], 103:[692,126], 104:[222,282], 105:[254,282], 106:[286,282], 107:[318,282], 108:[350,282], 109:[382,282], 110:[414,282], 111:[446,282], 112:[478,282], 113:[510,282], 114:[542,282], 115:[574,282], 116:[574,338], 117:[542,338], 118:[510,338], 119:[478,338], 120:[446,338], 121:[414,338], 122:[382,338], 123:[350,338], 124:[318,338], 125:[286,338], 126:[254,338], 127:[222,338], 128:[190,338] };
+function mapSVG(){
+  var byLot = {};
+  dirData.forEach(function(d){ byLot[String(d.lot)] = d; });
+  var s = '<svg viewBox="0 0 1080 660" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kerns Ridge lot map">';
+  s += '<rect x="0" y="0" width="1080" height="660" fill="#E9F0E2"/>';
+  s += '<ellipse cx="505" cy="98" rx="54" ry="26" fill="#A8CBE0"/><text x="505" y="102" font-size="11" fill="#3D6076" text-anchor="middle">Stormwater Pond</text>';
+  s += '<ellipse cx="185" cy="568" rx="68" ry="32" fill="#A8CBE0"/><text x="185" y="572" font-size="11" fill="#3D6076" text-anchor="middle">Stormwater Pond</text>';
+  var R = 'stroke="#B7BBC0" stroke-width="15" fill="none" stroke-linecap="round"';
+  s += '<path d="M156,262 L668,254" ' + R + '/>';
+  s += '<path d="M668,254 C700,248 712,210 718,168" ' + R + '/>';
+  s += '<path d="M718,168 C714,116 742,84 800,68 C890,50 975,56 1002,92 C1024,120 1032,180 1032,266" ' + R + '/>';
+  s += '<path d="M950,118 L950,288" ' + R + '/>';
+  s += '<path d="M950,288 Q944,378 880,430" ' + R + '/>';
+  s += '<path d="M880,436 C620,430 380,424 205,402" ' + R + '/>';
+  s += '<path d="M205,402 C178,382 156,352 142,312" ' + R + '/>';
+  s += '<circle cx="118" cy="262" r="38" ' + R + '/>';
+  s += '<path d="M668,254 L664,394" ' + R + '/>';
+  s += '<path d="M252,402 L242,460" ' + R + '/><circle cx="234" cy="488" r="20" ' + R + '/>';
+  s += '<path d="M474,436 L470,462" ' + R + '/><circle cx="466" cy="484" r="17" ' + R + '/>';
+  s += '<rect x="1028" y="0" width="52" height="660" fill="#9AA0A6"/>';
+  s += '<path d="M1028,268 L975,268" ' + R + '/>';
+  var L = 'font-size="13" font-style="italic" fill="#4B5563"';
+  s += '<text x="400" y="266" ' + L + '>Gaelic Drive</text>';
+  s += '<text x="420" y="440" ' + L + '>Kildare Drive</text>';
+  s += '<text x="676" y="330" ' + L + ' transform="rotate(-90 676 330)" text-anchor="middle">Midfield Drive</text>';
+  s += '<text x="822" y="118" ' + L + '>Kildare Drive</text>';
+  s += '<text x="938" y="205" ' + L + ' transform="rotate(90 938 205)" text-anchor="middle">Kildare Drive</text>';
+  s += '<text x="916" y="378" font-size="11" font-style="italic" fill="#4B5563" transform="rotate(56 916 378)">Roscrea Dr</text>';
+  s += '<text x="234" y="532" font-size="10" font-style="italic" fill="#4B5563" text-anchor="middle">Fairmount Ct</text>';
+  s += '<text x="466" y="524" font-size="10" font-style="italic" fill="#4B5563" text-anchor="middle">Gleann Ct</text>';
+  s += '<text x="1054" y="330" font-size="19" font-weight="700" fill="#FFFFFF" transform="rotate(-90 1054 330)" text-anchor="middle">Bringle Ferry Road</text>';
+  Object.keys(LOT_POS).forEach(function(k){
+    var p = LOT_POS[k], d = byLot[k];
+    var fill = (k === "79") ? "#FFC327" : (d && d.name ? "#2563EB" : "#1D3557");
+    var tc = (k === "79") ? "#12275F" : "#FFFFFF";
+    s += '<g class="lot" data-lot="' + k + '"><rect x="' + p[0] + '" y="' + p[1] + '" width="27" height="24" rx="5" fill="' + fill + '" stroke="#FFFFFF" stroke-width="1.2"/>' +
+      '<text x="' + (p[0] + 13.5) + '" y="' + (p[1] + 16.5) + '" font-size="11" font-weight="700" fill="' + tc + '" text-anchor="middle" style="pointer-events:none">' + k + '</text></g>';
+  });
+  return s + '</svg>';
+}
+function buildMap(){
+  document.getElementById("dirMap").innerHTML = mapSVG();
+  document.querySelectorAll("#dirMap .lot").forEach(function(g){
+    g.addEventListener("click", function(){ showLot(g.getAttribute("data-lot")); });
+  });
+  document.getElementById("lotPopClose").addEventListener("click", function(e){
+    e.preventDefault();
+    document.getElementById("lotPop").style.display = "none";
+  });
+}
+function showLot(n){
+  var d = null;
+  dirData.forEach(function(x){ if (String(x.lot) === String(n)) d = x; });
+  var h = '<div class="top"><span class="lot">Lot ' + esc(n) + '</span>' +
+    (d && d.addr ? '<span class="addr">' + esc(d.addr) + '</span>' : '') + '</div>';
+  if (d && d.name) h += '<div class="name">' + esc(d.name) + '</div>';
+  var chips = "";
+  if (d && /yes/i.test(d.candy)) chips += '<span class="chip">🎃 Handing out candy</span>';
+  if (d && /yes/i.test(d.cams)) chips += '<span class="chip">📹 Cameras</span>';
+  if (chips) h += '<div class="chips">' + chips + '</div>';
+  if (d && d.fb.length) h += '<div class="teams">🏈 ' + esc(d.fb.join(" · ")) + '</div>';
+  if (d && d.bb.length) h += '<div class="teams">🏀 ' + esc(d.bb.join(" · ")) + '</div>';
+  if (!d || (!d.name && !d.addr)) h += '<div class="det">No info added for this lot yet.</div>';
+  document.getElementById("lotPopBody").innerHTML = h;
+  document.getElementById("lotPop").style.display = "block";
+}
+/*MAPGEN-END*/
 var loadDirectory = once(function(){
   fetchSheet("Neighborhood Directory", "A5:I300").then(function(rows){
     dirData = [];
@@ -352,6 +424,7 @@ var loadDirectory = once(function(){
                      cams:r[4]||"", fb:[r[5],r[6]].filter(Boolean), bb:[r[7],r[8]].filter(Boolean) });
     });
     renderDir();
+    buildMap();
   }).catch(function(){ errBox(document.getElementById("dirList"), "the directory"); });
 });
 function renderDir(){
@@ -493,36 +566,39 @@ var loadSchools = once(function(){
 
 /* ---------- Services ---------- */
 var loadServices = once(function(){
+  var bannerHTML = "";
   fetchSheet("Services & Referrals", "A1:E5", 0).then(function(rows){
     if (rows[0] && rows[1]) {
-      document.getElementById("svcBanner").innerHTML =
-        '<div class="warn"><div class="bttl">' + esc(rows[0][0]) + '</div><div class="det">' + esc(rows[1][0]) + '</div></div>';
+      bannerHTML = '<div class="warn"><div class="bttl">' + esc(rows[0][0]) + '</div><div class="det">' + esc(rows[1][0]) + '</div></div>';
     }
-  }).catch(function(){});
-  fetchSheet("Services & Referrals", "A6:F120").then(function(rows){
-    var html = "", lastCat = null, open = false;
-    rows.filter(function(r){ return r[1]; }).forEach(function(r){
-      if (r[0] && r[0] !== lastCat) {
-        if (open) html += '</div>';
-        html += '<div class="sect sectToggle">' + esc(r[0].toUpperCase()) + '<span class="sectArrow">▸</span></div><div class="sectBody" style="display:none">';
-        lastCat = r[0]; open = true;
-      }
-      html += '<div class="card"><div class="ttl">' + esc(r[1]) + '</div>' + phoneHTML(r[2]) +
-        webHTML(r[3]) + (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') +
-        (r[5] ? '<div class="promo">🎉 <strong>Current promo:</strong> ' + esc(r[5]) + '</div>' : '') + '</div>';
-    });
-    if (open) html += '</div>';
-    var el = document.getElementById("svcList");
-    el.innerHTML = html || '<div class="msg">No services listed yet.</div>';
-    el.querySelectorAll(".sectToggle").forEach(function(h){
-      h.addEventListener("click", function(){
-        var body = h.nextElementSibling;
-        var closed = body.style.display === "none";
-        body.style.display = closed ? "" : "none";
-        h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
+  }).catch(function(){}).then(function(){
+    fetchSheet("Services & Referrals", "A6:F120").then(function(rows){
+      var html = "", lastCat = null, open = false, bannerUsed = false;
+      rows.filter(function(r){ return r[1]; }).forEach(function(r){
+        if (r[0] && r[0] !== lastCat) {
+          if (open) html += '</div>';
+          html += '<div class="sect sectToggle">' + esc(r[0].toUpperCase()) + '<span class="sectArrow">▸</span></div><div class="sectBody" style="display:none">';
+          if (bannerHTML && /fence/i.test(r[0])) { html += bannerHTML; bannerUsed = true; }
+          lastCat = r[0]; open = true;
+        }
+        html += '<div class="card"><div class="ttl">' + esc(r[1]) + '</div>' + phoneHTML(r[2]) +
+          webHTML(r[3]) + (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') +
+          (r[5] ? '<div class="promo">🎉 <strong>Current promo:</strong> ' + esc(r[5]) + '</div>' : '') + '</div>';
       });
-    });
-  }).catch(function(){ errBox(document.getElementById("svcList"), "services"); });
+      if (open) html += '</div>';
+      var el = document.getElementById("svcList");
+      el.innerHTML = html || '<div class="msg">No services listed yet.</div>';
+      if (bannerHTML && !bannerUsed) document.getElementById("svcBanner").innerHTML = bannerHTML;
+      el.querySelectorAll(".sectToggle").forEach(function(h){
+        h.addEventListener("click", function(){
+          var body = h.nextElementSibling;
+          var closed = body.style.display === "none";
+          body.style.display = closed ? "" : "none";
+          h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
+        });
+      });
+    }).catch(function(){ errBox(document.getElementById("svcList"), "services"); });
+  });
 });
 
 /* ---------- Help Wanted ---------- */
@@ -531,7 +607,7 @@ var loadHelpWanted = once(function(){
     var real = rows.filter(function(r){ return r[1]; });
     if (!real.length) {
       document.getElementById("hwList").innerHTML =
-        '<div class="msg">No listings yet — be the first to post one.</div>';
+        '<div class="msg">Nothing here yet. Be the first to post one.</div>';
       return;
     }
     document.getElementById("hwList").innerHTML = real.map(function(r){
@@ -594,7 +670,7 @@ var loadWinners = once(function(){
 /* ---------- Lend & Borrow ---------- */
 function lendCards(rows, kind){
   var real = rows.filter(function(r){ return r[0] && !/^nothing here yet/i.test(r[0]); });
-  if (!real.length) return '<div class="msg">Nothing here yet — be the first to add yours with the button below.</div>';
+  if (!real.length) return '<div class="msg">Nothing here yet. Add yours with the button below.</div>';
   return real.map(function(r){
     var chips = "";
     if (kind === "lend" && r[1]) chips += '<span class="chip">' + esc(r[1]) + '</span>';
@@ -625,7 +701,7 @@ var loadForSale = once(function(){
     var real = rows.filter(function(r){ return r[0] && !/nothing here yet/i.test(r[0]); });
     if (!real.length) {
       document.getElementById("saleList").innerHTML =
-        '<div class="msg">Nothing for sale yet — be the first to list something with the button below.</div>';
+        '<div class="msg">Nothing for sale yet. List something with the button below.</div>';
       return;
     }
     document.getElementById("saleList").innerHTML = real.map(function(r){
@@ -646,7 +722,7 @@ var loadRides = once(function(){
     var real = rows.filter(function(r){ return r[0] && !/nothing here yet/i.test(r[0]); });
     if (!real.length) {
       document.getElementById("ridesList").innerHTML =
-        '<div class="msg">No rides posted yet — be the first to offer or ask with the button below.</div>';
+        '<div class="msg">No rides yet. Offer or ask with the button below.</div>';
       return;
     }
     document.getElementById("ridesList").innerHTML = real.map(function(r){
@@ -668,7 +744,7 @@ var loadPets = once(function(){
     var real = rows.filter(function(r){ return r[0] && !/no lost or found/i.test(r[0]); });
     if (!real.length) {
       document.getElementById("petsList").innerHTML =
-        '<div class="msg">No lost or found pets right now — and that\'s the way we like it!</div>';
+        '<div class="msg">No lost or found pets right now. That\'s the way we like it!</div>';
       return;
     }
     document.getElementById("petsList").innerHTML = real.map(function(r){
@@ -709,7 +785,7 @@ var loadPackages = once(function(){
     var real = rows.filter(function(r){ return r[0] && !/no lost or found/i.test(r[0]); });
     if (!real.length) {
       document.getElementById("pkgList").innerHTML =
-        '<div class="msg">No lost or found packages right now — every package is where it belongs!</div>';
+        '<div class="msg">No lost or found packages right now. Every package is where it belongs!</div>';
       return;
     }
     document.getElementById("pkgList").innerHTML = real.map(function(r){
@@ -730,5 +806,9 @@ var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHe
                 helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend,
                 updates: loadUpdates, packages: loadPackages };
 </script>
+<div id="lotPop" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;background:#fff;border-top:3px solid #12275F;border-radius:16px 16px 0 0;box-shadow:0 -6px 28px rgba(0,0,0,.3);padding:16px;max-height:72vh;overflow-y:auto">
+  <div id="lotPopBody"></div>
+  <a class="postbtn" href="#" id="lotPopClose" style="margin-top:12px">Close</a>
+</div>
 </body>
 </html>
