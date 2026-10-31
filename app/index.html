@@ -32,7 +32,7 @@
        background:#F5F0E6;border:1px solid #E0D7BE;border-radius:14px;color:#1c2430;
        font-size:16px;font-weight:700;padding:18px 10px;text-decoration:none;cursor:pointer;min-height:64px;width:100%}
   .btn.wide{grid-column:1/-1}
-  .btn.green{background:#6BC275;border-color:#57A662;color:#10330F}
+  .btn.blue{background:#8FB0F5;border-color:#6E97EC;color:#0B2A5B}
   .btn:active{filter:brightness(.96)}
   .sect{font-size:13px;font-weight:700;letter-spacing:.06em;color:#274B73;background:#DCE9F7;border-radius:9px;padding:8px 11px;margin:20px 0 10px}
   .sectToggle{cursor:pointer;padding:13px 11px;font-size:14px;-webkit-tap-highlight-color:transparent}
@@ -52,7 +52,7 @@
   .det{font-size:13.5px;color:#5A6B82;margin-top:5px;line-height:1.45}
   .chips{margin-top:7px;display:flex;gap:6px;flex-wrap:wrap}
   .chip{font-size:12.5px;font-weight:700;background:#EEF4FB;color:#274B73;border-radius:999px;padding:3px 9px}
-  .chip.green{background:#E4F3E4;color:#256B2E}
+  .chip.blue{background:#E1EBFC;color:#1D4FB8}
   .teams{font-size:13px;color:#5A6B82;margin-top:7px}
   .phone{display:inline-block;font-size:17px;font-weight:800;color:#12275f;text-decoration:none;margin-top:3px}
   .weblink{color:#1B5FBF;font-weight:600;text-decoration:none;word-break:break-all}
@@ -68,7 +68,7 @@
   .msg{background:#fff;border:1px solid #E4E1D8;border-radius:14px;padding:18px;text-align:center;color:#5A6B82}
   .foot{text-align:center;font-size:12.5px;color:#8A94A6;margin-top:26px;line-height:1.6}
   a.sheetlink{color:#12275f;font-weight:700}
-  a.postbtn{display:block;background:#16a765;color:#fff;font-size:17px;font-weight:700;text-align:center;padding:16px 14px;border-radius:14px;text-decoration:none;margin-top:6px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+  a.postbtn{display:block;background:#2563EB;color:#fff;font-size:17px;font-weight:700;text-align:center;padding:16px 14px;border-radius:14px;text-decoration:none;margin-top:6px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
 </style>
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
@@ -108,7 +108,7 @@
   <!-- HOME -->
   <div class="screen on" id="screen-home">
     <div class="grid">
-      <button class="btn wide green" data-go="newhere">🆕 New Here? Start Here</button>
+      <button class="btn wide blue" data-go="newhere">🆕 New Here? Start Here</button>
       <button class="btn" data-go="directory">🏠 Directory</button>
       <button class="btn" data-go="events">📅 Local Events</button>
       <button class="btn" data-go="updates">📣 Updates</button>
@@ -589,7 +589,7 @@ function lendCards(rows, kind){
     var chips = "";
     if (kind === "lend" && r[1]) chips += '<span class="chip">' + esc(r[1]) + '</span>';
     if (kind === "borrow" && r[1]) chips += '<span class="chip">⏰ Needed by ' + esc(r[1]) + '</span>';
-    if (r[6]) chips += '<span class="chip green">' + esc(r[6]) + '</span>';
+    if (r[6]) chips += '<span class="chip blue">' + esc(r[6]) + '</span>';
     var who = [r[2], r[3] ? "Lot " + r[3] : ""].filter(Boolean).join(" · ");
     return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' +
       (chips ? '<div class="chips">' + chips + '</div>' : '') +
