@@ -24,6 +24,10 @@
   .screen{display:none}
   .screen.on{display:block}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  /* Home screen: all buttons fit on one phone screen, no scrolling */
+  #screen-home.on{display:flex;flex-direction:column;height:calc(100dvh - 88px)}
+  #screen-home .grid{flex:1;grid-auto-rows:1fr;gap:8px;min-height:0}
+  #screen-home .btn{min-height:0;padding:8px;font-size:15px;line-height:1.2}
   .btn{display:flex;align-items:center;justify-content:center;text-align:center;gap:6px;
        background:#F5F0E6;border:1px solid #E0D7BE;border-radius:14px;color:#1c2430;
        font-size:16px;font-weight:700;padding:18px 10px;text-decoration:none;cursor:pointer;min-height:64px;width:100%}
