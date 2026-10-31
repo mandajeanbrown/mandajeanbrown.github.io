@@ -135,10 +135,10 @@
     <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
     <div class="card"><div class="ttl">Welcome to Kerns Ridge 🏡</div>
       <div class="det">The local numbers and trash info new neighbors usually need, all in one place.</div></div>
-    <div class="sect">LOCAL NUMBERS &amp; INFO</div>
-    <div id="nhList"><div class="msg">Loading...</div></div>
-    <div class="sect">TRASH &amp; BULK PICKUP</div>
-    <div id="nhTrash"><div class="msg">Loading...</div></div>
+    <div class="sect sectToggle">LOCAL NUMBERS &amp; INFO<span class="sectArrow">▸</span></div>
+    <div class="sectBody" style="display:none"><div id="nhList"><div class="msg">Loading...</div></div></div>
+    <div class="sect sectToggle">TRASH &amp; BULK PICKUP<span class="sectArrow">▸</span></div>
+    <div class="sectBody" style="display:none"><div id="nhTrash"><div class="msg">Loading...</div></div></div>
   </div>
 
   <!-- DIRECTORY -->
@@ -425,6 +425,14 @@ function storeChips(who, playCell, iosCell){
 
 /* ---------- New Here ---------- */
 var loadNewHere = once(function(){
+  document.querySelectorAll("#screen-newhere .sectToggle").forEach(function(h){
+    h.addEventListener("click", function(){
+      var body = h.nextElementSibling;
+      var closed = body.style.display === "none";
+      body.style.display = closed ? "" : "none";
+      h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
+    });
+  });
   fetchSheet("New Here?", "A15:F31").then(function(rows){
     document.getElementById("nhList").innerHTML = rows.filter(function(r){ return r[0]; }).map(function(r){
       return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' + phoneHTML(r[1]) +
