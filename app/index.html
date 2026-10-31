@@ -61,6 +61,7 @@
   .msg{background:#fff;border:1px solid #E4E1D8;border-radius:14px;padding:18px;text-align:center;color:#5A6B82}
   .foot{text-align:center;font-size:12.5px;color:#8A94A6;margin-top:26px;line-height:1.6}
   a.sheetlink{color:#12275f;font-weight:700}
+  a.postbtn{display:block;background:#16a765;color:#fff;font-size:17px;font-weight:700;text-align:center;padding:16px 14px;border-radius:14px;text-decoration:none;margin-top:6px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
 </style>
 </head>
 <body>
@@ -127,7 +128,7 @@
     <div id="lendList"><div class="msg">Loading...</div></div>
     <div class="sect">🔎 LOOKING TO BORROW</div>
     <div id="borrowList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLScd-Iu57D5WekRZRmRfkmeWDk1Eio9EizM0MmUaB_Li1a3P9w/viewform" target="_blank" rel="noopener">➕ Add yours — lend, give away, or borrow →</a></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLScd-Iu57D5WekRZRmRfkmeWDk1Eio9EizM0MmUaB_Li1a3P9w/viewform" target="_blank" rel="noopener">➕ Add yours — lend, give away, or borrow →</a></div>
   </div>
 
   <!-- EMERGENCY -->
@@ -154,7 +155,7 @@
     <div id="saleList"><div class="msg">Loading...</div></div>
     <div class="sect">🎁 FREE STUFF &amp; CURB ALERTS</div>
     <div id="freeList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener">➕ List something for sale →</a></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener">➕ List something for sale →</a></div>
   </div>
 
   <!-- RIDES & CARPOOL -->
@@ -163,7 +164,7 @@
     <div class="card"><div class="det">Neighbors helping neighbors get places... airport runs, school carpools, commutes, church, appointments. Message each other on Facebook Messenger to work out pickup.</div></div>
     <div class="sect">🚗 RIDES &amp; CARPOOL</div>
     <div id="ridesList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLSebnK9IRCiTrqep1sy0m188SoslVUoeXFpCNN0Lsxl0Ajk3sQ/viewform" target="_blank" rel="noopener">➕ Offer or ask for a ride →</a></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSebnK9IRCiTrqep1sy0m188SoslVUoeXFpCNN0Lsxl0Ajk3sQ/viewform" target="_blank" rel="noopener">➕ Offer or ask for a ride →</a></div>
   </div>
 
   <!-- LOST & FOUND PETS -->
@@ -172,7 +173,7 @@
     <div class="card"><div class="det">Lost a pet, or found one wandering? Check here first... and message the owner or finder on Facebook Messenger, the fastest way to swap photos and get pets home.</div></div>
     <div class="sect">🐾 LOST &amp; FOUND PETS</div>
     <div id="petsList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLSeULpC4p_VfkzaMRzdHvgKhja-cxYQbvOdD1Qw8iMzinL7oLg/viewform" target="_blank" rel="noopener">➕ Post a lost or found pet →</a></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSeULpC4p_VfkzaMRzdHvgKhja-cxYQbvOdD1Qw8iMzinL7oLg/viewform" target="_blank" rel="noopener">➕ Post a lost or found pet →</a></div>
   </div>
 
   <!-- SCHOOLS -->
@@ -187,7 +188,7 @@
     <button class="back" data-go="home">← Home</button>
     <div class="card"><div class="det">Jobs and help wanted posted by your neighbors... yard work, handyman help, child care, and more. Neighbors get first shot at the work. To be listed, tap the button below or post in the Kerns Ridge Facebook group.</div></div>
     <div id="hwList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="sheetlink" href="https://docs.google.com/forms/d/e/1FAIpQLSe0iHBjI4YzqkWtoYx5eGpwC0jHYd-tYUNkha2plJXa0YZptA/viewform" target="_blank" rel="noopener">➕ Post a job / ask for help →</a></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSe0iHBjI4YzqkWtoYx5eGpwC0jHYd-tYUNkha2plJXa0YZptA/viewform" target="_blank" rel="noopener">➕ Post a job / ask for help →</a></div>
   </div>
 
   <!-- WINNERS -->
@@ -474,18 +475,19 @@ var loadWinners = once(function(){
       for (var j = ci + 1; j < rows.length; j++) {
         var c = rows[j];
         if (!c[0]) continue;
-        var vote = "";
-        if (/halloween/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.halloween + '" target="_blank" rel="noopener">Tap to vote 🎃</a>';
-        if (/christmas/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.christmas + '" target="_blank" rel="noopener">Tap to vote 🎄</a>';
-        if (/flower garden/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.garden + '" target="_blank" rel="noopener">Tap to vote 🌸</a>';
-        if (/golf course lawn/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.lawn + '" target="_blank" rel="noopener">Tap to vote ⛳</a>';
-        if (/porch/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.porch + '" target="_blank" rel="noopener">Tap to vote 🚪</a>';
-        if (/pet costume/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.petcostume + '" target="_blank" rel="noopener">Tap to vote 🐶</a>';
-        if (/holiday street/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.street + '" target="_blank" rel="noopener">Tap to vote 🏘️</a>';
-        if (/photo of the year/i.test(c[1]||"")) vote = ' <a class="weblink" href="' + FORMS.photo + '" target="_blank" rel="noopener">Tap to vote 📸</a>';
+        var voteUrl = "", voteEmoji = "";
+        if (/halloween/i.test(c[1]||"")) { voteUrl = FORMS.halloween; voteEmoji = "🎃"; }
+        if (/christmas/i.test(c[1]||"")) { voteUrl = FORMS.christmas; voteEmoji = "🎄"; }
+        if (/flower garden/i.test(c[1]||"")) { voteUrl = FORMS.garden; voteEmoji = "🌸"; }
+        if (/golf course lawn/i.test(c[1]||"")) { voteUrl = FORMS.lawn; voteEmoji = "⛳"; }
+        if (/porch/i.test(c[1]||"")) { voteUrl = FORMS.porch; voteEmoji = "🚪"; }
+        if (/pet costume/i.test(c[1]||"")) { voteUrl = FORMS.petcostume; voteEmoji = "🐶"; }
+        if (/holiday street/i.test(c[1]||"")) { voteUrl = FORMS.street; voteEmoji = "🏘️"; }
+        if (/photo of the year/i.test(c[1]||"")) { voteUrl = FORMS.photo; voteEmoji = "📸"; }
         html += '<div class="card"><div class="ttl">' + esc(c[1]||"") + '</div>' +
           (c[0] ? '<div class="chips"><span class="chip">📅 ' + esc(c[0]) + '</span></div>' : '') +
-          (c[2] ? '<div class="det">' + esc(c[2]) + vote + '</div>' : '') + '</div>';
+          (c[2] ? '<div class="det">' + esc(c[2]) + '</div>' : '') +
+          (voteUrl ? '<a class="postbtn" href="' + voteUrl + '" target="_blank" rel="noopener">🗳️ Tap to vote ' + voteEmoji + '</a>' : '') + '</div>';
       }
     }
     document.getElementById("winList").innerHTML = html || '<div class="msg">Nothing here yet.</div>';
