@@ -25,6 +25,8 @@
   .chip { display: inline-block; background: #DCE9F7; border: 1px solid #A9C6EE; color: #12275f; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 1px 9px; margin-left: 7px; vertical-align: 2px; }
   .det { font-size: 14px; margin-top: 4px; line-height: 1.45; }
   .msg { text-align: center; font-size: 15px; padding: 22px 10px; color: #444; }
+  .alertBtn { display: block; width: 100%; margin-top: 14px; background: #12275f; color: #fff; border: none; font: inherit; font-weight: 800; font-size: 16px; padding: 13px 12px; border-radius: 12px; cursor: pointer; }
+  .hint { font-size: 12.5px; color: #555; margin-top: 6px; text-align: center; line-height: 1.45; }
   footer { text-align: center; font-size: 12.5px; color: #666; margin-top: 26px; }
 </style>
 </head>
@@ -35,6 +37,8 @@
     <h1>🌶️ Kerns Ridge Chili Cook-Off</h1>
     <div class="sub">Saturday, November 7, 2026 · 4:00–7:00 PM</div>
     <div class="live">● Live RSVP list — updates automatically</div>
+    <button class="alertBtn" id="rsvpAlertBtn">🔔 Get new RSVP alerts</button>
+    <div class="hint">Organizer: tap the button and allow notifications to get an alert when a new RSVP comes in. On iPhone, add this page to your Home Screen first, then tap the button from there.</div>
   </header>
 
   <div class="tallies">
@@ -48,6 +52,42 @@
   <footer>Kerns Ridge neighborhood · This page updates on its own as neighbors RSVP — check back any time.</footer>
 </div>
 
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+async function rsvpAlertOn(OS){
+  try {
+    if (!OS.User.PushSubscription.optedIn) return false;
+    var tags = await OS.User.getTags();
+    return !!(tags && tags.rsvp_alerts === "chili");
+  } catch(e){ return false; }
+}
+async function paintAlertBtn(OS){
+  var b = document.getElementById("rsvpAlertBtn");
+  if (!b) return;
+  b.textContent = (await rsvpAlertOn(OS)) ? "🔔 RSVP Alerts: ON (tap to turn off)" : "🔔 Get new RSVP alerts";
+}
+OneSignalDeferred.push(async function(OneSignal){
+  await OneSignal.init({
+    appId: "2e0a9422-7fcf-43c1-bee6-386a4923c5f5",
+    serviceWorkerPath: "/OneSignalSDKWorker.js",
+    notifyButton: { enable: false }
+  });
+  paintAlertBtn(OneSignal);
+  document.getElementById("rsvpAlertBtn").addEventListener("click", async function(){
+    try {
+      if (await rsvpAlertOn(OneSignal)) {
+        OneSignal.User.removeTag("rsvp_alerts");
+        await OneSignal.User.PushSubscription.optOut();
+      } else {
+        await OneSignal.User.PushSubscription.optIn();
+        OneSignal.User.addTag("rsvp_alerts", "chili");
+      }
+    } catch(e){}
+    paintAlertBtn(OneSignal);
+  });
+});
+</script>
 <script>
 var SHEET_ID = "19EpFUfng0klHaYTBqFKhruntYL7IAmCPj3kXM0-0i4Q";
 function esc(s){ return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
