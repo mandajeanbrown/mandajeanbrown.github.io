@@ -69,6 +69,7 @@
   .car{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:9px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .car::-webkit-scrollbar{display:none}
   .car img{flex:0 0 88%;height:210px;object-fit:cover;border-radius:10px;scroll-snap-align:center;background:#EDEAE2}
+  .car.tall img{height:330px}
   .carCap{font-size:12.5px;color:#000;margin-top:7px}
   .carDots{text-align:center;margin-top:5px;line-height:1}
   .carDots span{display:inline-block;width:7px;height:7px;border-radius:50%;background:#C4CEDE;margin:0 2.5px}
@@ -719,6 +720,16 @@ var loadLend = once(function(){
     document.getElementById("borrowList").innerHTML = lendCards(rows, "borrow");
   }).catch(function(){ errBox(document.getElementById("borrowList"), "borrow requests"); });
 });
+var SALE_PHOTOS = {
+  "pride go-go elite traveller mobility scooter": ["photos/scooter-1.jpg","photos/scooter-2.jpg","photos/scooter-3.jpg","photos/scooter-4.jpg","photos/scooter-5.jpg","photos/scooter-6.jpg","photos/scooter-7.jpg","photos/scooter-8.jpg","photos/scooter-9.jpg"]
+};
+function salePhotosHTML(title){
+  var files = SALE_PHOTOS[(title || "").trim().toLowerCase()];
+  if (!files) return "";
+  var imgs = files.map(function(f){ return '<img src="' + f + '" loading="lazy" alt="Pride Go-Go Elite Traveller mobility scooter">'; }).join("");
+  var dots = files.map(function(f, i){ return '<span' + (i === 0 ? ' class="on"' : '') + '></span>'; }).join("");
+  return '<div class="carCap">📸 Swipe to see more photos</div><div class="car tall">' + imgs + '</div><div class="carDots">' + dots + '</div>';
+}
 var loadForSale = once(function(){
   fetchSheet("Lend & Borrow", "A19:G29").then(function(rows){
     document.getElementById("freeList").innerHTML = lendCards(rows, "free");
@@ -733,6 +744,7 @@ var loadForSale = once(function(){
     document.getElementById("saleList").innerHTML = real.map(function(r){
       var status = (r[7] && r[7] !== "For Sale") ? ' <span class="chip">' + esc(r[7]) + '</span>' : '';
       return '<div class="card">' +
+        salePhotosHTML(r[0]) +
         '<div class="ttl">' + esc(r[0]) + status + '</div>' +
         '<div style="margin:5px 0"><span class="chip">💲 ' + esc(r[2] || "") + '</span>' +
         (r[1] ? ' <span class="chip">' + esc(r[1]) + '</span>' : '') + '</div>' +
@@ -740,6 +752,14 @@ var loadForSale = once(function(){
         (r[5] ? '<div class="det">📞 ' + esc(r[5]) + '</div>' : '') +
         (r[6] ? '<div class="det">' + esc(r[6]) + '</div>' : '') + '</div>';
     }).join("");
+    document.querySelectorAll("#saleList .car").forEach(function(car){
+      car.addEventListener("scroll", function(){
+        var dots = car.nextElementSibling;
+        if (!dots || !dots.classList.contains("carDots")) return;
+        var idx = Math.round(car.scrollLeft / car.clientWidth);
+        dots.querySelectorAll("span").forEach(function(d, i){ d.className = i === idx ? "on" : ""; });
+      }, { passive: true });
+    });
   }).catch(function(){ errBox(document.getElementById("saleList"), "for sale listings"); });
 });
 
