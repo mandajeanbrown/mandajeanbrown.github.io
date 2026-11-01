@@ -66,6 +66,13 @@
           border-radius:14px;padding:15px;text-decoration:none;margin:0 0 12px}
   .gold{background:#FFF8E1;border:1.5px solid #E3C766}
   .promo{background:#EAF7EA;border-radius:9px;padding:7px 10px;font-size:13.5px;margin-top:8px;line-height:1.45}
+  .car{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:9px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .car::-webkit-scrollbar{display:none}
+  .car img{flex:0 0 88%;height:210px;object-fit:cover;border-radius:10px;scroll-snap-align:center;background:#EDEAE2}
+  .carCap{font-size:12.5px;color:#000;margin-top:7px}
+  .carDots{text-align:center;margin-top:5px;line-height:1}
+  .carDots span{display:inline-block;width:7px;height:7px;border-radius:50%;background:#C4CEDE;margin:0 2.5px}
+  .carDots span.on{background:#2563EB}
   #dirMap svg{width:100%;height:auto;display:block}
   .lot{cursor:pointer}
   .msg{background:#fff;border:1px solid #E4E1D8;border-radius:14px;padding:18px;text-align:center;color:#000000}
@@ -564,6 +571,17 @@ var loadSchools = once(function(){
 });
 
 /* ---------- Services ---------- */
+var BIZ_PHOTOS = {
+  "patricia": ["photos/patricia-paint-1.jpg","photos/patricia-paint-2.jpg","photos/patricia-paint-3.jpg","photos/patricia-paint-4.jpg","photos/patricia-paint-5.jpg","photos/patricia-paint-6.jpg","photos/patricia-paint-7.jpg","photos/patricia-paint-8.jpg","photos/patricia-paint-9.jpg"]
+};
+function photosHTML(name, cat){
+  var key = (name || "").trim().toLowerCase();
+  var files = BIZ_PHOTOS[key];
+  if (!files || !/paint/i.test(cat || "")) return "";
+  var imgs = files.map(function(f){ return '<img src="' + f + '" loading="lazy" alt="Room painted by Patricia">'; }).join("");
+  var dots = files.map(function(f, i){ return '<span' + (i === 0 ? ' class="on"' : '') + '></span>'; }).join("");
+  return '<div class="carCap">Rooms painted by Patricia... swipe to see more</div><div class="car">' + imgs + '</div><div class="carDots">' + dots + '</div>';
+}
 var loadServices = once(function(){
   var bannerHTML = "";
   fetchSheet("Services & Referrals", "A1:E5", 0).then(function(rows){
@@ -582,11 +600,20 @@ var loadServices = once(function(){
         }
         html += '<div class="card"><div class="ttl">' + esc(r[1]) + '</div>' + phoneHTML(r[2]) +
           webHTML(r[3]) + (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') +
-          (r[5] ? '<div class="promo">🎉 <strong>Current promo:</strong> ' + esc(r[5]) + '</div>' : '') + '</div>';
+          (r[5] ? '<div class="promo">🎉 <strong>Current promo:</strong> ' + esc(r[5]) + '</div>' : '') +
+          photosHTML(r[1], r[0]) + '</div>';
       });
       if (open) html += '</div>';
       var el = document.getElementById("svcList");
       el.innerHTML = html || '<div class="msg">No services listed yet.</div>';
+      el.querySelectorAll(".car").forEach(function(car){
+        car.addEventListener("scroll", function(){
+          var dots = car.nextElementSibling;
+          if (!dots || !dots.classList.contains("carDots")) return;
+          var idx = Math.round(car.scrollLeft / car.clientWidth);
+          dots.querySelectorAll("span").forEach(function(d, i){ d.className = i === idx ? "on" : ""; });
+        }, { passive: true });
+      });
       if (bannerHTML && !bannerUsed) document.getElementById("svcBanner").innerHTML = bannerHTML;
       el.querySelectorAll(".sectToggle").forEach(function(h){
         h.addEventListener("click", function(){
