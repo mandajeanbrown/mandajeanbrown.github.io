@@ -53,6 +53,7 @@
   .det{font-size:13.5px;color:#000000;margin-top:5px;line-height:1.45}
   .chips{margin-top:7px;display:flex;gap:6px;flex-wrap:wrap}
   .chip{font-size:12.5px;font-weight:700;background:#EEF4FB;color:#274B73;border-radius:999px;padding:3px 9px}
+  .dirphoto{width:100%;max-height:280px;object-fit:cover;border-radius:10px;margin-top:8px}
   .chip.blue{background:#E1EBFC;color:#1D4FB8}
   .teams{font-size:13px;color:#000000;margin-top:7px}
   .phone{display:inline-block;font-size:17px;font-weight:800;color:#12275f;text-decoration:none;margin-top:3px}
@@ -411,9 +412,11 @@ function showLot(n){
   var h = '<div class="top"><span class="lot">Lot ' + esc(n) + '</span>' +
     (d && d.addr ? '<span class="addr">' + esc(d.addr) + '</span>' : '') + '</div>';
   if (d && d.name) h += '<div class="name">' + esc(d.name) + '</div>';
+  if (d && d.photo) h += '<img class="dirphoto" src="https://drive.google.com/thumbnail?id=' + esc(d.photo) + '&sz=w800" alt="Family photo">';
   var chips = "";
   if (d && /yes/i.test(d.candy)) chips += '<span class="chip">🎃 Handing out candy</span>';
   if (d && /yes/i.test(d.cams)) chips += '<span class="chip">📹 Cameras</span>';
+  if (d && /yes/i.test(d.lights)) chips += '<span class="chip">🎄 Christmas lights display</span>';
   if (chips) h += '<div class="chips">' + chips + '</div>';
   if (d && d.fb.length) h += '<div class="teams">🏈 ' + esc(d.fb.join(" · ")) + '</div>';
   if (d && d.bb.length) h += '<div class="teams">🏀 ' + esc(d.bb.join(" · ")) + '</div>';
@@ -423,12 +426,13 @@ function showLot(n){
 }
 /*MAPGEN-END*/
 var loadDirectory = once(function(){
-  fetchSheet("Neighborhood Directory", "A5:I300").then(function(rows){
+  fetchSheet("Neighborhood Directory", "A5:K300").then(function(rows){
     dirData = [];
     rows.forEach(function(r){
       if (!r[0]) return;
       dirData.push({ lot:r[0], addr:r[1]||"", name:r[2]||"", candy:r[3]||"",
-                     cams:r[4]||"", fb:[r[5],r[6]].filter(Boolean), bb:[r[7],r[8]].filter(Boolean) });
+                     cams:r[4]||"", fb:[r[5],r[6]].filter(Boolean), bb:[r[7],r[8]].filter(Boolean),
+                     lights:r[9]||"", photo:r[10]||"" });
     });
     renderDir();
     buildMap();
@@ -445,9 +449,11 @@ function renderDir(){
     var chips = "";
     if (/yes/i.test(d.candy)) chips += '<span class="chip">🎃 Handing out candy</span>';
     if (/yes/i.test(d.cams))  chips += '<span class="chip">📹 Cameras</span>';
+    if (/yes/i.test(d.lights)) chips += '<span class="chip">🎄 Christmas lights display</span>';
     return '<div class="card"><div class="top"><span class="lot">Lot ' + esc(d.lot) + '</span>' +
       (d.addr ? '<span class="addr">' + esc(d.addr) + '</span>' : '') + '</div>' +
       (d.name ? '<div class="name">' + esc(d.name) + '</div>' : '') +
+      (d.photo ? '<img class="dirphoto" src="https://drive.google.com/thumbnail?id=' + esc(d.photo) + '&sz=w800" alt="Family photo">' : '') +
       (chips ? '<div class="chips">' + chips + '</div>' : '') +
       (d.fb.length ? '<div class="teams">🏈 ' + esc(d.fb.join(" · ")) + '</div>' : '') +
       (d.bb.length ? '<div class="teams">🏀 ' + esc(d.bb.join(" · ")) + '</div>' : '') +
