@@ -438,6 +438,20 @@ var loadDirectory = once(function(){
     buildMap();
   }).catch(function(){ errBox(document.getElementById("dirList"), "the directory"); });
 });
+function dirCard(d){
+  var chips = "";
+  if (/yes/i.test(d.candy)) chips += '<span class="chip">🎃 Handing out candy</span>';
+  if (/yes/i.test(d.cams))  chips += '<span class="chip">📹 Cameras</span>';
+  if (/yes/i.test(d.lights)) chips += '<span class="chip">🎄 Christmas lights display</span>';
+  return '<div class="card"><div class="top"><span class="lot">Lot ' + esc(d.lot) + '</span>' +
+    (d.addr ? '<span class="addr">' + esc(d.addr) + '</span>' : '') + '</div>' +
+    (d.name ? '<div class="name">' + esc(d.name) + '</div>' : '') +
+    (d.photo ? '<img class="dirphoto" src="https://drive.google.com/thumbnail?id=' + esc(d.photo) + '&sz=w800" alt="Family photo">' : '') +
+    (chips ? '<div class="chips">' + chips + '</div>' : '') +
+    (d.fb.length ? '<div class="teams">🏈 ' + esc(d.fb.join(" · ")) + '</div>' : '') +
+    (d.bb.length ? '<div class="teams">🏀 ' + esc(d.bb.join(" · ")) + '</div>' : '') +
+    '</div>';
+}
 function renderDir(){
   var q = document.getElementById("dirSearch").value.toLowerCase().trim();
   var list = dirData.filter(function(d){
@@ -445,20 +459,33 @@ function renderDir(){
   });
   document.getElementById("dirCount").textContent =
     list.length + (list.length === 1 ? " lot" : " lots") + (q ? " match your search" : " in Kerns Ridge");
-  document.getElementById("dirList").innerHTML = list.map(function(d){
-    var chips = "";
-    if (/yes/i.test(d.candy)) chips += '<span class="chip">🎃 Handing out candy</span>';
-    if (/yes/i.test(d.cams))  chips += '<span class="chip">📹 Cameras</span>';
-    if (/yes/i.test(d.lights)) chips += '<span class="chip">🎄 Christmas lights display</span>';
-    return '<div class="card"><div class="top"><span class="lot">Lot ' + esc(d.lot) + '</span>' +
-      (d.addr ? '<span class="addr">' + esc(d.addr) + '</span>' : '') + '</div>' +
-      (d.name ? '<div class="name">' + esc(d.name) + '</div>' : '') +
-      (d.photo ? '<img class="dirphoto" src="https://drive.google.com/thumbnail?id=' + esc(d.photo) + '&sz=w800" alt="Family photo">' : '') +
-      (chips ? '<div class="chips">' + chips + '</div>' : '') +
-      (d.fb.length ? '<div class="teams">🏈 ' + esc(d.fb.join(" · ")) + '</div>' : '') +
-      (d.bb.length ? '<div class="teams">🏀 ' + esc(d.bb.join(" · ")) + '</div>' : '') +
-      '</div>';
-  }).join("") || '<div class="msg">No lots match that search.</div>';
+  var el = document.getElementById("dirList");
+  if (q) {
+    el.innerHTML = list.map(dirCard).join("") || '<div class="msg">No lots match that search.</div>';
+    return;
+  }
+  var groups = {}, order = [];
+  list.forEach(function(d){
+    var g = Math.floor((parseInt(d.lot, 10) - 1) / 10);
+    if (!groups[g]) { groups[g] = []; order.push(g); }
+    groups[g].push(d);
+  });
+  el.innerHTML = order.map(function(g){
+    var lots = groups[g];
+    var withInfo = lots.filter(function(d){ return d.name; }).length;
+    return '<div class="sect sectToggle">LOTS ' + lots[0].lot + '–' + lots[lots.length - 1].lot +
+      (withInfo ? ' · ' + withInfo + ' with info' : '') +
+      '<span class="sectArrow">▸</span></div>' +
+      '<div class="sectBody" style="display:none">' + lots.map(dirCard).join("") + '</div>';
+  }).join("");
+  el.querySelectorAll(".sectToggle").forEach(function(h){
+    h.addEventListener("click", function(){
+      var body = h.nextElementSibling;
+      var closed = body.style.display === "none";
+      body.style.display = closed ? "" : "none";
+      h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
+    });
+  });
 }
 document.getElementById("dirSearch").addEventListener("input", function(){ if (dirData) renderDir(); });
 
