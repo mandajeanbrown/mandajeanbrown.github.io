@@ -54,6 +54,7 @@
   .chips{margin-top:7px;display:flex;gap:6px;flex-wrap:wrap}
   .chip{font-size:12.5px;font-weight:700;background:#EEF4FB;color:#274B73;border-radius:999px;padding:3px 9px}
   .dirphoto{width:100%;max-height:280px;object-fit:cover;border-radius:10px;margin-top:8px}
+  .flyerimg{width:100%;display:block;border-radius:10px;margin-top:8px;border:1px solid #E4E1D8}
   .chip.blue{background:#E1EBFC;color:#1D4FB8}
   .teams{font-size:13px;color:#000000;margin-top:7px}
   .phone{display:inline-block;font-size:17px;font-weight:800;color:#12275f;text-decoration:none;margin-top:3px}
@@ -169,6 +170,7 @@
   <!-- EVENTS -->
   <div class="screen" id="screen-events">
     <button class="back" data-go="home">Home</button>
+    <div id="spotWrap"></div>
     <div class="sect">UPCOMING AROUND EAST SPENCER &amp; SALISBURY</div>
     <div id="evList"><div class="msg">Loading events...</div></div>
     <div class="foot">New events are added every Monday. Confirm details before you head out... they can change.</div>
@@ -610,6 +612,25 @@ document.getElementById("dirSearch").addEventListener("input", function(){ if (d
 
 /* ---------- Events ---------- */
 var loadEvents = once(function(){
+  /* Flyer spotlight: shows until the end of Nov 30, 2026, then drops off on its own. */
+  if (new Date() <= new Date(2026, 10, 30, 23, 59, 59)) {
+    document.getElementById("spotWrap").innerHTML =
+      '<div class="sect">📣 SPOTLIGHT</div>' +
+      '<div class="card"><div class="ttl">City of East Spencer — November News</div>' +
+      '<div class="det">From the Southern City Express, the town\u2019s November newsletter. East Spencer runs our trash service. The dates that matter most:</div>' +
+      '<div class="det"><b>Bulk pickup: Fri, Nov 13 &amp; Mon, Nov 30.</b> Call Town Hall before your date to get your address on the list.</div>' +
+      '<a class="phone" href="tel:+17046367111">(704) 636-7111</a>' +
+      '<div class="det"><b>Leaf pickup:</b> call Town Hall to get on the list. <b>Limb pickup:</b> every Tuesday — limbs no longer than 6 feet and no more than 2 feet around.</div>' +
+      '<div class="det"><b>Fall Giveaway:</b> Sat, Nov 14, 10 a.m. to 3 p.m., Royal Giants Park (also in the list below).</div>' +
+      '<div class="det"><b>Town Hall closed:</b> Wed, Nov 11, Wed, Nov 25 from noon, and Thu–Fri, Nov 26–27.</div>' +
+      '<div class="det"><b>Trash pickup is every Monday.</b> Trash service questions? Call the Utility Clerk:</div>' +
+      '<a class="phone" href="tel:+17044984725">(704) 498-4725</a>' +
+      '<div class="sub" style="margin-top:10px">Tap a page to see the whole flyer. English:</div>' +
+      '<a href="https://drive.google.com/file/d/1t7G6sxEhnA6UTlL0dW9s6pqQ0jEgYPJa/view" target="_blank" rel="noopener"><img class="flyerimg" src="https://drive.google.com/thumbnail?id=1t7G6sxEhnA6UTlL0dW9s6pqQ0jEgYPJa&sz=w1100" alt="East Spencer November 2026 newsletter, English"></a>' +
+      '<div class="sub" style="margin-top:10px">En español:</div>' +
+      '<a href="https://drive.google.com/file/d/1o7ZRkfUfbT020KPwzOH3b8wY40lxjJ30/view" target="_blank" rel="noopener"><img class="flyerimg" src="https://drive.google.com/thumbnail?id=1o7ZRkfUfbT020KPwzOH3b8wY40lxjJ30&sz=w1100" alt="East Spencer November 2026 newsletter, Spanish"></a>' +
+      '</div>';
+  }
   fetchSheet("Local Events", "A4:E300").then(function(rows){
     var today = new Date(); today.setHours(0, 0, 0, 0);
     var evs = rows.filter(function(r){
