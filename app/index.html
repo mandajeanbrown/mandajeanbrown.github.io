@@ -225,7 +225,7 @@
   <!-- LOST & FOUND (general items - not pets, not packages) -->
   <div class="screen" id="screen-lostfound">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Lost something, or found something that is not a pet or a package? Check here first. Message the owner or finder on Facebook Messenger to swap photos and arrange pickup. Found something valuable? The owner may need to describe a detail only they would know.</div></div>
+    <div class="card"><div class="det">Lost something, or found something that is not a pet or a package? Check here first. Items are posted with their photos so the owner can spot theirs. Message the owner or finder on Facebook Messenger to arrange pickup.</div></div>
     <div class="sect">🔍 LOST &amp; FOUND</div>
     <div id="lostfoundList"><div class="msg">Loading...</div></div>
     <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSeo-dfYBSalABTG5mTJGLsQ57fWllx1W7xgx2K8MKAvCXAt5A/viewform" target="_blank" rel="noopener">➕ Post a lost or found item</a></div>
@@ -937,7 +937,7 @@ var loadForSale = once(function(){
 });
 
 var loadLostFound = once(function(){
-  fetchSheet("Lost & Found Items", "A5:J80").then(function(rows){
+  fetchSheet("Lost & Found Items", "A5:K80").then(function(rows){
     var real = rows.filter(function(r){ return r[0] && !/no lost or found/i.test(r[0]); });
     if (!real.length) {
       document.getElementById("lostfoundList").innerHTML =
@@ -948,6 +948,7 @@ var loadLostFound = once(function(){
       return '<div class="card"><div class="ttl">🔍 ' + esc(r[0] || "") + '</div>' +
         '<div style="margin:5px 0"><span class="chip">' + esc(r[1] || "") + '</span>' +
         (r[9] ? ' <span class="chip">' + esc(r[9]) + '</span>' : '') + '</div>' +
+        (r[10] ? '<div style="display:flex;gap:6px;margin:6px 0">' + r[10].split(',').map(function(id){ return '<img src="https://drive.google.com/thumbnail?id=' + esc(id.trim()) + '&sz=w600" style="width:48%;border-radius:10px" alt="Photo of the item">'; }).join("") + '</div>' : '') +
         (r[2] ? '<div class="det">' + esc(r[2]) + '</div>' : '') +
         '<div class="sub">📍 ' + esc(r[3] || "") + (r[4] ? ' · ' + esc(r[4]) : '') + '</div>' +
         '<div class="sub">' + esc(r[5] || "") + (r[6] ? ' · Lot ' + esc(r[6]) : '') + '</div>' +
