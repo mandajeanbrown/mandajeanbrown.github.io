@@ -185,7 +185,7 @@
   <div class="screen" id="screen-directory">
     <button class="back" data-go="home">Home</button>
     <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
-    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div class="det">Real lot lines from Rowan County records. Tap a lot to see its size, street frontage, and whether it has sold. Yellow lots have neighbor info added. Green lots are still owned by the builder... they have not sold yet. Zoom in to see lot numbers.</div><div id="dirMap"><div class="msg">Loading...</div></div></div>
+    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div class="det">Real lot lines from Rowan County records. Tap a lot to see its size, street frontage, and whether it has sold. Yellow lots have neighbor info added. Purple lots are sold too... those neighbors just have not added their info yet. Green lots are still owned by the builder... they have not sold yet. Zoom in to see lot numbers.</div><div id="dirMap"><div class="msg">Loading...</div></div></div>
     <input class="search" id="dirSearch" type="search" placeholder="Search name, address, or lot #" autocomplete="off">
     <div class="count" id="dirCount"></div>
     <div id="dirList"><div class="msg">Loading the directory...</div></div>
@@ -730,6 +730,7 @@ function parcelStyle(f){
   if (lotHasInfo(f.properties.lot)) return { color:"#12275F", weight:1.2, fillColor:"#FFC327", fillOpacity:.55 };
   var st = f.properties.status;
   if (st === "forsale" || st === "lot") return { color:"#12275F", weight:1.2, fillColor:"#22C55E", fillOpacity:.55 };
+  if (st === "sold") return { color:"#12275F", weight:1.2, fillColor:"#8B5CF6", fillOpacity:.55 };
   return { color:"#12275F", weight:1.2, fillColor:"#FFFFFF", fillOpacity:.28 };
 }
 function showParcel(f){
