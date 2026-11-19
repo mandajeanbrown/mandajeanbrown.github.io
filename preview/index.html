@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kerns Ridge Community</title>
+<link rel="icon" type="image/png" href="../icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#12275f">
+<meta name="color-scheme" content="light">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kerns Ridge">
+<style>
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,'Segoe UI',Arial,sans-serif;background:#F4F5F1;color:#1c2430;margin:0;padding:0 0 40px;-webkit-font-smoothing:antialiased}
+  header{background:linear-gradient(135deg,#12275f,#1d3f86);color:#fff;padding:16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5;box-shadow:0 2px 14px rgba(18,39,95,.28)}
+  header img{width:44px;height:44px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+  header .t{font-size:21px;font-weight:800;line-height:1.15;letter-spacing:.01em}
+  header .s{font-size:13px;opacity:.85}
+  .banner{width:100%;display:block;border-radius:20px;margin-bottom:14px;box-shadow:0 6px 20px rgba(16,24,40,.13)}
+  .wrap{max-width:560px;margin:0 auto;padding:16px 14px}
+  .screen{display:none}
+  .screen.on{display:block}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  /* Home screen: all buttons fit on one phone screen, no scrolling */
+  #screen-home.on{display:flex;flex-direction:column;height:calc(100dvh - 88px)}
+  #screen-home .grid{flex:1;grid-auto-rows:1fr;gap:10px;min-height:0}
+  #screen-home .btn{min-height:0;padding:10px;font-size:15.5px;line-height:1.25}
+  .btn{display:flex;align-items:center;justify-content:center;text-align:center;gap:6px;
+       background:#fff;border:none;border-radius:20px;color:#1c2430;box-shadow:0 1px 2px rgba(16,24,40,.06),0 6px 18px rgba(16,24,40,.07);
+       font-size:16px;font-weight:700;padding:18px 10px;text-decoration:none;cursor:pointer;min-height:64px;width:100%;
+       transition:transform .08s ease}
+  .btn.wide{grid-column:1/-1}
+  .btn.blue{background:linear-gradient(135deg,#2563EB,#1D4FB8);border:none;color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.32)}
+  .btn:active{filter:brightness(.97);transform:scale(.985)}
+  .sect{font-size:13px;font-weight:800;letter-spacing:.07em;color:#5A6B84;background:transparent;border-radius:9px;padding:8px 4px;margin:22px 0 10px}
+  .sectToggle{cursor:pointer;padding:15px 14px;font-size:14px;-webkit-tap-highlight-color:transparent;background:#fff;color:#1c2430;letter-spacing:.02em;box-shadow:0 1px 2px rgba(16,24,40,.06),0 6px 18px rgba(16,24,40,.07);border-radius:16px}
+  .sectArrow{float:right;font-weight:700;color:#2563EB}
+  .sect:first-of-type{margin-top:10px}
+  .back{display:block;width:100%;background:linear-gradient(135deg,#12275f,#1d3f86);border:none;color:#fff;font-size:18px;font-weight:700;padding:16px;border-radius:16px;cursor:pointer;margin:0 0 14px;box-shadow:0 4px 14px rgba(18,39,95,.30)}
+  .back::before{content:"🏠 "}
+  .search{width:100%;font-size:17px;padding:14px 18px;border:1.5px solid #E2E6EC;border-radius:999px;margin:6px 0 4px;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.05)}
+  .count{font-size:13px;color:#5A6B84;margin:6px 4px 10px}
+  .card{background:#fff;border:none;border-radius:20px;padding:16px;margin:0 0 12px;box-shadow:0 1px 2px rgba(16,24,40,.05),0 8px 22px rgba(16,24,40,.06)}
+  .card .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .lot{font-weight:800;font-size:16px;color:#12275f}
+  .addr{font-size:14px;color:#5A6B84}
+  .name{font-size:16px;font-weight:600;margin-top:2px}
+  .ttl{font-size:17px;font-weight:700}
+  .sub{font-size:14px;color:#5A6B84;margin-top:2px}
+  .det{font-size:14px;color:#1c2430;margin-top:5px;line-height:1.5}
+  .chips{margin-top:9px;display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-size:12.5px;font-weight:600;background:#EEF2F7;color:#33507E;border-radius:999px;padding:5px 11px}
+  .dirphoto{width:100%;max-height:280px;object-fit:cover;border-radius:16px;margin-top:10px}
+  .flyerimg{width:100%;display:block;border-radius:16px;margin-top:10px;border:none;box-shadow:0 2px 10px rgba(16,24,40,.10)}
+  .chip.blue{background:#E1EBFC;color:#1D4FB8}
+  .teams{font-size:13px;color:#1c2430;margin-top:7px}
+  .phone{display:inline-block;font-size:17px;font-weight:800;color:#12275f;text-decoration:none;margin-top:3px}
+  .weblink{color:#1B5FBF;font-weight:600;text-decoration:none;word-break:break-all}
+  .ev .date{display:inline-block;font-weight:800;font-size:13.5px;color:#12275f;background:#EAF0FA;border-radius:999px;padding:5px 12px;margin-bottom:8px}
+  .warn{background:#FEF3F2;border:1.5px solid #F3B7B2;border-radius:20px;padding:16px;margin:0 0 12px}
+  .warn .ttl{color:#8B1A1A}
+  .warn .bttl{font-size:clamp(11px, 3.6vw, 14px);font-weight:700;color:#8B1A1A;white-space:nowrap}
+  .warn .det{color:#1c2430}
+  .big911{display:block;text-align:center;background:linear-gradient(135deg,#C12727,#A31F1F);color:#fff;font-size:21px;font-weight:800;
+          border-radius:20px;padding:17px;text-decoration:none;margin:0 0 12px;box-shadow:0 6px 18px rgba(193,39,39,.35)}
+  .gold{background:#FFFBEB;border:1.5px solid #F0D98C}
+  .promo{background:#EAF7EA;border-radius:12px;padding:9px 12px;font-size:13.5px;margin-top:9px;line-height:1.5}
+  .car{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .car::-webkit-scrollbar{display:none}
+  .car img{flex:0 0 88%;height:210px;object-fit:cover;border-radius:16px;scroll-snap-align:center;background:#EDEAE2}
+  .car.tall img{height:330px}
+  .carCap{font-size:12.5px;color:#5A6B84;margin-top:7px}
+  .carDots{text-align:center;margin-top:5px;line-height:1}
+  .carDots span{display:inline-block;width:7px;height:7px;border-radius:50%;background:#C4CEDE;margin:0 2.5px}
+  .carDots span.on{background:#2563EB}
+  #dirMap svg{width:100%;height:auto;display:block}
+  .lot{cursor:pointer}
+  .msg{background:#fff;border:none;border-radius:20px;padding:20px;text-align:center;color:#1c2430;box-shadow:0 1px 2px rgba(16,24,40,.05),0 8px 22px rgba(16,24,40,.06)}
+  .foot{text-align:center;font-size:12.5px;color:#8A94A6;margin-top:26px;line-height:1.6}
+  a.sheetlink{color:#12275f;font-weight:700}
+  a.postbtn{display:block;background:linear-gradient(135deg,#2563EB,#1D4FB8);color:#fff;font-size:17px;font-weight:700;text-align:center;padding:16px 14px;border-radius:999px;text-decoration:none;margin-top:6px;box-shadow:0 4px 14px rgba(37,99,235,.32)}
+</style>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "2e0a9422-7fcf-43c1-bee6-386a4923c5f5",
+      serviceWorkerPath: "/OneSignalSDKWorker.js",
+      serviceWorkerParam: { scope: "/" },
+      notifyButton: { enable: false }
+    });
+    var btn = document.getElementById("notifyBtn");
+    if (!btn) return;
+    function paint(){
+      btn.textContent = OneSignal.User.PushSubscription.optedIn
+        ? "🔔 Notify Me: ON (tap to turn off)"
+        : "🔔 Notify Me";
+    }
+    paint();
+    OneSignal.User.PushSubscription.addEventListener("change", paint);
+    btn.addEventListener("click", async function(){
+      if (OneSignal.User.PushSubscription.optedIn) { await OneSignal.User.PushSubscription.optOut(); }
+      else { await OneSignal.User.PushSubscription.optIn(); }
+      paint();
+    });
+  });
+</script>
+</head>
+<body>
+<header>
+  <img src="../icon-192.png" alt="Kerns Ridge logo">
+  <div><div class="t">Kerns Ridge</div><div class="s">Neighborhood Community</div></div>
+</header>
+
+<div class="wrap">
+
+  <!-- HOME -->
+  <div class="screen on" id="screen-home">
+    <div class="grid">
+      <button class="btn wide blue" data-go="newhere">🆕 New Here? Start Here</button>
+      <button class="btn" data-go="directory">🏠 Directory</button>
+      <button class="btn" data-go="events">📅 Local Events</button>
+      <button class="btn" data-go="updates">📣 Updates</button>
+      <button class="btn" data-go="lend">🤝 Lend &amp; Borrow</button>
+      <button class="btn" data-go="forsale">🏷️ For Sale</button>
+      <button class="btn" data-go="lostfound">🔍 Lost &amp; Found</button>
+      <button class="btn" data-go="pets">🐾 Lost &amp; Found Pets</button>
+      <button class="btn" data-go="packages">📦 Lost &amp; Found Packages</button>
+      <button class="btn" data-go="emergency">🚨 Emergencies</button>
+      <button class="btn" data-go="services">🔧 Services</button>
+      <button class="btn" data-go="schools">🎓 Schools</button>
+      <button class="btn" data-go="helpwanted">💼 Help Wanted</button>
+      <button class="btn wide" data-go="winners">🏆 Winners Circle</button>
+      <button class="btn wide" data-go="votes">🗳️ Community Competitions</button>
+      <button class="btn wide" id="notifyBtn" style="background:#12275f;color:#fff;border-color:#12275f">🔔 Notify Me</button>
+    </div>
+    <div class="foot">Everything opens right here in the app.</div>
+  </div>
+
+  <!-- NEW HERE -->
+  <div class="screen" id="screen-newhere">
+    <button class="back" data-go="home">Home</button>
+    <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
+    <div class="card"><div class="ttl">Welcome to Kerns Ridge 🏡</div>
+      <div class="det">Local numbers and trash info every new neighbor needs.</div></div>
+    <div class="card"><div class="ttl">Kerns Ridge on Facebook 👥</div>
+      <div class="det">Neighbors also chat day to day in the private Facebook group. Everything in this app works without Facebook... the group is just the other place neighbors post.</div>
+      <a class="postbtn" href="https://www.facebook.com/groups/1951332269107873/" target="_blank" rel="noopener">Join the Facebook group</a></div>
+    <div class="sect sectToggle">LOCAL NUMBERS &amp; INFO<span class="sectArrow">▸</span></div>
+    <div class="sectBody" style="display:none"><div id="nhList"><div class="msg">Loading...</div></div></div>
+    <div class="sect sectToggle">TRASH &amp; BULK PICKUP<span class="sectArrow">▸</span></div>
+    <div class="sectBody" style="display:none"><div id="nhTrash"><div class="msg">Loading...</div></div></div>
+  </div>
+
+  <!-- DIRECTORY -->
+  <div class="screen" id="screen-directory">
+    <button class="back" data-go="home">Home</button>
+    <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
+    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div class="det">Tap a lot to see its info. Yellow lots have info added.</div><div id="dirMap"><div class="msg">Loading...</div></div></div>
+    <input class="search" id="dirSearch" type="search" placeholder="Search name, address, or lot #" autocomplete="off">
+    <div class="count" id="dirCount"></div>
+    <div id="dirList"><div class="msg">Loading the directory...</div></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdTS-APqVVS1x9pG40aHUtsd4iQLNqSa2zch8W3WQ4shFq9Zg/viewform" target="_blank" rel="noopener">➕ Add your lot info</a></div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="screen" id="screen-events">
+    <button class="back" data-go="home">Home</button>
+    <div id="spotWrap"></div>
+    <div class="sect">UPCOMING AROUND EAST SPENCER &amp; SALISBURY</div>
+    <div id="evList"><div class="msg">Loading events...</div></div>
+    <div class="foot">New events are added every Monday. Confirm details before you head out... they can change.</div>
+  </div>
+
+  <!-- UPDATES -->
+  <div class="screen" id="screen-updates">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">The latest on street lights, water, trash, and roads.</div></div>
+    <div class="sect">📣 NEIGHBORHOOD UPDATES</div>
+    <div id="updList"><div class="msg">Loading...</div></div>
+  </div>
+
+  <!-- LEND & BORROW -->
+  <div class="screen" id="screen-lend">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">Borrow from neighbors. Message them to arrange pickup. Bring things back clean and on time.</div></div>
+    <div class="sect">🙋 HAPPY TO LEND</div>
+    <div id="lendList"><div class="msg">Loading...</div></div>
+    <div class="sect">🔎 LOOKING TO BORROW</div>
+    <div id="borrowList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLScd-Iu57D5WekRZRmRfkmeWDk1Eio9EizM0MmUaB_Li1a3P9w/viewform" target="_blank" rel="noopener">➕ Add yours — lend, give away, or borrow</a></div>
+  </div>
+
+  <!-- EMERGENCY -->
+  <div class="screen" id="screen-emergency">
+    <button class="back" data-go="home">Home</button>
+    <a class="big911" href="tel:911">🚨 Life-threatening emergency? Call 911</a>
+    <div class="card"><div class="det">For everything that is not an emergency. Tap a number to call.</div></div>
+    <div id="emList"><div class="msg">Loading...</div></div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="screen" id="screen-services">
+    <button class="back" data-go="home">Home</button>
+    <div id="svcBanner"></div>
+    <div class="card"><div class="det">Businesses your neighbors recommend. To add one, post it in the Kerns Ridge Facebook group.</div></div>
+    <div id="svcList"><div class="msg">Loading...</div></div>
+  </div>
+
+  <!-- FOR SALE -->
+  <div class="screen" id="screen-forsale">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">Neighbors selling to neighbors. Message the seller on Facebook Messenger to arrange pickup. Free stuff is below.</div></div>
+    <div class="sect">🏷️ FOR SALE</div>
+    <div id="saleList"><div class="msg">Loading...</div></div>
+    <div class="sect">🎁 FREE STUFF &amp; CURB ALERTS</div>
+    <div id="freeList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener">➕ List something</a></div>
+  </div>
+
+  <!-- LOST & FOUND (general items - not pets, not packages) -->
+  <div class="screen" id="screen-lostfound">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">Lost something, or found something that is not a pet or a package? Check here first. Items are posted with their photos so the owner can spot theirs. Message the owner or finder on Facebook Messenger to arrange pickup.</div></div>
+    <div class="sect">🔍 LOST &amp; FOUND</div>
+    <div id="lostfoundList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSeo-dfYBSalABTG5mTJGLsQ57fWllx1W7xgx2K8MKAvCXAt5A/viewform" target="_blank" rel="noopener">➕ Post a lost or found item</a></div>
+  </div>
+
+  <!-- LOST & FOUND PETS -->
+  <div class="screen" id="screen-pets">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">Lost or found a pet? Check here first. Message the owner or finder on Facebook Messenger to swap photos.</div></div>
+    <div class="sect">🐾 LOST &amp; FOUND PETS</div>
+    <div id="petsList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSeULpC4p_VfkzaMRzdHvgKhja-cxYQbvOdD1Qw8iMzinL7oLg/viewform" target="_blank" rel="noopener">➕ Post a lost or found pet</a></div>
+  </div>
+
+  <!-- LOST & FOUND PACKAGES -->
+  <div class="screen" id="screen-packages">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">Package at the wrong house, or marked delivered but missing? Message each other on Facebook Messenger to arrange the handoff.</div></div>
+    <div class="sect">📦 LOST &amp; FOUND PACKAGES</div>
+    <div id="pkgList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSczple8ahqgJtdB311EZIMldUKEGoxjTRHVfP-XP0X8Dx_YbA/viewform" target="_blank" rel="noopener">➕ Post a lost or found package</a></div>
+  </div>
+
+  <!-- SCHOOLS -->
+  <div class="screen" id="screen-schools">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">Public, private, and charter schools near Kerns Ridge, plus state scholarships. Tuition is each school's published rate. Confirm current rates with the school.</div></div>
+    <div id="schList"><div class="msg">Loading...</div></div>
+  </div>
+
+  <!-- HELP WANTED -->
+  <div class="screen" id="screen-helpwanted">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">Jobs posted by neighbors. To be listed, tap the button below or post in the Kerns Ridge Facebook group.</div></div>
+    <div id="hwList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSe0iHBjI4YzqkWtoYx5eGpwC0jHYd-tYUNkha2plJXa0YZptA/viewform" target="_blank" rel="noopener">➕ Post a job / ask for help</a></div>
+  </div>
+
+  <!-- WINNERS -->
+  <div class="screen" id="screen-winners">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">Every neighborhood champion, from cook-offs to contests.</div></div>
+    <div id="winList"><div class="msg">Loading...</div></div>
+  </div>
+
+  <!-- VOTES -->
+  <div class="screen" id="screen-votes">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="det">Vote in this year's competitions. Winners are crowned in the Winners Circle. Tap one to open its ballot.</div></div>
+    <div class="grid">
+      <button class="btn" data-go="form" data-form="halloween">🎃 Halloween Vote</button>
+      <button class="btn" data-go="form" data-form="christmas">🎄 Christmas Vote</button>
+      <button class="btn" data-go="form" data-form="garden">🌸 Flower Garden Vote</button>
+      <button class="btn" data-go="form" data-form="lawn">⛳ Golf Course Lawn Vote</button>
+      <button class="btn" data-go="form" data-form="porch">🚪 Porch / Front Door Vote</button>
+      <button class="btn" data-go="form" data-form="petcostume">🐶 Pet Costume Vote</button>
+      <button class="btn" data-go="form" data-form="street">🏘️ Holiday Street Vote</button>
+      <button class="btn" data-go="form" data-form="photo">📸 Photo of the Year Vote</button>
+    </div>
+    <div class="foot">Ballots are anonymous... one vote per household, please.</div>
+  </div>
+
+</div>
+
+<script>
+var SID = "1ZvJ6Gr-qCmeubYUZncJViLhn569JkKFuMAvF7zHaqLM";
+var SHEET = "https://docs.google.com/spreadsheets/d/" + SID + "/edit";
+var RSVP_FORM = "https://docs.google.com/forms/d/e/1FAIpQLScTR1RaZ_i910O-9dWh2OqPhXCQ-xy-qIwiBEAFwSEcV38K9A/viewform";
+var RSVP_EVENT_ENTRY = "entry.1423850769";
+var FORMS = {
+  halloween: "https://docs.google.com/forms/d/e/1FAIpQLSd1V7KA0kFN2-q6mWovkwE0I-X3UOGxfvklhCu4S5FkoKN20A/viewform",
+  christmas: "https://docs.google.com/forms/d/e/1FAIpQLSeIAXKqvliVOSBccjNGTOlln-A0W1afu_DK85z9Mb1OoNR5Vw/viewform",
+  garden: "https://docs.google.com/forms/d/e/1FAIpQLSeUB0VqBxHeqjIEDzpGXnKXsuzLGVSaHjIl0f9EqWGOres8KA/viewform",
+  lawn: "https://docs.google.com/forms/d/e/1FAIpQLSdPV0PX78BQ-PkCE1xGZFHHhzEVGiKdwCwWVLigVs6qXH1-_Q/viewform",
+  porch: "https://docs.google.com/forms/d/e/1FAIpQLSe5lks38UNApW8lczrIpSsN-HbZ07ueUk6Pt4P65ee_0svPew/viewform",
+  petcostume: "https://docs.google.com/forms/d/e/1FAIpQLSfYXDDoqbi_abMoGAGSJOyeCqa5er_Q4YAjumlmwn2zTY5nSQ/viewform",
+  street: "https://docs.google.com/forms/d/e/1FAIpQLSfyl5cIHZCqgpAileXNXnctFxMChib91afBYHpOxpNMWIBJsA/viewform",
+  photo: "https://docs.google.com/forms/d/e/1FAIpQLScgeXT0JrDBNhkXMihNQrDhG8B2imvGaknynLDfvRqHcJOv0Q/viewform"
+};
+
+function show(name){
+  document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("on"); });
+  document.getElementById("screen-" + name).classList.add("on");
+  window.scrollTo(0,0);
+  if (LOADERS[name]) LOADERS[name]();
+}
+document.querySelectorAll("[data-go]").forEach(function(el){
+  el.addEventListener("click", function(){
+    var go = el.getAttribute("data-go");
+    if (go === "sheet") {
+      var url = SHEET + "#gid=" + el.getAttribute("data-gid");
+      var r = el.getAttribute("data-range"); if (r) url += "&range=" + r;
+      window.open(url, "_blank");
+    } else if (go === "form") {
+      window.open(FORMS[el.getAttribute("data-form")], "_blank");
+    } else { show(go); }
+  });
+});
+
+function fetchSheet(name, range, headers){
+  var url = "https://docs.google.com/spreadsheets/d/" + SID +
+            "/gviz/tq?tqx=out:json&headers=" + (headers == null ? 1 : headers) +
+            "&range=" + range + "&sheet=" + encodeURIComponent(name);
+  return fetch(url).then(function(r){ return r.text(); }).then(function(t){
+    var j = JSON.parse(t.substring(t.indexOf("{"), t.lastIndexOf("}") + 1));
+    return j.table.rows.map(function(row){
+      return (row.c || []).map(function(c){
+        if (!c) return "";
+        return (c.f != null ? String(c.f) : (c.v != null ? String(c.v) : "")).trim();
+      });
+    });
+  });
+}
+function esc(s){ return String(s||"").replace(/[&<>"']/g, function(m){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]; }); }
+function errBox(el, what){
+  el.innerHTML = '<div class="msg">Could not load ' + what + '. Check your connection and try again.</div>';
+}
+function phoneHTML(text){
+  var digits = (text || "").replace(/\D/g, "");
+  if (digits.length >= 7 || digits === "811") {
+    var num = digits.length === 10 ? "1" + digits : digits;
+    return '<a class="phone" href="tel:+' + num + '">' + esc(text) + '</a>';
+  }
+  return text ? '<div class="sub">' + esc(text) + '</div>' : '';
+}
+function webHTML(text){
+  if (!text || text === "-") return "";
+  var tok = text.split(/\s+/)[0];
+  if (!/^[a-z0-9.-]+\.[a-z]{2,}(\/\S*)?$/i.test(tok)) return "";
+  return '<div class="sub">🌐 <a class="weblink" href="https://' + esc(tok) + '" target="_blank" rel="noopener">' + esc(text) + '</a></div>';
+}
+function once(fn){ var done = false; return function(){ if (done) return; done = true; fn(); }; }
+
+/* ---------- Directory ---------- */
+var dirData = null;
+/*MAPGEN-BEGIN*/
+var LOT_GEO = {
+  "1": {"p": "846,148 849,172 889,173 890,149 888,147", "l": [869, 160]},
+  "2": {"p": "850,176 849,202 889,203 891,184 888,177", "l": [869, 191]},
+  "3": {"p": "849,207 848,232 888,232 889,207", "l": [868, 219]},
+  "4": {"p": "848,237 847,261 849,266 889,270 887,237", "l": [869, 253]},
+  "5": {"p": "842,298 830,320 860,338 862,342 867,343 880,318 879,316", "l": [856, 319]},
+  "6": {"p": "827,323 811,342 838,377 865,347", "l": [836, 349]},
+  "7": {"p": "807,344 786,357 799,397 808,394 816,388 828,388 834,382 834,378", "l": [809, 370]},
+  "8": {"p": "781,358 758,366 771,405 795,398", "l": [780, 396]},
+  "9": {"p": "754,367 730,375 742,415 767,407", "l": [748, 391]},
+  "10": {"p": "725,377 703,383 707,426 738,416", "l": [719, 402]},
+  "11": {"p": "699,385 675,386 674,423 679,423 685,429 703,427", "l": [688, 408]},
+  "12": {"p": "645,384 642,421 650,421 658,427 667,426 671,387", "l": [657, 406]},
+  "13": {"p": "615,383 612,422 637,424 639,422 641,383", "l": [623, 404]},
+  "14": {"p": "587,380 583,421 608,422 611,381", "l": [597, 402]},
+  "15": {"p": "556,377 552,418 578,420 581,379", "l": [564, 400]},
+  "16": {"p": "526,375 522,416 548,418 552,377", "l": [537, 397]},
+  "17": {"p": "493,374 488,399 489,415 493,418 496,416 519,417 522,375 499,373", "l": [505, 395]},
+  "18": {"p": "544,422 528,422 524,420 522,421 496,421 501,430 499,445 541,449", "l": [518, 434]},
+  "19": {"p": "487,459 492,476 534,479 540,477 541,452 498,449", "l": [516, 464]},
+  "20": {"p": "403,475 457,471 460,469 465,458 456,452 456,445 454,448 451,444 449,446 410,443 411,451 409,455 404,458", "l": [432, 460]},
+  "21": {"p": "407,414 406,439 449,442 451,444 452,442 452,431 457,432 452,430 454,428 457,429 456,427 454,427 460,419 459,416", "l": [430, 428]},
+  "22": {"p": "440,369 436,411 458,412 463,415 467,413 468,407 469,374 464,371", "l": [454, 392]},
+  "23": {"p": "409,367 407,409 433,411 435,370", "l": [418, 390]},
+  "24": {"p": "380,365 377,406 402,408 406,367", "l": [392, 387]},
+  "25": {"p": "351,362 346,405 372,406 376,364", "l": [358, 386]},
+  "26": {"p": "317,362 315,366 312,402 343,405 346,363", "l": [329, 383]},
+  "27": {"p": "312,407 311,433 357,436 366,434 367,411", "l": [339, 421]},
+  "28": {"p": "316,438 323,452 322,462 360,466 363,463 360,448 365,440", "l": [339, 452]},
+  "29": {"p": "361,469 321,465 316,475 310,478 328,523 333,520 362,485 364,477", "l": [336, 489]},
+  "30": {"p": "324,524 305,480 297,479 296,481 299,481 293,482 287,479 270,511 261,520 281,523", "l": [298, 507]},
+  "31": {"p": "232,468 232,477 249,501 259,503 263,513 284,477 277,470 273,462", "l": [261, 483]},
+  "32": {"p": "233,463 273,459 275,447 283,436 275,434 234,431", "l": [257, 448]},
+  "33": {"p": "236,401 235,428 282,430 284,434 291,430 291,405", "l": [264, 417]},
+  "34": {"p": "266,358 262,399 291,402 293,394 294,362 290,358", "l": [282, 380]},
+  "35": {"p": "238,352 216,389 228,397 257,399 261,358", "l": [242, 378]},
+  "36": {"p": "209,341 190,377 213,388 233,352", "l": [214, 365]},
+  "37": {"p": "183,327 164,363 187,374 206,339", "l": [188, 349]},
+  "38": {"p": "155,310 157,314 155,317 154,314 152,320 150,318 152,322 137,348 161,360 179,324 160,313 157,313", "l": [158, 336]},
+  "39": {"p": "130,299 117,324 111,329 111,335 133,347 147,321 148,323 150,322 148,320 154,310 137,301 134,303", "l": [136, 323]},
+  "40": {"p": "128,296 105,285 81,329 90,330 92,323 99,319 107,320 111,326", "l": [106, 308]},
+  "41": {"p": "101,281 91,276 74,279 50,324 76,328", "l": [76, 303]},
+  "42": {"p": "53,268 17,288 17,302 45,323 69,279", "l": [43, 295]},
+  "43": {"p": "17,233 17,283 51,264 49,246", "l": [28, 258]},
+  "44": {"p": "50,179 32,195 34,209 29,215 17,218 17,228 53,242 66,230", "l": [44, 216]},
+  "45": {"p": "55,175 69,229 87,232 105,195 88,168", "l": [77, 198]},
+  "46": {"p": "110,199 90,235 96,242 101,255 105,258 131,213 130,210", "l": [110, 227]},
+  "47": {"p": "137,214 133,215 110,260 131,272 155,231 150,224", "l": [134, 243]},
+  "48": {"p": "157,236 137,274 157,286 163,286 185,252 164,236", "l": [158, 262]},
+  "49": {"p": "178,193 147,216 158,225 158,228 163,229 189,250 206,233", "l": [178, 222]},
+  "50": {"p": "216,171 207,171 181,191 209,232 231,220", "l": [211, 201]},
+  "51": {"p": "221,172 234,219 256,215 258,173", "l": [245, 193]},
+  "52": {"p": "264,173 260,215 286,216 289,175", "l": [278, 195]},
+  "53": {"p": "293,175 289,216 316,218 318,178", "l": [304, 197]},
+  "54": {"p": "322,177 320,218 346,220 348,180", "l": [338, 200]},
+  "55": {"p": "354,179 350,220 376,222 379,183 370,180", "l": [364, 201]},
+  "56": {"p": "383,182 379,223 405,224 408,183", "l": [397, 203]},
+  "57": {"p": "412,184 409,225 435,225 438,186", "l": [427, 203]},
+  "58": {"p": "442,187 439,226 464,229 468,188", "l": [453, 208]},
+  "59": {"p": "472,187 469,227 475,230 498,230 501,226 505,191", "l": [489, 209]},
+  "60": {"p": "490,129 475,156 494,168 503,168 511,177 522,156", "l": [498, 154]},
+  "61": {"p": "518,104 496,118 492,126 523,150 525,154 542,137", "l": [518, 129]},
+  "62": {"p": "541,87 524,99 523,102 544,133 548,133 567,119 546,89", "l": [545, 111]},
+  "63": {"p": "566,69 546,84 570,117 580,110 580,113 582,113 582,109 587,112 583,109 591,103", "l": [566, 94]},
+  "64": {"p": "593,51 570,67 582,82 587,83 586,88 595,101 616,85 593,54", "l": [594, 76]},
+  "65": {"p": "633,23 596,50 620,84 641,70", "l": [618, 55]},
+  "66": {"p": "637,21 645,70 669,66 671,23", "l": [655, 44]},
+  "67": {"p": "675,24 674,66 699,66 701,25", "l": [687, 44]},
+  "68": {"p": "707,25 704,67 730,67 731,27", "l": [714, 47]},
+  "69": {"p": "735,27 733,68 759,69 761,28", "l": [747, 48]},
+  "70": {"p": "766,28 763,69 788,78 791,29", "l": [777, 50]},
+  "71": {"p": "795,30 793,79 807,88 826,107 829,107 823,61 827,33", "l": [811, 62]},
+  "72": {"p": "848,33 830,34 827,56 832,105 861,91", "l": [842, 67]},
+  "73": {"p": "854,34 865,90 889,86 890,81 880,36", "l": [869, 59]},
+  "74": {"p": "739,93 736,97 734,139 764,140 786,104 763,95", "l": [756, 115]},
+  "75": {"p": "792,107 787,111 767,141 780,159 820,146 811,128 796,111 796,109 795,111", "l": [790, 134]},
+  "76": {"p": "822,152 819,151 781,163 780,186 824,187", "l": [804, 171]},
+  "77": {"p": "780,190 778,217 824,218 824,191", "l": [801, 202]},
+  "78": {"p": "824,221 777,222 776,247 823,247", "l": [797, 232]},
+  "79": {"p": "776,251 775,273 816,289 819,288 822,275 823,251", "l": [801, 265]},
+  "80": {"p": "774,276 763,294 767,297 786,329 801,317 815,295 817,296 816,299 818,297 816,294", "l": [792, 301]},
+  "81": {"p": "760,295 728,299 738,335 744,345 781,331", "l": [755, 320]},
+  "82": {"p": "727,294 760,291 771,273 771,266 729,263", "l": [750, 279]},
+  "83": {"p": "730,234 729,260 771,262 773,236", "l": [751, 248]},
+  "84": {"p": "730,204 731,230 773,232 775,221 774,219 774,206", "l": [755, 219]},
+  "85": {"p": "732,174 731,200 769,201 774,203 775,176", "l": [753, 188]},
+  "86": {"p": "734,142 732,170 760,172 777,170 777,161 763,143", "l": [756, 158]},
+  "87": {"p": "675,89 673,120 714,122 714,92", "l": [697, 104]},
+  "88": {"p": "672,124 670,150 713,151 714,126", "l": [692, 138]},
+  "89": {"p": "670,154 668,181 711,182 712,156", "l": [694, 168]},
+  "90": {"p": "668,184 665,194 667,196 666,210 709,212 711,186", "l": [689, 198]},
+  "91": {"p": "666,214 665,240 708,242 709,215", "l": [687, 228]},
+  "92": {"p": "665,243 662,269 707,272 708,246", "l": [685, 258]},
+  "93": {"p": "662,274 659,314 672,310 674,313 677,309 708,302 706,276", "l": [679, 292]},
+  "94": {"p": "709,307 678,313 675,361 695,361 719,353 720,344", "l": [696, 336]},
+  "95": {"p": "673,315 658,318 648,317 645,359 671,361", "l": [657, 339]},
+  "96": {"p": "612,316 610,340 612,355 615,358 641,359 644,317", "l": [627, 337]},
+  "97": {"p": "615,285 613,311 654,314 656,288", "l": [635, 299]},
+  "98": {"p": "617,256 615,281 656,285 659,258", "l": [634, 270]},
+  "99": {"p": "619,226 617,247 618,252 648,254 659,253 661,228", "l": [639, 240]},
+  "100": {"p": "621,196 620,222 661,224 663,198", "l": [641, 210]},
+  "101": {"p": "616,171 621,191 663,194 667,152 644,149 642,154", "l": [644, 174]},
+  "102": {"p": "618,114 599,127 595,132 595,136 609,155 614,167 641,149", "l": [617, 141]},
+  "103": {"p": "670,89 643,97 621,111 646,146 667,147", "l": [647, 119]},
+  "104": {"p": "259,291 263,249 261,240 249,240 230,247 209,262", "l": [242, 263]},
+  "105": {"p": "267,240 264,284 289,286 292,241", "l": [275, 263]},
+  "106": {"p": "297,240 293,287 320,287 323,242", "l": [308, 265]},
+  "107": {"p": "327,243 323,289 346,289 348,291 352,246", "l": [338, 266]},
+  "108": {"p": "358,245 355,254 353,291 379,292 382,248", "l": [365, 269]},
+  "109": {"p": "387,247 383,291 409,294 411,248", "l": [398, 271]},
+  "110": {"p": "416,250 413,295 438,297 441,260 443,254 438,250", "l": [427, 273]},
+  "111": {"p": "448,252 445,258 442,297 467,298 472,255", "l": [457, 276]},
+  "112": {"p": "477,253 473,298 499,300 501,256", "l": [487, 278]},
+  "113": {"p": "506,256 503,301 529,301 532,258", "l": [514, 280]},
+  "114": {"p": "537,258 532,302 558,305 562,260", "l": [547, 282]},
+  "115": {"p": "565,260 563,306 593,307 596,275 594,264 588,261", "l": [576, 285]},
+  "116": {"p": "562,309 559,353 574,355 588,355 591,348 593,311", "l": [576, 333]},
+  "117": {"p": "533,307 531,351 555,352 558,308", "l": [544, 330]},
+  "118": {"p": "503,305 499,349 524,351 528,307", "l": [511, 329]},
+  "119": {"p": "473,303 469,346 495,349 499,304", "l": [484, 326]},
+  "120": {"p": "442,300 440,346 466,347 468,303", "l": [454, 324]},
+  "121": {"p": "413,298 410,343 435,344 438,300", "l": [424, 322]},
+  "122": {"p": "383,297 380,340 406,342 409,298", "l": [394, 320]},
+  "123": {"p": "353,295 350,337 376,341 379,296", "l": [361, 318]},
+  "124": {"p": "324,292 321,335 346,338 349,294", "l": [335, 316]},
+  "125": {"p": "293,290 290,334 316,335 319,292", "l": [302, 314]},
+  "126": {"p": "264,288 260,332 286,334 289,290", "l": [275, 312]},
+  "127": {"p": "234,282 217,316 234,326 256,332 259,295", "l": [241, 309]},
+  "128": {"p": "205,266 189,288 187,296 185,294 190,303 214,314 231,280", "l": [205, 292]}
+};
+var MAP_ROADS = ["1048,682 1048,-64 991,-64 991,87 895,87 865,93 832,110 826,110 814,101 816,104 812,106 815,104 811,102 814,100 802,89 769,75 702,69 654,71 617,87 599,100 602,100 603,107 596,107 599,100 594,104 595,109 592,110 593,103 591,110 588,111 588,106 588,112 583,110 583,113 530,151 510,183 504,224 499,233 251,219 216,232 191,250 164,289 147,284 141,278 135,278 101,259 91,240 81,233 63,233 54,245 53,260 62,273 72,275 91,273 154,306 156,311 162,309 164,312 232,348 252,353 294,357 298,362 294,416 299,415 300,418 294,418 293,433 281,442 277,453 280,469 289,477 295,477 295,474 300,473 300,476 297,475 303,478 312,474 320,461 319,450 307,430 311,364 317,358 467,368 473,374 470,413 456,426 455,437 457,440 455,442 464,455 482,458 489,455 498,442 497,429 483,408 486,402 487,376 493,370 671,383 706,380 785,355 799,346 822,327 834,307 837,294 844,287 876,290 881,288 882,291 991,292 991,682"];
+var MAP_PONDS = ["114,424 104,436 97,453 100,485 122,501 124,514 120,518 120,524 134,533 149,573 158,583 173,587 206,573 224,573 238,558 238,549 227,517 216,509 217,495 198,469 169,438 131,440 123,435 122,422", "453,10 449,22 451,50 443,81 456,99 483,106 489,104 521,60 522,51 532,38 528,37 530,32 528,27 501,13 476,13 468,8"];
+function mapSVG(){
+  var byLot = {};
+  dirData.forEach(function(d){ byLot[String(d.lot)] = d; });
+  var s = '<svg viewBox="0 0 1080 546" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kerns Ridge lot map">';
+  s += '<rect x="0" y="0" width="1080" height="546" fill="#E9F0E2"/>';
+  MAP_PONDS.forEach(function(p){ s += '<polygon points="' + p + '" fill="#A8CBE0"/>'; });
+  MAP_ROADS.forEach(function(p){ s += '<polygon points="' + p + '" fill="#B7BBC0"/>'; });
+  s += '<rect x="534" y="188" width="54" height="30" rx="6" fill="#2E86C8" stroke="#FFFFFF" stroke-width="2"/>';
+  s += '<rect x="540" y="194" width="42" height="18" rx="4" fill="none" stroke="#BEE1F5" stroke-width="1"/>';
+  s += '<text x="561" y="232" font-size="11" font-weight="700" fill="#12275F" text-anchor="middle">Pool House</text>';
+  var L = 'font-size="13" font-style="italic" fill="#4B5563"';
+  s += '<text x="620" y="378" ' + L + '>Kildare Drive</text>';
+  s += '<text x="990" y="185" ' + L + ' transform="rotate(-90 990 185)" text-anchor="middle">Kildare Drive</text>';
+  s += '<text x="1061" y="273" font-size="17" font-weight="700" fill="#FFFFFF" transform="rotate(-90 1061 273)" text-anchor="middle">Bringle Ferry Road</text>';
+  Object.keys(LOT_GEO).forEach(function(k){
+    var g = LOT_GEO[k], d = byLot[k];
+    var fill = (d && d.name) ? "#FFC327" : "#1D3557";
+    var tc = (d && d.name) ? "#12275F" : "#FFFFFF";
+    s += '<g class="lot" data-lot="' + k + '"><polygon points="' + g.p + '" fill="' + fill + '" stroke="#FFFFFF" stroke-width="1.2"/>' +
+      '<text x="' + g.l[0] + '" y="' + g.l[1] + '" font-size="13" font-weight="700" fill="' + tc + '" text-anchor="middle" dominant-baseline="central" style="pointer-events:none">' + k + '</text></g>';
+  });
+  return s + '</svg>';
+}
+function buildMap(){
+  document.getElementById("dirMap").innerHTML = mapSVG();
+  document.querySelectorAll("#dirMap .lot").forEach(function(g){
+    g.addEventListener("click", function(){ showLot(g.getAttribute("data-lot")); });
+  });
+  document.getElementById("lotPopClose").addEventListener("click", function(e){
+    e.preventDefault();
+    document.getElementById("lotPop").style.display = "none";
+  });
+}
+function showLot(n){
+  var d = null;
+  dirData.forEach(function(x){ if (String(x.lot) === String(n)) d = x; });
+  var h = '<div class="top"><span class="lot">Lot ' + esc(n) + '</span>' +
+    (d && d.addr ? '<span class="addr">' + esc(d.addr) + '</span>' : '') + '</div>';
+  if (d && d.name) h += '<div class="name">' + esc(d.name) + '</div>';
+  if (d && d.photo) h += '<img class="dirphoto" src="https://drive.google.com/thumbnail?id=' + esc(d.photo) + '&sz=w800" alt="Family photo">';
+  var chips = "";
+  if (d && /yes/i.test(d.candy)) chips += '<span class="chip">🎃 Handing out candy</span>';
+  if (d && /yes/i.test(d.cams)) chips += '<span class="chip">📹 Cameras</span>';
+  if (d && /yes/i.test(d.lights)) chips += '<span class="chip">🎄 Christmas lights display</span>';
+  if (chips) h += '<div class="chips">' + chips + '</div>';
+  if (d && d.fb.length) h += '<div class="teams">🏈 ' + esc(d.fb.join(" · ")) + '</div>';
+  if (d && d.bb.length) h += '<div class="teams">🏀 ' + esc(d.bb.join(" · ")) + '</div>';
+  if (!d || (!d.name && !d.addr)) h += '<div class="det">No info added for this lot yet.</div>';
+  document.getElementById("lotPopBody").innerHTML = h;
+  document.getElementById("lotPop").style.display = "block";
+}
+/*MAPGEN-END*/
+var loadDirectory = once(function(){
+  fetchSheet("Neighborhood Directory", "A5:K300").then(function(rows){
+    dirData = [];
+    rows.forEach(function(r){
+      if (!r[0]) return;
+      dirData.push({ lot:r[0], addr:r[1]||"", name:r[2]||"", candy:r[3]||"",
+                     cams:r[4]||"", fb:[r[5],r[6]].filter(Boolean), bb:[r[7],r[8]].filter(Boolean),
+                     lights:r[9]||"", photo:r[10]||"" });
+    });
+    renderDir();
+    buildMap();
+  }).catch(function(){ errBox(document.getElementById("dirList"), "the directory"); });
+});
+function dirCard(d){
+  var chips = "";
+  if (/yes/i.test(d.candy)) chips += '<span class="chip">🎃 Handing out candy</span>';
+  if (/yes/i.test(d.cams))  chips += '<span class="chip">📹 Cameras</span>';
+  if (/yes/i.test(d.lights)) chips += '<span class="chip">🎄 Christmas lights display</span>';
+  return '<div class="card"><div class="top"><span class="lot">Lot ' + esc(d.lot) + '</span>' +
+    (d.addr ? '<span class="addr">' + esc(d.addr) + '</span>' : '') + '</div>' +
+    (d.name ? '<div class="name">' + esc(d.name) + '</div>' : '') +
+    (d.photo ? '<img class="dirphoto" src="https://drive.google.com/thumbnail?id=' + esc(d.photo) + '&sz=w800" alt="Family photo">' : '') +
+    (chips ? '<div class="chips">' + chips + '</div>' : '') +
+    (d.fb.length ? '<div class="teams">🏈 ' + esc(d.fb.join(" · ")) + '</div>' : '') +
+    (d.bb.length ? '<div class="teams">🏀 ' + esc(d.bb.join(" · ")) + '</div>' : '') +
+    '</div>';
+}
+function renderDir(){
+  var q = document.getElementById("dirSearch").value.toLowerCase().trim();
+  var list = dirData.filter(function(d){
+    return !q || (d.lot + " " + d.addr + " " + d.name).toLowerCase().indexOf(q) >= 0;
+  });
+  document.getElementById("dirCount").textContent =
+    list.length + (list.length === 1 ? " lot" : " lots") + (q ? " match your search" : " in Kerns Ridge");
+  var el = document.getElementById("dirList");
+  if (q) {
+    el.innerHTML = list.map(dirCard).join("") || '<div class="msg">No lots match that search.</div>';
+    return;
+  }
+  var groups = {}, order = [];
+  list.forEach(function(d){
+    var g = Math.floor((parseInt(d.lot, 10) - 1) / 10);
+    if (!groups[g]) { groups[g] = []; order.push(g); }
+    groups[g].push(d);
+  });
+  el.innerHTML = order.map(function(g){
+    var lots = groups[g];
+    var withInfo = lots.filter(function(d){ return d.name; }).length;
+    return '<div class="sect sectToggle">LOTS ' + lots[0].lot + '–' + lots[lots.length - 1].lot +
+      (withInfo ? ' · ' + withInfo + ' with info' : '') +
+      '<span class="sectArrow">▸</span></div>' +
+      '<div class="sectBody" style="display:none">' + lots.map(dirCard).join("") + '</div>';
+  }).join("");
+  el.querySelectorAll(".sectToggle").forEach(function(h){
+    h.addEventListener("click", function(){
+      var body = h.nextElementSibling;
+      var closed = body.style.display === "none";
+      body.style.display = closed ? "" : "none";
+      h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
+    });
+  });
+}
+document.getElementById("dirSearch").addEventListener("input", function(){ if (dirData) renderDir(); });
+
+/* ---------- Events ---------- */
+var loadEvents = once(function(){
+  /* Flyer spotlight: shows until the end of Nov 30, 2026, then drops off on its own. */
+  if (new Date() <= new Date(2026, 10, 30, 23, 59, 59)) {
+    document.getElementById("spotWrap").innerHTML =
+      '<div class="sect">📣 SPOTLIGHT</div>' +
+      '<div class="card"><div class="ttl">City of East Spencer — November News</div>' +
+      '<div class="det">From the Southern City Express, the town\u2019s November newsletter. East Spencer runs our trash service. The dates that matter most:</div>' +
+      '<div class="det"><b>Bulk pickup: Fri, Nov 13 &amp; Mon, Nov 30.</b> Call Town Hall before your date to get your address on the list.</div>' +
+      '<a class="phone" href="tel:+17046367111">(704) 636-7111</a>' +
+      '<div class="det"><b>Leaf pickup:</b> call Town Hall to get on the list. <b>Limb pickup:</b> every Tuesday — limbs no longer than 6 feet and no more than 2 feet around.</div>' +
+      '<div class="det"><b>Fall Giveaway:</b> Sat, Nov 14, 10 a.m. to 3 p.m., Royal Giants Park (also in the list below).</div>' +
+      '<div class="det"><b>Town Hall closed:</b> Wed, Nov 11, Wed, Nov 25 from noon, and Thu–Fri, Nov 26–27.</div>' +
+      '<div class="det"><b>Trash pickup is every Monday.</b> Trash service questions? Call the Utility Clerk:</div>' +
+      '<a class="phone" href="tel:+17044984725">(704) 498-4725</a>' +
+      '<div class="sub" style="margin-top:10px">Tap a page to see the whole flyer. English:</div>' +
+      '<a href="https://drive.google.com/file/d/1t7G6sxEhnA6UTlL0dW9s6pqQ0jEgYPJa/view" target="_blank" rel="noopener"><img class="flyerimg" src="https://drive.google.com/thumbnail?id=1t7G6sxEhnA6UTlL0dW9s6pqQ0jEgYPJa&sz=w1100" alt="East Spencer November 2026 newsletter, English"></a>' +
+      '<div class="sub" style="margin-top:10px">En español:</div>' +
+      '<a href="https://drive.google.com/file/d/1o7ZRkfUfbT020KPwzOH3b8wY40lxjJ30/view" target="_blank" rel="noopener"><img class="flyerimg" src="https://drive.google.com/thumbnail?id=1o7ZRkfUfbT020KPwzOH3b8wY40lxjJ30&sz=w1100" alt="East Spencer November 2026 newsletter, Spanish"></a>' +
+      '</div>';
+  }
+  fetchSheet("Local Events", "A4:E300").then(function(rows){
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var evs = rows.filter(function(r){
+      if (!r[1]) return false;
+      var d = Date.parse(String(r[0] || "").replace(/^[A-Za-z]+,\s*/, ""));
+      if (isNaN(d)) return true; /* no date (recurring) — always show */
+      return d >= today.getTime(); /* drop events before today */
+    });
+    document.getElementById("evList").innerHTML = evs.map(function(r){
+      var hasDate = !!Date.parse(String(r[0] || "").replace(/^[A-Za-z]+,\s*/, ""));
+      var isKR = /kerns ridge/i.test(r[3] || "");
+      var rsvp = (hasDate && isKR) ? '<a class="postbtn" href="' + RSVP_FORM + '?' + RSVP_EVENT_ENTRY + '=' +
+        encodeURIComponent(r[1] || "") + '" target="_blank" rel="noopener">📋 RSVP for this event</a>' : '';
+      return '<div class="card ev"><span class="date">' + esc(r[0]) + (r[2] ? ' · ' + esc(r[2]) : '') + '</span>' +
+        '<div class="ttl">' + esc(r[1]) + '</div>' +
+        (r[3] ? '<div class="sub">📍 ' + esc(r[3]) + '</div>' : '') +
+        (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + rsvp + '</div>';
+    }).join("") || '<div class="msg">No events listed right now.</div>';
+  }).catch(function(){ errBox(document.getElementById("evList"), "events"); });
+});
+
+/* App-store links: the sheet only exposes the word "Download" to the app,
+   so the real store addresses live here (taken from the sheet's own formulas). */
+var APP_LINKS = [
+  { match: /duke energy/i, play: "https://play.google.com/store/apps/details?id=com.dukeenergy.customerapp.release&hl=en&gl=us",
+    ios: "https://itunes.apple.com/us/app/duke-energy/id1325217974?mt=8" },
+  { match: /cams/i, play: "https://play.google.com/store/apps/details?id=com.vantacahome.camsconnects&hl=en_US", ios: "" },
+  { match: /salisbury connect/i, play: "https://play.google.com/store/apps/details?id=com.ridewithvia.salisburyconnect&hl=en-us&gl=us", ios: "" }
+];
+function storeChips(who, playCell, iosCell){
+  var entry = null;
+  APP_LINKS.forEach(function(e){ if (e.match.test(who)) entry = e; });
+  var name = who.split("(")[0].trim();
+  var chips = "";
+  if (playCell) {
+    var purl = (entry && entry.play) || ("https://play.google.com/store/search?q=" + encodeURIComponent(name) + "&c=apps");
+    chips += '<a class="chip" style="text-decoration:none" target="_blank" rel="noopener" href="' + purl + '">▶️ Google Play app</a>';
+  }
+  if (iosCell) {
+    var iurl = (entry && entry.ios) || ("https://apps.apple.com/us/search?term=" + encodeURIComponent(name));
+    chips += '<a class="chip" style="text-decoration:none" target="_blank" rel="noopener" href="' + iurl + '">🍎 App Store app</a>';
+  }
+  return chips ? '<div class="chips">' + chips + '</div>' : '';
+}
+
+/* ---------- New Here ---------- */
+var loadNewHere = once(function(){
+  document.querySelectorAll("#screen-newhere .sectToggle").forEach(function(h){
+    h.addEventListener("click", function(){
+      var body = h.nextElementSibling;
+      var closed = body.style.display === "none";
+      body.style.display = closed ? "" : "none";
+      h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
+    });
+  });
+  fetchSheet("New Here?", "A15:F31").then(function(rows){
+    document.getElementById("nhList").innerHTML = rows.filter(function(r){ return r[0]; }).map(function(r){
+      return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' + phoneHTML(r[1]) +
+        webHTML(r[4]) + storeChips(r[0], r[2], r[3]) +
+        (r[5] ? '<div class="det">' + esc(r[5]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("nhList"), "local numbers"); });
+  fetchSheet("New Here?", "A33:F45").then(function(rows){
+    document.getElementById("nhTrash").innerHTML = rows.filter(function(r){ return r[0]; }).map(function(r){
+      return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' +
+        (r[1] ? '<div class="sub">' + esc(r[1]) + '</div>' : '') + webHTML(r[4]) +
+        (r[5] ? '<div class="det">' + esc(r[5]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("nhTrash"), "trash info"); });
+});
+
+/* ---------- Emergency ---------- */
+var loadEmergency = once(function(){
+  fetchSheet("Emergency & Safety", "A4:D30").then(function(rows){
+    document.getElementById("emList").innerHTML = rows.filter(function(r){ return r[0] && r[1] !== "911"; }).map(function(r){
+      return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' + phoneHTML(r[1]) +
+        webHTML(r[2]) + (r[3] ? '<div class="det">' + esc(r[3]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("emList"), "emergency numbers"); });
+});
+
+/* ---------- Schools ---------- */
+var loadSchools = once(function(){
+  fetchSheet("Schools", "A4:F80").then(function(rows){
+    var html = "", open = false;
+    rows.forEach(function(r){
+      var filled = r.filter(Boolean).length;
+      if (!filled) return;
+      if (filled === 1) {
+        if (open) html += '</div>';
+        html += '<div class="sect sectToggle">' + esc(r[0]) + '<span class="sectArrow">▸</span></div><div class="sectBody" style="display:none">';
+        open = true; return;
+      }
+      html += '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' + phoneHTML(r[1]) +
+        (r[2] ? '<div class="chips"><span class="chip">🕐 ' + esc(r[2]) + '</span></div>' : '') +
+        webHTML(r[3]) +
+        (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') +
+        (r[5] ? '<div class="det">💵 ' + esc(r[5]) + '</div>' : '') + '</div>';
+    });
+    if (open) html += '</div>';
+    var schEl = document.getElementById("schList");
+    schEl.innerHTML = html;
+    schEl.querySelectorAll(".sectToggle").forEach(function(h){
+      h.addEventListener("click", function(){
+        var body = h.nextElementSibling;
+        var closed = body.style.display === "none";
+        body.style.display = closed ? "" : "none";
+        h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
+      });
+    });
+  }).catch(function(){ errBox(document.getElementById("schList"), "schools"); });
+});
+
+/* ---------- Services ---------- */
+var BIZ_PHOTOS = {
+  "patricia": ["photos/patricia-paint-1.jpg","photos/patricia-paint-2.jpg","photos/patricia-paint-3.jpg","photos/patricia-paint-4.jpg","photos/patricia-paint-5.jpg","photos/patricia-paint-6.jpg","photos/patricia-paint-7.jpg","photos/patricia-paint-8.jpg","photos/patricia-paint-9.jpg"]
+};
+function photosHTML(name, cat){
+  var key = (name || "").trim().toLowerCase();
+  var files = BIZ_PHOTOS[key];
+  if (!files || !/paint/i.test(cat || "")) return "";
+  var imgs = files.map(function(f){ return '<img src="' + f + '" loading="lazy" alt="Room painted by Patricia">'; }).join("");
+  var dots = files.map(function(f, i){ return '<span' + (i === 0 ? ' class="on"' : '') + '></span>'; }).join("");
+  return '<div class="carCap">Rooms painted by Patricia... swipe to see more</div><div class="car">' + imgs + '</div><div class="carDots">' + dots + '</div>';
+}
+var loadServices = once(function(){
+  var bannerHTML = "";
+  fetchSheet("Services & Referrals", "A1:E5", 0).then(function(rows){
+    if (rows[0] && rows[1]) {
+      bannerHTML = '<div class="warn"><div class="bttl">' + esc(rows[0][0]) + '</div><div class="det">' + esc(rows[1][0]) + '</div></div>';
+    }
+  }).catch(function(){}).then(function(){
+    fetchSheet("Services & Referrals", "A6:F120").then(function(rows){
+      var html = "", lastCat = null, open = false, bannerUsed = false;
+      rows.filter(function(r){ return r[1]; }).forEach(function(r){
+        if (r[0] && r[0] !== lastCat) {
+          if (open) html += '</div>';
+          html += '<div class="sect sectToggle">' + esc(r[0].toUpperCase()) + '<span class="sectArrow">▸</span></div><div class="sectBody" style="display:none">';
+          if (bannerHTML && /fence/i.test(r[0])) { html += bannerHTML; bannerUsed = true; }
+          lastCat = r[0]; open = true;
+        }
+        html += '<div class="card"><div class="ttl">' + esc(r[1]) + '</div>' + phoneHTML(r[2]) +
+          webHTML(r[3]) + (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') +
+          (r[5] ? '<div class="promo">🎉 <strong>Current promo:</strong> ' + esc(r[5]) + '</div>' : '') +
+          photosHTML(r[1], r[0]) + '</div>';
+      });
+      if (open) html += '</div>';
+      var el = document.getElementById("svcList");
+      el.innerHTML = html || '<div class="msg">No services listed yet.</div>';
+      el.querySelectorAll(".car").forEach(function(car){
+        car.addEventListener("scroll", function(){
+          var dots = car.nextElementSibling;
+          if (!dots || !dots.classList.contains("carDots")) return;
+          var idx = Math.round(car.scrollLeft / car.clientWidth);
+          dots.querySelectorAll("span").forEach(function(d, i){ d.className = i === idx ? "on" : ""; });
+        }, { passive: true });
+      });
+      if (bannerHTML && !bannerUsed) document.getElementById("svcBanner").innerHTML = bannerHTML;
+      el.querySelectorAll(".sectToggle").forEach(function(h){
+        h.addEventListener("click", function(){
+          var body = h.nextElementSibling;
+          var closed = body.style.display === "none";
+          body.style.display = closed ? "" : "none";
+          h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
+        });
+      });
+    }).catch(function(){ errBox(document.getElementById("svcList"), "services"); });
+  });
+});
+
+/* ---------- Help Wanted ---------- */
+var loadHelpWanted = once(function(){
+  fetchSheet("Help Wanted", "A4:D40").then(function(rows){
+    var real = rows.filter(function(r){ return r[1]; });
+    if (!real.length) {
+      document.getElementById("hwList").innerHTML =
+        '<div class="msg">Nothing here yet. Be the first to post one.</div>';
+      return;
+    }
+    document.getElementById("hwList").innerHTML = real.map(function(r){
+      return '<div class="card"><div class="ttl">' + esc(r[1]) + '</div>' +
+        (r[0] ? '<div class="chips"><span class="chip">📅 ' + esc(r[0]) + '</span></div>' : '') +
+        (r[2] ? '<div class="det">' + esc(r[2]) + '</div>' : '') +
+        (r[3] && /^https?:/i.test(r[3]) ? '<div class="sub">💬 <a class="weblink" href="' + esc(r[3]) + '" target="_blank" rel="noopener">See the Facebook post</a></div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("hwList"), "help wanted"); });
+});
+
+/* ---------- Winners Circle ---------- */
+var loadWinners = once(function(){
+  fetchSheet("Winners Circle", "A1:E60", 0).then(function(rows){
+    function findRow(txt){ return rows.findIndex(function(r){ return (r[0]||"").indexOf(txt) >= 0; }); }
+    var html = "";
+    var li = findRow("LATEST COMPETITION");
+    if (li >= 0 && rows[li+1]) {
+      html += '<div class="sect">🌶️ LATEST COMPETITION</div><div class="card gold"><div class="ttl">' +
+        esc(rows[li+1][0]) + '</div>' +
+        (rows[li+2] ? '<div class="det">' + esc(rows[li+2][0]) + '</div>' : '') + '</div>';
+    }
+    var hi = findRow("HALL OF FAME");
+    if (hi >= 0) {
+      html += '<div class="sect">🏆 HALL OF FAME</div>';
+      for (var i = hi + 2; i < rows.length; i++) {
+        var r = rows[i];
+        if (!r[0] || (r[0]||"").indexOf("COMING UP") >= 0) break;
+        if (r[1] === "Competition") continue;
+        html += '<div class="card"><div class="ttl">🏆 ' + esc(r[1]||"") + ' — ' + esc(r[2]||"") + '</div>' +
+          '<div class="chips"><span class="chip">📅 ' + esc(r[0]) + '</span></div>' +
+          (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + '</div>';
+      }
+    }
+    var ci = findRow("COMING UP");
+    if (ci >= 0) {
+      html += '<div class="sect">🔜 COMING UP — YOUR NAME COULD BE HERE</div>';
+      for (var j = ci + 1; j < rows.length; j++) {
+        var c = rows[j];
+        if (!c[0]) continue;
+        var voteUrl = "", voteEmoji = "";
+        if (/halloween/i.test(c[1]||"")) { voteUrl = FORMS.halloween; voteEmoji = "🎃"; }
+        if (/christmas/i.test(c[1]||"")) { voteUrl = FORMS.christmas; voteEmoji = "🎄"; }
+        if (/flower garden/i.test(c[1]||"")) { voteUrl = FORMS.garden; voteEmoji = "🌸"; }
+        if (/golf course lawn/i.test(c[1]||"")) { voteUrl = FORMS.lawn; voteEmoji = "⛳"; }
+        if (/porch/i.test(c[1]||"")) { voteUrl = FORMS.porch; voteEmoji = "🚪"; }
+        if (/pet costume/i.test(c[1]||"")) { voteUrl = FORMS.petcostume; voteEmoji = "🐶"; }
+        if (/holiday street/i.test(c[1]||"")) { voteUrl = FORMS.street; voteEmoji = "🏘️"; }
+        if (/photo of the year/i.test(c[1]||"")) { voteUrl = FORMS.photo; voteEmoji = "📸"; }
+        html += '<div class="card"><div class="ttl">' + esc(c[1]||"") + '</div>' +
+          (c[0] ? '<div class="chips"><span class="chip">📅 ' + esc(c[0]) + '</span></div>' : '') +
+          (c[2] ? '<div class="det">' + esc(c[2]) + '</div>' : '') +
+          (voteUrl ? '<a class="postbtn" href="' + voteUrl + '" target="_blank" rel="noopener">🗳️ Tap to vote ' + voteEmoji + '</a>' : '') + '</div>';
+      }
+    }
+    document.getElementById("winList").innerHTML = html || '<div class="msg">Nothing here yet.</div>';
+  }).catch(function(){ errBox(document.getElementById("winList"), "winners"); });
+});
+
+/* ---------- Lend & Borrow ---------- */
+function lendCards(rows, kind){
+  var real = rows.filter(function(r){ return r[0] && !/^nothing here yet/i.test(r[0]); });
+  if (!real.length) return '<div class="msg">Nothing here yet. Add yours with the button below.</div>';
+  return real.map(function(r){
+    var chips = "";
+    if (kind === "lend" && r[1]) chips += '<span class="chip">' + esc(r[1]) + '</span>';
+    if (kind === "borrow" && r[1]) chips += '<span class="chip">⏰ Needed by ' + esc(r[1]) + '</span>';
+    if (r[6]) chips += '<span class="chip blue">' + esc(r[6]) + '</span>';
+    var who = [r[2], r[3] ? "Lot " + r[3] : ""].filter(Boolean).join(" · ");
+    return '<div class="card"><div class="ttl">' + esc(r[0]) + '</div>' +
+      (chips ? '<div class="chips">' + chips + '</div>' : '') +
+      (kind === "free" && r[1] ? '<div class="sub">📍 ' + esc(r[1]) + '</div>' : '') +
+      (who ? '<div class="sub">👤 ' + esc(who) + '</div>' : '') +
+      (r[4] ? '<div class="sub">📞 ' + esc(r[4]) + '</div>' : '') +
+      (r[5] ? '<div class="det">' + esc(r[5]) + '</div>' : '') + '</div>';
+  }).join("");
+}
+var loadLend = once(function(){
+  fetchSheet("Lend & Borrow", "A5:G17").then(function(rows){
+    document.getElementById("lendList").innerHTML = lendCards(rows, "lend");
+  }).catch(function(){ errBox(document.getElementById("lendList"), "lend listings"); });
+  fetchSheet("Lend & Borrow", "A31:G90").then(function(rows){
+    document.getElementById("borrowList").innerHTML = lendCards(rows, "borrow");
+  }).catch(function(){ errBox(document.getElementById("borrowList"), "borrow requests"); });
+});
+var SALE_PHOTOS = {
+  "pride go-go elite traveller mobility scooter": ["photos/scooter-1.jpg","photos/scooter-2.jpg","photos/scooter-3.jpg","photos/scooter-4.jpg","photos/scooter-5.jpg","photos/scooter-6.jpg","photos/scooter-7.jpg","photos/scooter-8.jpg","photos/scooter-9.jpg"]
+};
+function salePhotosHTML(title){
+  var files = SALE_PHOTOS[(title || "").trim().toLowerCase()];
+  if (!files) return "";
+  var imgs = files.map(function(f){ return '<img src="' + f + '" loading="lazy" alt="Pride Go-Go Elite Traveller mobility scooter">'; }).join("");
+  var dots = files.map(function(f, i){ return '<span' + (i === 0 ? ' class="on"' : '') + '></span>'; }).join("");
+  return '<div class="carCap">📸 Swipe to see more photos</div><div class="car tall">' + imgs + '</div><div class="carDots">' + dots + '</div>';
+}
+var loadForSale = once(function(){
+  fetchSheet("Lend & Borrow", "A19:G29").then(function(rows){
+    document.getElementById("freeList").innerHTML = lendCards(rows, "free");
+  }).catch(function(){ errBox(document.getElementById("freeList"), "free stuff"); });
+  fetchSheet("For Sale", "A5:H80").then(function(rows){
+    var real = rows.filter(function(r){ return r[0] && !/nothing here yet/i.test(r[0]); });
+    if (!real.length) {
+      document.getElementById("saleList").innerHTML =
+        '<div class="msg">Nothing for sale yet. List something with the button below.</div>';
+      return;
+    }
+    document.getElementById("saleList").innerHTML = real.map(function(r){
+      var status = (r[7] && r[7] !== "For Sale") ? ' <span class="chip">' + esc(r[7]) + '</span>' : '';
+      return '<div class="card">' +
+        salePhotosHTML(r[0]) +
+        '<div class="ttl">' + esc(r[0]) + status + '</div>' +
+        '<div style="margin:5px 0"><span class="chip">💲 ' + esc(r[2] || "") + '</span>' +
+        (r[1] ? ' <span class="chip">' + esc(r[1]) + '</span>' : '') + '</div>' +
+        '<div class="sub">' + esc(r[3] || "") + (r[4] ? ' · Lot ' + esc(r[4]) : '') + '</div>' +
+        (r[5] ? '<div class="det">📞 ' + esc(r[5]) + '</div>' : '') +
+        (r[6] ? '<div class="det">' + esc(r[6]) + '</div>' : '') + '</div>';
+    }).join("");
+    document.querySelectorAll("#saleList .car").forEach(function(car){
+      car.addEventListener("scroll", function(){
+        var dots = car.nextElementSibling;
+        if (!dots || !dots.classList.contains("carDots")) return;
+        var idx = Math.round(car.scrollLeft / car.clientWidth);
+        dots.querySelectorAll("span").forEach(function(d, i){ d.className = i === idx ? "on" : ""; });
+      }, { passive: true });
+    });
+  }).catch(function(){ errBox(document.getElementById("saleList"), "for sale listings"); });
+});
+
+var loadLostFound = once(function(){
+  fetchSheet("Lost & Found Items", "A5:K80").then(function(rows){
+    var real = rows.filter(function(r){ return r[0] && !/no lost or found/i.test(r[0]); });
+    if (!real.length) {
+      document.getElementById("lostfoundList").innerHTML =
+        '<div class="msg">No lost or found items right now.</div>';
+      return;
+    }
+    document.getElementById("lostfoundList").innerHTML = real.map(function(r){
+      return '<div class="card"><div class="ttl">🔍 ' + esc(r[0] || "") + '</div>' +
+        '<div style="margin:5px 0"><span class="chip">' + esc(r[1] || "") + '</span>' +
+        (r[9] ? ' <span class="chip">' + esc(r[9]) + '</span>' : '') + '</div>' +
+        (r[10] ? '<div style="display:flex;gap:6px;margin:6px 0">' + r[10].split(',').map(function(id){ return '<img src="https://drive.google.com/thumbnail?id=' + esc(id.trim()) + '&sz=w600" style="width:48%;border-radius:10px" alt="Photo of the item">'; }).join("") + '</div>' : '') +
+        (r[2] ? '<div class="det">' + esc(r[2]) + '</div>' : '') +
+        '<div class="sub">📍 ' + esc(r[3] || "") + (r[4] ? ' · ' + esc(r[4]) : '') + '</div>' +
+        '<div class="sub">' + esc(r[5] || "") + (r[6] ? ' · Lot ' + esc(r[6]) : '') + '</div>' +
+        (r[7] ? '<div class="det">💬 ' + esc(r[7]) + '</div>' : '') +
+        (r[8] ? '<div class="det">' + esc(r[8]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("lostfoundList"), "lost and found posts"); });
+});
+
+var loadPets = once(function(){
+  fetchSheet("Lost & Found Pets", "A5:J80").then(function(rows){
+    var real = rows.filter(function(r){ return r[0] && !/no lost or found/i.test(r[0]); });
+    if (!real.length) {
+      document.getElementById("petsList").innerHTML =
+        '<div class="msg">No lost or found pets right now. That\'s the way we like it!</div>';
+      return;
+    }
+    document.getElementById("petsList").innerHTML = real.map(function(r){
+      return '<div class="card"><div class="ttl">🐾 ' + esc(r[0] || "") + '</div>' +
+        '<div style="margin:5px 0"><span class="chip">' + esc(r[1] || "") + '</span>' +
+        (r[9] ? ' <span class="chip">' + esc(r[9]) + '</span>' : '') + '</div>' +
+        (r[2] ? '<div class="det">' + esc(r[2]) + '</div>' : '') +
+        '<div class="sub">📍 ' + esc(r[3] || "") + (r[4] ? ' · ' + esc(r[4]) : '') + '</div>' +
+        '<div class="sub">' + esc(r[5] || "") + (r[6] ? ' · Lot ' + esc(r[6]) : '') + '</div>' +
+        (r[7] ? '<div class="det">💬 ' + esc(r[7]) + '</div>' : '') +
+        (r[8] ? '<div class="det">' + esc(r[8]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("petsList"), "pet posts"); });
+});
+
+/* ---------- Updates ---------- */
+var loadUpdates = once(function(){
+  fetchSheet("Neighborhood Updates", "A4:D60").then(function(rows){
+    var real = rows.filter(function(r){ return r[1]; });
+    if (!real.length) {
+      document.getElementById("updList").innerHTML =
+        '<div class="msg">No updates right now... everything is running like it should.</div>';
+      return;
+    }
+    document.getElementById("updList").innerHTML = real.map(function(r){
+      return '<div class="card"><div class="ttl">' + esc(r[1] || "") + '</div>' +
+        '<div style="margin:5px 0">' +
+        (r[2] ? '<span class="chip">' + esc(r[2]) + '</span>' : '') +
+        (r[0] ? ' <span class="chip">📅 ' + esc(r[0]) + '</span>' : '') + '</div>' +
+        (r[3] ? '<div class="det">' + esc(r[3]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("updList"), "updates"); });
+});
+
+/* ---------- Packages ---------- */
+var loadPackages = once(function(){
+  fetchSheet("Lost & Found Packages", "A5:J80").then(function(rows){
+    var real = rows.filter(function(r){ return r[0] && !/no lost or found/i.test(r[0]); });
+    if (!real.length) {
+      document.getElementById("pkgList").innerHTML =
+        '<div class="msg">No lost or found packages right now. Every package is where it belongs!</div>';
+      return;
+    }
+    document.getElementById("pkgList").innerHTML = real.map(function(r){
+      return '<div class="card"><div class="ttl">📦 ' + esc(r[0] || "") + '</div>' +
+        '<div style="margin:5px 0"><span class="chip">' + esc(r[1] || "") + '</span>' +
+        (r[9] ? ' <span class="chip">' + esc(r[9]) + '</span>' : '') + '</div>' +
+        (r[2] ? '<div class="det">' + esc(r[2]) + '</div>' : '') +
+        '<div class="sub">📍 ' + esc(r[3] || "") + (r[4] ? ' · ' + esc(r[4]) : '') + '</div>' +
+        '<div class="sub">' + esc(r[5] || "") + (r[6] ? ' · Lot ' + esc(r[6]) : '') + '</div>' +
+        (r[7] ? '<div class="det">💬 ' + esc(r[7]) + '</div>' : '') +
+        (r[8] ? '<div class="det">' + esc(r[8]) + '</div>' : '') + '</div>';
+    }).join("");
+  }).catch(function(){ errBox(document.getElementById("pkgList"), "package posts"); });
+});
+
+var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, forsale: loadForSale, lostfound: loadLostFound, pets: loadPets,
+                emergency: loadEmergency, schools: loadSchools, services: loadServices,
+                helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend,
+                updates: loadUpdates, packages: loadPackages };
+</script>
+<div id="lotPop" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;background:#fff;border-top:3px solid #12275F;border-radius:16px 16px 0 0;box-shadow:0 -6px 28px rgba(0,0,0,.3);padding:16px;max-height:72vh;overflow-y:auto">
+  <div id="lotPopBody"></div>
+  <a class="postbtn" href="#" id="lotPopClose" style="margin-top:12px">Close</a>
+</div>
+</body>
+</html>
