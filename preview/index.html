@@ -77,7 +77,14 @@
   .carDots{text-align:center;margin-top:5px;line-height:1}
   .carDots span{display:inline-block;width:7px;height:7px;border-radius:50%;background:#C4CEDE;margin:0 2.5px}
   .carDots span.on{background:#2563EB}
-  #dirMap svg{width:100%;height:auto;display:block}
+  #dirMap > svg{width:100%;height:auto;display:block}
+  #plotMap{height:380px;border-radius:14px;z-index:0;background:#DCE9F7}
+  .leaflet-container{font:inherit}
+  .leaflet-tooltip.lotLbl{background:transparent;border:none;box-shadow:none;padding:0;color:#12275F;font-weight:700;font-size:11px;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff}
+  .leaflet-tooltip.lotLbl:before{display:none}
+  .krBaseCtl{display:flex;gap:6px}
+  .krBaseCtl button{border:2px solid #A9C6EE;background:#fff;color:#1c2430;font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px;cursor:pointer}
+  .krBaseCtl button.on{background:#2563EB;border-color:#2563EB;color:#fff}
   .lot{cursor:pointer}
   .msg{background:#fff;border:none;border-radius:20px;padding:20px;text-align:center;color:#1c2430;box-shadow:0 1px 2px rgba(16,24,40,.05),0 8px 22px rgba(16,24,40,.06)}
   .foot{text-align:center;font-size:12.5px;color:#8A94A6;margin-top:26px;line-height:1.6}
@@ -121,6 +128,8 @@
     });
   });
 </script>
+<link rel="stylesheet" href="leaflet.css">
+<script src="leaflet.js"></script>
 </head>
 <body>
 <header>
@@ -172,7 +181,7 @@
   <div class="screen" id="screen-directory">
     <button class="back" data-go="home">Home</button>
     <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
-    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div class="det">Tap a lot to see its info. Yellow lots have info added.</div><div id="dirMap"><div class="msg">Loading...</div></div></div>
+    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div class="det">Real lot lines from Rowan County records. Tap a lot to see its info. Yellow lots have info added. Zoom in to see lot numbers.</div><div id="dirMap"><div class="msg">Loading...</div></div></div>
     <input class="search" id="dirSearch" type="search" placeholder="Search name, address, or lot #" autocomplete="off">
     <div class="count" id="dirCount"></div>
     <div id="dirList"><div class="msg">Loading the directory...</div></div>
@@ -691,6 +700,82 @@ function showLot(n){
   document.getElementById("lotPop").style.display = "block";
 }
 /*MAPGEN-END*/
+// ---------- REAL PLOT MAP (Rowan County parcel lines; traced map is the fallback) ----------
+var krMap = null, krSel = null, krLabels = null;
+function lotHasInfo(n){
+  var has = false;
+  dirData.forEach(function(d){ if (String(d.lot) === String(n) && d.name) has = true; });
+  return has;
+}
+function parcelStyle(f){
+  if (f.properties.common) return { color:"#12275F", weight:1.2, fillColor:"#2E86C8", fillOpacity:.45 };
+  var gold = lotHasInfo(f.properties.lot);
+  return { color:"#12275F", weight:1.2, fillColor: gold ? "#FFC327" : "#FFFFFF", fillOpacity: gold ? .55 : .28 };
+}
+function showParcel(f){
+  var p = f.properties;
+  if (p.common) {
+    document.getElementById("lotPopBody").innerHTML =
+      '<div class="top"><span class="lot">Pool House</span></div><div class="det">Common area</div>';
+    document.getElementById("lotPop").style.display = "block";
+    return;
+  }
+  var d = null;
+  dirData.forEach(function(x){ if (String(x.lot) === String(p.lot)) d = x; });
+  if (d && (d.name || d.addr)) { showLot(p.lot); return; }
+  document.getElementById("lotPopBody").innerHTML =
+    '<div class="top"><span class="lot">Lot ' + esc(p.lot) + '</span>' +
+    (p.addr ? '<span class="addr">' + esc(p.addr) + '</span>' : '') + '</div>' +
+    '<div class="det">No info added for this lot yet.</div>';
+  document.getElementById("lotPop").style.display = "block";
+}
+function buildPlotMap(){
+  if (krMap) { setTimeout(function(){ krMap.invalidateSize(); }, 250); return; }
+  if (typeof L === "undefined") { buildMap(); return; }
+  fetch("kr-parcels.geojson").then(function(r){ return r.json(); }).then(function(data){
+    document.getElementById("dirMap").innerHTML = '<div id="plotMap"></div>';
+    var sat = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { attribution:"Esri World Imagery", maxZoom:19 });
+    var street = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution:"OpenStreetMap", maxZoom:19 });
+    krMap = L.map("plotMap", { layers:[sat], scrollWheelZoom:false, tapTolerance:12 });
+    krMap.attributionControl.setPrefix(false);
+    var KRBaseCtl = L.Control.extend({ onAdd: function(){
+      var div = L.DomUtil.create('div', 'krBaseCtl');
+      div.innerHTML = '<button type="button" data-b="sat" class="on">Satellite</button><button type="button" data-b="street">Street</button>';
+      L.DomEvent.disableClickPropagation(div);
+      div.querySelectorAll('button').forEach(function(b){ b.addEventListener('click', function(){
+        div.querySelectorAll('button').forEach(function(x){ x.classList.remove('on'); });
+        b.classList.add('on');
+        if (b.getAttribute('data-b') === 'sat') { krMap.removeLayer(street); krMap.addLayer(sat); }
+        else { krMap.removeLayer(sat); krMap.addLayer(street); }
+      }); });
+      return div;
+    } });
+    krMap.addControl(new KRBaseCtl({ position:'topright' }));
+    krLabels = L.layerGroup();
+    var layer = L.geoJSON(data, {
+      style: parcelStyle,
+      onEachFeature: function(f, lyr){
+        lyr.on("click", function(){
+          if (krSel) krSel.setStyle(parcelStyle(krSel.feature));
+          krSel = lyr;
+          lyr.setStyle({ weight:3, color:"#2563EB" });
+          showParcel(f);
+        });
+        if (!f.properties.common) {
+          krLabels.addLayer(L.tooltip({ permanent:true, direction:"center", className:"lotLbl", interactive:false })
+            .setContent(f.properties.lot).setLatLng(lyr.getBounds().getCenter()));
+        }
+      }
+    }).addTo(krMap);
+    krMap.fitBounds(layer.getBounds(), { padding:[8,8] });
+    var upd = function(){
+      if (krMap.getZoom() >= 17) { if (!krMap.hasLayer(krLabels)) krLabels.addTo(krMap); }
+      else if (krMap.hasLayer(krLabels)) krMap.removeLayer(krLabels);
+    };
+    krMap.on("zoomend", upd); upd();
+    setTimeout(function(){ krMap.invalidateSize(); }, 250);
+  }).catch(function(){ buildMap(); });
+}
 var loadDirectory = once(function(){
   fetchSheet("Neighborhood Directory", "A5:K300").then(function(rows){
     dirData = [];
@@ -701,8 +786,8 @@ var loadDirectory = once(function(){
                      lights:r[9]||"", photo:r[10]||"" });
     });
     renderDir();
-    buildMap();
-  }).catch(function(){ errBox(document.getElementById("dirList"), "the directory"); });
+    buildPlotMap();
+  }).catch(function(){ errBox(document.getElementById("dirList"), "the directory"); buildPlotMap(); });
 });
 function dirCard(d){
   var chips = "";
