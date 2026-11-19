@@ -185,7 +185,7 @@
   <div class="screen" id="screen-directory">
     <button class="back" data-go="home">Home</button>
     <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
-    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div class="det">Real lot lines from Rowan County records. Tap a lot to see its size, street frontage, and whether it has sold. Yellow lots have neighbor info added. Purple lots are sold too... those neighbors just have not added their info yet. Green lots are still owned by the builder... they have not sold yet. Zoom in to see lot numbers.</div><div id="dirMap"><div class="msg">Loading...</div></div></div>
+    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div class="det">Real lot lines from Rowan County records. Tap a lot to see its size, street frontage, and whether it has sold. Yellow lots have neighbor info added. Blue lots are sold too... those neighbors just have not added their info yet. Gray lots are still owned by the builder... they have not sold yet. Zoom in to see lot numbers.</div><div id="dirMap"><div class="msg">Loading...</div></div></div>
     <input class="search" id="dirSearch" type="search" placeholder="Search name, address, or lot #" autocomplete="off">
     <div class="count" id="dirCount"></div>
     <div id="dirList"><div class="msg">Loading the directory...</div></div>
@@ -711,9 +711,9 @@ function fmtNum(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
 function lotFactsHTML(p){
   if (!p || !p.sqft) return "";
   var st = "";
-  if (p.status === "sold") st = '<div class="frow"><span class="stDot" style="background:#64748B"></span><b>Sold</b></div>';
-  else if (p.status === "forsale") st = '<div class="frow"><span class="stDot" style="background:#1F9D55"></span><b>For sale</b> — builder-owned home</div>';
-  else if (p.status === "lot") st = '<div class="frow"><span class="stDot" style="background:#1F9D55"></span><b>Not sold yet</b> — still owned by the builder</div>';
+  if (p.status === "sold") st = '<div class="frow"><span class="stDot" style="background:#2563EB"></span><b>Sold</b></div>';
+  else if (p.status === "forsale") st = '<div class="frow"><span class="stDot" style="background:#8A94A6"></span><b>For sale</b> — builder-owned home</div>';
+  else if (p.status === "lot") st = '<div class="frow"><span class="stDot" style="background:#8A94A6"></span><b>Not sold yet</b> — still owned by the builder</div>';
   var h = '<div class="facts">' + st +
     '<div class="frow">Lot size: <b>' + fmtNum(p.sqft) + ' sq ft</b> (' + p.ac + ' acres)</div>';
   if (p.front) h += '<div class="frow">About <b>' + p.front + ' ft</b> of street frontage, about <b>' + p.depth + ' ft</b> deep</div>';
@@ -726,11 +726,11 @@ function lotHasInfo(n){
   return has;
 }
 function parcelStyle(f){
-  if (f.properties.common) return { color:"#12275F", weight:1.2, fillColor:"#2E86C8", fillOpacity:.45 };
+  if (f.properties.common) return { color:"#12275F", weight:1.2, fillColor:"#12275F", fillOpacity:.55 };
   if (lotHasInfo(f.properties.lot)) return { color:"#12275F", weight:1.2, fillColor:"#FFC327", fillOpacity:.55 };
   var st = f.properties.status;
-  if (st === "forsale" || st === "lot") return { color:"#12275F", weight:1.2, fillColor:"#22C55E", fillOpacity:.55 };
-  if (st === "sold") return { color:"#12275F", weight:1.2, fillColor:"#8B5CF6", fillOpacity:.55 };
+  if (st === "forsale" || st === "lot") return { color:"#12275F", weight:1.2, fillColor:"#8A94A6", fillOpacity:.55 };
+  if (st === "sold") return { color:"#12275F", weight:1.2, fillColor:"#2563EB", fillOpacity:.55 };
   return { color:"#12275F", weight:1.2, fillColor:"#FFFFFF", fillOpacity:.28 };
 }
 function showParcel(f){
