@@ -750,7 +750,7 @@ function showParcel(f){
 function buildPlotMap(){
   if (krMap) { setTimeout(function(){ krMap.invalidateSize(); }, 250); return; }
   if (typeof L === "undefined") { buildMap(); return; }
-  fetch("kr-parcels.geojson").then(function(r){ return r.json(); }).then(function(data){
+  fetch("kr-parcels.geojson?v=20261119b").then(function(r){ return r.json(); }).then(function(data){
     data.features.forEach(function(f){ if (f.properties.lot) krFacts[f.properties.lot] = f.properties; });
     document.getElementById("dirMap").innerHTML = '<div id="plotMap"></div>';
     var sat = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { attribution:"Esri World Imagery", maxZoom:19 });
