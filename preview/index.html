@@ -140,8 +140,6 @@
       <button class="btn" data-go="lend">🤝 Lend &amp; Borrow</button>
       <button class="btn" data-go="forsale">🏷️ For Sale</button>
       <button class="btn" data-go="lostfound">🔍 Lost &amp; Found</button>
-      <button class="btn" data-go="pets">🐾 Lost &amp; Found Pets</button>
-      <button class="btn" data-go="packages">📦 Lost &amp; Found Packages</button>
       <button class="btn" data-go="emergency">🚨 Emergencies</button>
       <button class="btn" data-go="services">🔧 Services</button>
       <button class="btn" data-go="schools">🎓 Schools</button>
@@ -236,31 +234,19 @@
     <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener">➕ List something</a></div>
   </div>
 
-  <!-- LOST & FOUND (general items - not pets, not packages) -->
+  <!-- LOST & FOUND (everything: pets, packages, items) -->
   <div class="screen" id="screen-lostfound">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Lost something, or found something that is not a pet or a package? Check here first. Items are posted with their photos so the owner can spot theirs. Message the owner or finder on Facebook Messenger to arrange pickup.</div></div>
-    <div class="sect">🔍 LOST &amp; FOUND</div>
-    <div id="lostfoundList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSeo-dfYBSalABTG5mTJGLsQ57fWllx1W7xgx2K8MKAvCXAt5A/viewform" target="_blank" rel="noopener">➕ Post a lost or found item</a></div>
-  </div>
-
-  <!-- LOST & FOUND PETS -->
-  <div class="screen" id="screen-pets">
-    <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Lost or found a pet? Check here first. Message the owner or finder on Facebook Messenger to swap photos.</div></div>
+    <div class="card"><div class="det">Lost something, or found something? Everything lost and found is on this one page... pets first, then packages, then everything else. Message the owner or finder on Facebook Messenger to arrange the handoff. Items are posted with their photos. For pets and packages, swap photos on Messenger.</div></div>
     <div class="sect">🐾 LOST &amp; FOUND PETS</div>
     <div id="petsList"><div class="msg">Loading...</div></div>
     <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSeULpC4p_VfkzaMRzdHvgKhja-cxYQbvOdD1Qw8iMzinL7oLg/viewform" target="_blank" rel="noopener">➕ Post a lost or found pet</a></div>
-  </div>
-
-  <!-- LOST & FOUND PACKAGES -->
-  <div class="screen" id="screen-packages">
-    <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Package at the wrong house, or marked delivered but missing? Message each other on Facebook Messenger to arrange the handoff.</div></div>
     <div class="sect">📦 LOST &amp; FOUND PACKAGES</div>
     <div id="pkgList"><div class="msg">Loading...</div></div>
     <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSczple8ahqgJtdB311EZIMldUKEGoxjTRHVfP-XP0X8Dx_YbA/viewform" target="_blank" rel="noopener">➕ Post a lost or found package</a></div>
+    <div class="sect">🔍 LOST &amp; FOUND ITEMS</div>
+    <div id="lostfoundList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSeo-dfYBSalABTG5mTJGLsQ57fWllx1W7xgx2K8MKAvCXAt5A/viewform" target="_blank" rel="noopener">➕ Post a lost or found item</a></div>
   </div>
 
   <!-- SCHOOLS -->
@@ -1179,10 +1165,10 @@ var loadPackages = once(function(){
   }).catch(function(){ errBox(document.getElementById("pkgList"), "package posts"); });
 });
 
-var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, forsale: loadForSale, lostfound: loadLostFound, pets: loadPets,
+var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, forsale: loadForSale, lostfound: function(){ loadPets(); loadPackages(); loadLostFound(); },
                 emergency: loadEmergency, schools: loadSchools, services: loadServices,
                 helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend,
-                updates: loadUpdates, packages: loadPackages };
+                updates: loadUpdates };
 
 // ---------- HOME WARRANTY CHECKLIST (check marks saved on this phone) ----------
 (function(){
