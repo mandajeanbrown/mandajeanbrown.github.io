@@ -82,6 +82,8 @@
   .leaflet-container{font:inherit}
   .leaflet-tooltip.lotLbl{background:transparent;border:none;box-shadow:none;padding:0;color:#12275F;font-weight:700;font-size:11px;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff}
   .leaflet-tooltip.lotLbl:before{display:none}
+  .leaflet-tooltip.segLbl{background:transparent;border:none;box-shadow:none;padding:0;color:#374151;font-weight:600;font-size:10px;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff}
+  .leaflet-tooltip.segLbl:before{display:none}
   .krBaseCtl{display:flex;gap:6px}
   .krBaseCtl button{border:2px solid #A9C6EE;background:#fff;color:#1c2430;font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px;cursor:pointer}
   .krBaseCtl button.on{background:#2563EB;border-color:#2563EB;color:#fff}
@@ -185,7 +187,7 @@
   <div class="screen" id="screen-directory">
     <button class="back" data-go="home">Home</button>
     <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
-    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div class="det">Real lot lines from Rowan County records. Tap a lot to see its size, street frontage, and whether it has sold. Yellow lots have neighbor info added. Blue lots are sold too... those neighbors just have not added their info yet. Gray lots are still owned by the builder... they have not sold yet. Zoom in to see lot numbers.</div><div id="dirMap"><div class="msg">Loading...</div></div></div>
+    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div class="det">Real lot lines from Rowan County records. Tap a lot to see its size, street frontage, and whether it has sold. Yellow lots have neighbor info added. Blue lots are sold too... those neighbors just have not added their info yet. Gray lots are still owned by the builder... they have not sold yet. Zoom in to see lot numbers. Zoom in close, or tap a lot, to see the length of each lot line.</div><div id="dirMap"><div class="msg">Loading...</div></div></div>
     <input class="search" id="dirSearch" type="search" placeholder="Search name, address, or lot #" autocomplete="off">
     <div class="count" id="dirCount"></div>
     <div id="dirList"><div class="msg">Loading the directory...</div></div>
@@ -706,7 +708,26 @@ function showLot(n){
 }
 /*MAPGEN-END*/
 // ---------- REAL PLOT MAP (Rowan County parcel lines; traced map is the fallback) ----------
-var krMap = null, krSel = null, krLabels = null, krFacts = {};
+var krMap = null, krSel = null, krLabels = null, krFacts = {}, krSegs = null, krSelSegs = null, krFeatures = [];
+function segTip(s){
+  return L.tooltip({ permanent:true, direction:"center", className:"segLbl", interactive:false })
+    .setContent(s[2] + " ft").setLatLng([s[1], s[0]]);
+}
+function showSelSegs(f){
+  if (!krSelSegs) return;
+  krSelSegs.clearLayers();
+  if (f.properties.segs) f.properties.segs.forEach(function(s){ krSelSegs.addLayer(segTip(s)); });
+}
+function refreshSegs(){
+  if (!krSegs || !krMap) return;
+  krSegs.clearLayers();
+  if (krMap.getZoom() < 18) return;
+  var b = krMap.getBounds();
+  krFeatures.forEach(function(f){
+    if (!f.properties.segs) return;
+    f.properties.segs.forEach(function(s){ if (b.contains([s[1], s[0]])) krSegs.addLayer(segTip(s)); });
+  });
+}
 function fmtNum(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
 function lotFactsHTML(p){
   if (!p || !p.sqft) return "";
@@ -753,7 +774,8 @@ function showParcel(f){
 function buildPlotMap(){
   if (krMap) { setTimeout(function(){ krMap.invalidateSize(); }, 250); return; }
   if (typeof L === "undefined") { buildMap(); return; }
-  fetch("kr-parcels.geojson?v=20261119b").then(function(r){ return r.json(); }).then(function(data){
+  fetch("kr-parcels.geojson?v=20261119c").then(function(r){ return r.json(); }).then(function(data){
+    krFeatures = data.features;
     data.features.forEach(function(f){ if (f.properties.lot) krFacts[f.properties.lot] = f.properties; });
     document.getElementById("dirMap").innerHTML = '<div id="plotMap"></div>';
     var sat = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { attribution:"Esri World Imagery", maxZoom:19 });
@@ -774,6 +796,8 @@ function buildPlotMap(){
     } });
     krMap.addControl(new KRBaseCtl({ position:'topright' }));
     krLabels = L.layerGroup();
+    krSegs = L.layerGroup();
+    krSelSegs = L.layerGroup();
     var layer = L.geoJSON(data, {
       style: parcelStyle,
       onEachFeature: function(f, lyr){
@@ -782,6 +806,7 @@ function buildPlotMap(){
           krSel = lyr;
           lyr.setStyle({ weight:3, color:"#2563EB" });
           showParcel(f);
+          showSelSegs(f);
         });
         if (!f.properties.common) {
           krLabels.addLayer(L.tooltip({ permanent:true, direction:"center", className:"lotLbl", interactive:false })
@@ -789,12 +814,15 @@ function buildPlotMap(){
         }
       }
     }).addTo(krMap);
+    krSegs.addTo(krMap);
+    krSelSegs.addTo(krMap);
     krMap.fitBounds(layer.getBounds(), { padding:[8,8] });
     var upd = function(){
       if (krMap.getZoom() >= 17) { if (!krMap.hasLayer(krLabels)) krLabels.addTo(krMap); }
       else if (krMap.hasLayer(krLabels)) krMap.removeLayer(krLabels);
     };
     krMap.on("zoomend", upd); upd();
+    krMap.on("zoomend moveend", refreshSegs);
     setTimeout(function(){ krMap.invalidateSize(); }, 250);
   }).catch(function(){ buildMap(); });
 }
