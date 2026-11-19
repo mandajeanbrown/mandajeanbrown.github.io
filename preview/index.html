@@ -83,6 +83,17 @@
   .foot{text-align:center;font-size:12.5px;color:#8A94A6;margin-top:26px;line-height:1.6}
   a.sheetlink{color:#12275f;font-weight:700}
   a.postbtn{display:block;background:linear-gradient(135deg,#2563EB,#1D4FB8);color:#fff;font-size:17px;font-weight:700;text-align:center;padding:16px 14px;border-radius:999px;text-decoration:none;margin-top:6px;box-shadow:0 4px 14px rgba(37,99,235,.32)}
+
+  .chk{display:flex;gap:11px;align-items:flex-start;padding:11px 2px;border-bottom:1px solid #EEF1F4;cursor:pointer}
+  .chk:last-child{border-bottom:none}
+  .chk input{width:23px;height:23px;flex:0 0 auto;margin:1px 0 0;accent-color:#2563EB}
+  .chk span{font-size:15px;line-height:1.45}
+  .chk small{display:block;color:#5A6B84;font-size:13px;margin-top:2px;line-height:1.4}
+  .qaAns{background:#EEF4FB;border-radius:16px;padding:14px 15px;font-size:15px;line-height:1.55;margin-top:12px;display:none}
+  .qaRow{display:flex;gap:8px;margin-top:10px}
+  .qaRow .search{flex:1;margin:0}
+  .qaGo{background:linear-gradient(135deg,#2563EB,#1D4FB8);color:#fff;border:none;border-radius:999px;font-size:16px;font-weight:700;padding:0 22px;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,.32)}
+  .topicRow{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
 </style>
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
@@ -135,6 +146,8 @@
       <button class="btn" data-go="services">🔧 Services</button>
       <button class="btn" data-go="schools">🎓 Schools</button>
       <button class="btn" data-go="helpwanted">💼 Help Wanted</button>
+      <button class="btn wide" data-go="warranty">🛡️ Home Warranty</button>
+      <button class="btn wide" data-go="hoa">📋 HOA Rules</button>
       <button class="btn wide" data-go="winners">🏆 Winners Circle</button>
       <button class="btn wide" data-go="votes">🗳️ Community Competitions</button>
       <button class="btn wide" id="notifyBtn" style="background:#12275f;color:#fff;border-color:#12275f">🔔 Notify Me</button>
@@ -289,6 +302,151 @@
     <div class="foot">Ballots are anonymous... one vote per household, please.</div>
   </div>
 
+
+  <!-- HOME WARRANTY -->
+  <div class="screen" id="screen-warranty">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="ttl">🛡️ Your First-Year Home Warranty</div>
+      <div class="det">Most Kerns Ridge homes came with a Maverick home warranty through the builder, Adams Homes. The big one is the <b>workmanship and materials</b> coverage: it ends 12 months after your closing date, and anything you want covered has to be found and reported before that date.</div>
+      <div class="det">You do not have to check everything the week before your deadline. This page breaks the full walkthrough into five short stages spread across your first year. Check items off as you go... your check marks are saved on this phone.</div>
+      <a class="postbtn" href="https://drive.google.com/file/d/1J7GPrGtwfIAwRyfLbEEjhzVUzP5CFQhF/view" target="_blank" rel="noopener">📖 Open the Warranty Manual</a>
+    </div>
+    <div class="warn"><div class="bttl">⚠️ SOME FIXES ARE ONE-TIME ONLY</div>
+      <div class="det">Drywall cracks, cracked or loose tile, grout cracks, and caulking inside and out are repaired <b>one time only</b> during the first year. Unless something is leaking, note those items as you find them and save the repair for the Month 11 stage, so your one repair covers everything.</div></div>
+    <div class="card"><div class="ttl">How to report a problem</div>
+      <div class="det">1. Tell Adams Homes in writing as soon as you find a defect, and keep the date and the name of anyone you spoke with. A phone call alone does not count as a claim.</div>
+      <div class="det">2. If the builder does not resolve it, the Maverick claim form must be <b>received</b> by Maverick no later than 30 days after your first-year coverage ends. Maverick: 727-308-2179 · maverickbuilders.com</div>
+      <div class="det">3. Photograph every defect with the date visible, and do not repair it before Maverick has a chance to inspect it (emergencies excepted).</div>
+      <div class="det">Systems coverage (electrical, plumbing, heating and cooling) runs 2 years from closing, and major structural coverage runs 10 years, so this page is worth keeping after your first year too.</div>
+    </div>
+    <div class="sect">STAGE 1 · MOVE-IN WEEK</div>
+    <div class="card">
+      <label class="chk"><input type="checkbox" data-chk="s1-1"><span>Every door opens, closes, and latches. Locks and deadbolts all work.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s1-2"><span>Every window opens, closes, and locks. Screens in place, no cracked glass, no fogging between the panes.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s1-3"><span>Press TEST on every GFCI outlet (kitchen, bathrooms, garage, laundry, outside). Power should cut, then RESET should restore it.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s1-4"><span>Find the main water shut-off and the breaker panel, and check that the panel is labeled.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s1-5"><span>Run every faucet and flush every toilet. Look under every sink... all pipes dry.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s1-6"><span>Run each appliance once (oven, dishwasher on a full cycle, disposal, washer, dryer) and write down the model and serial numbers.<small>Appliances carry their own manufacturer warranty, not the home warranty. Register them now.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s1-7"><span>Run the heat and the air conditioning. Every room should get air from its vents.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s1-8"><span>Test every smoke and carbon monoxide alarm.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s1-9"><span>Photograph any scratch, chip, or dent and send the list to the builder now.<small>Chips, scratches, and dents are not covered by the warranty, so move-in is the time to get them on record with the builder.</small></span></label>
+      <div class="count" data-prog="s1"></div>
+    </div>
+    <div class="sect">STAGE 2 · AROUND MONTH 3</div>
+    <div class="card">
+      <label class="chk"><input type="checkbox" data-chk="s2-1"><span>Every drain still runs freely... no slow drains or gurgling.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s2-2"><span>Check under sinks and around toilets and the water heater for dampness or stains.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s2-3"><span>Doors and windows still open, close, and latch smoothly as the house settles.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s2-4"><span>After a good rain, walk the yard: water should flow away from the house, with no ponding against the foundation.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s2-5"><span>After rain, gutters and downspouts do not leak at the seams and hold no standing water.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s2-6"><span>Garage door opens and closes smoothly, and the safety reverse works.<small>Wave something under the closing door... it must reverse.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s2-7"><span>Walk every floor slowly. Note squeaks, bouncy spots, or gaps opening between wood boards.</span></label>
+      <div class="count" data-prog="s2"></div>
+    </div>
+    <div class="sect">STAGE 3 · AROUND MONTH 6</div>
+    <div class="card">
+      <label class="chk"><input type="checkbox" data-chk="s3-1"><span>Change the HVAC filter, and check the condensate drain line is clear with no water in the pan.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s3-2"><span>Look over caulk and grout in tubs, showers, and around sinks. Write down any gaps for your Month 11 list.<small>Wet-area caulking is a one-time repair. Note it now and claim it at Month 11, unless water is getting in.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s3-3"><span>Walk the outside: siding secure, no loose or cracked panels, and at least 6 inches of clearance between the siding and the ground or mulch.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s3-4"><span>Exterior paint and stain not peeling or blistering.<small>Exterior paint should not fail during the first year. Normal fading is not covered.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s3-5"><span>If you can enter the attic safely: insulation even, the underside of the roof dry, no fallen ductwork.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s3-6"><span>Check for musty smells, stains, or soft flooring anywhere... early signs of a hidden leak.</span></label>
+      <div class="count" data-prog="s3"></div>
+    </div>
+    <div class="sect">STAGE 4 · AROUND MONTH 9</div>
+    <div class="card">
+      <label class="chk"><input type="checkbox" data-chk="s4-1"><span>From the ground: shingles flat, no lifted, curled, or missing shingles. Flashing tight around vents and pipes.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s4-2"><span>Foundation walls: no cracks.<small>Cracks over 1/8 inch wide are covered.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s4-3"><span>Steps, stoop, and garage floor: no settling, heaving, or separation from the house.<small>Garage floor cracks over 1/4 inch are covered. Driveways and walkways are not covered.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s4-4"><span>Exterior trim joints still closed.<small>Open joints over 3/16 inch are covered, one time only. If yours are opening, note them for Month 11.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s4-5"><span>Test every outlet and switch room by room, and test every GFCI again.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s4-6"><span>Run the shower or tub in every bathroom for 5 minutes: pressure strong, drains free, no leaks at faucets or shower heads.</span></label>
+      <div class="count" data-prog="s4"></div>
+    </div>
+    <div class="sect">STAGE 5 · MONTH 11 — THE FULL FINAL PASS</div>
+    <div class="card"><div class="det">Do this stage about a month before your first-year coverage ends, and report everything you find to Adams Homes in writing before the end date.</div></div>
+    <div class="card">
+      <label class="chk"><input type="checkbox" data-chk="s5-1"><span>Drywall cracks, room by room... measure them.<small>Cracks over 1/8 inch wide are repaired one time only during the first year. This is that one time.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s5-2"><span>Mark nail pops, tape blisters, and seam lines with painter's tape and photograph them.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s5-3"><span>Tile floors and walls: no cracked or loose tiles, grout lines intact.<small>Cracked or loose tile and grout cracks are repaired one time only during the first year.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s5-4"><span>Caulking inside and out: around tubs, showers, sinks, windows, doors, and hose bibbs... no gaps.<small>Caulking is repaired one time only during the first year.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s5-5"><span>Interior trim and molding joints closed.<small>Open joints over 1/8 inch are covered.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s5-6"><span>Floors: wood not lifting or gapping, vinyl not lifting or bubbling, no nail pops pushing through vinyl, carpet seams not separating.<small>Standards: wood gaps over 1/8 inch, vinyl seam gaps over 1/16 inch.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s5-7"><span>Kitchen cabinets and drawers aligned and working, gaps to walls and ceiling within tolerance.<small>Warpage over 1/4 inch and gaps over 1/4 inch are covered.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s5-8"><span>Countertops firmly attached with tight seams, and the caulk seal intact at the backsplash and sink.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s5-9"><span>Interior paint not peeling. Varnish and lacquer on woodwork not deteriorating.<small>Natural finishes should not deteriorate during the first year.</small></span></label>
+      <label class="chk"><input type="checkbox" data-chk="s5-10"><span>One more full pass on doors and windows: operation, locks, weather-stripping, no drafts.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s5-11"><span>Garage drywall, door seals, and floor checked one last time.</span></label>
+      <label class="chk"><input type="checkbox" data-chk="s5-12"><span>Send your full defect list to Adams Homes in writing, with dated photos, before your coverage end date.</span></label>
+      <div class="count" data-prog="s5"></div>
+    </div>
+    <div class="foot"><button class="btn" id="wReset">↺ Start the checklist over</button></div>
+  </div>
+
+  <!-- HOA RULES -->
+  <div class="screen" id="screen-hoa">
+    <button class="back" data-go="home">Home</button>
+    <div class="card"><div class="ttl">📋 HOA Rules</div>
+      <div class="det">A plain-language summary of the Kerns Ridge Declaration of Covenants, the document every owner agreed to at closing. If anything here ever differs, the recorded Declaration controls. The association is managed by CAMS.</div></div>
+    <div class="card"><div class="ttl">🤔 Can I do this?</div>
+      <div class="det">Type what you are thinking of doing and get the rule, plus what to do next.</div>
+      <div class="qaRow"><input class="search" id="qaInput" type="search" placeholder="Try: fence, chickens, shed, pool..." autocomplete="off"><button class="qaGo" id="qaBtn">Ask</button></div>
+      <div class="topicRow" id="qaTopics"></div>
+      <div class="qaAns" id="qaAns"></div>
+    </div>
+    <div class="sect">⏰ TIMING RULES</div>
+    <div class="card">
+      <div class="det"><b>Holiday lights:</b> seasonal decorative lights are allowed from Thanksgiving to New Year's Day only. Christmas is the only holiday with a decoration window in the covenants.</div>
+      <div class="det"><b>Trash cans:</b> cans may be out in the open only on the evening before pickup. The rest of the time they must be screened from view of the street and neighboring lots. Trash must be taken out at least once a week, and burning trash or debris is never allowed.</div>
+      <div class="det"><b>Temporary parking:</b> an RV, boat, or trailer may sit on a lot, driveway, or street for up to 48 hours as a one-off (loading, a guest, a trip). Longer than that, it has to be stored elsewhere or in a closed garage.</div>
+      <div class="det"><b>Damage to your home:</b> if your house is damaged, debris removal or rebuilding must begin within 60 days.</div>
+      <div class="det"><b>Fix-it window:</b> if the association notifies you of a maintenance problem, you have 10 days to complete the repair (or start it, if it cannot be finished in 10 days) before the association can do it at your expense.</div>
+      <div class="det"><b>Dues:</b> assessments not paid within 30 days of the due date accrue interest at 10% per year.</div>
+    </div>
+    <div class="sect">🏗️ CHANGES THAT NEED APPROVAL FIRST</div>
+    <div class="card">
+      <div class="det">Any exterior construction, alteration, addition, or landscaping change needs <b>written approval from the Architectural Review Committee (ARC) before work starts</b>. That includes:</div>
+      <div class="det">· Fences of any kind (uncoated chain link and barbed wire can never be approved)</div>
+      <div class="det">· Any change to an exterior color, finish, or texture... house, roof, or fence</div>
+      <div class="det">· Sheds and outbuildings (same materials as the house, behind the rear wall of the house)</div>
+      <div class="det">· In-ground swimming pools, outside jacuzzis, and hot tubs</div>
+      <div class="det">· Solar panels and other energy equipment</div>
+      <div class="det">· Front-yard vegetable gardens, hammocks, statuary, and play equipment (a basketball goal beside the driveway is allowed)</div>
+      <div class="det">· Dog houses, pens, and other animal shelters</div>
+      <div class="det">· Exterior sculpture, fountains, flags, bird baths, and bird houses</div>
+      <div class="det">· Signs of any kind (see the exceptions under Not Allowed)</div>
+      <div class="det">· Window air-conditioning units (and never where visible from the front of the lot)</div>
+      <div class="det">· Removing a tree over 4 inches thick (about 12½ inches around, measured 4½ feet up), except dead or diseased trees and trees within 10 feet of a house, driveway, sidewalk, drainage area, or septic field</div>
+    </div>
+    <div class="sect">🚫 NOT ALLOWED</div>
+    <div class="card">
+      <div class="det">· Above-ground pools... no exceptions</div>
+      <div class="det">· Livestock, poultry, or exotic animals. Maximum 3 household pets per lot, no pets kept or bred for business, and pets must be leashed outside the house or a fenced area</div>
+      <div class="det">· Overnight parking or storage of RVs, boats, trailers, campers, motor homes, commercial vehicles, motorcycles, or off-road vehicles on any street or lot, except inside a closed garage (the 48-hour exception is above). Passenger cars, SUVs, and light trucks without commercial markings may park in driveways</div>
+      <div class="det">· Major or extended vehicle repairs on the lot. Vehicle assembly and messy hobbies only inside an enclosed garage</div>
+      <div class="det">· Exterior clotheslines of any type</div>
+      <div class="det">· Foil or other reflective material on windows</div>
+      <div class="det">· Fuel tanks or water tanks visible from any street or lot</div>
+      <div class="det">· Signs without ARC consent, except one professional For Sale or For Rent sign (max 4 sq ft), professional security signs, and legally required signs</div>
+      <div class="det">· Exterior speakers, horns, sirens, bells, or amplifiers, except security devices</div>
+      <div class="det">· Discharging firearms, including BB guns, pellet guns, bows, and sling shots. No target practice and no hunting anywhere in the subdivision (self-defense excepted)</div>
+      <div class="det">· Short-term rentals. Leases must be at least 12 months</div>
+      <div class="det">· A business with a sign, any outward evidence of activity, or customers coming to the home. A home office entirely inside the home is fine</div>
+      <div class="det">· Blocking drainage, or placing anything in a drainage or utility easement that interferes with it</div>
+      <div class="det">· Artificial vegetation or plastic animal decorations on the exterior (the covenants' example is pink flamingos)</div>
+      <div class="det">· Leaving a garage door open when the garage is not in use, or shrinking a garage below 2-car size</div>
+      <div class="det">· Individual mailboxes... mail is delivered to the centralized mailbox kiosks</div>
+    </div>
+    <div class="sect">💵 DUES, FINES & ENFORCEMENT</div>
+    <div class="card">
+      <div class="det">· Maximum annual assessment: $900 per lot, rising no more than 10% per year without a member vote. New owners pay a $200 working capital contribution at closing</div>
+      <div class="det">· Assessments are a lien on the lot. Late payments accrue interest at 10% per year after 30 days, and the association can sue or foreclose the lien and recover costs and attorneys' fees</div>
+      <div class="det">· Fines follow the North Carolina Planned Community Act. The Declaration does not set a dollar amount</div>
+      <div class="det">· After 10 days' written notice (emergencies excepted), the association may enter a lot to fix or remove a violation at the owner's expense. Unapproved construction can be stopped</div>
+    </div>
+    <div class="card"><div class="ttl">Getting approval</div>
+      <div class="det">Submit an Architectural Review Request Form through the CAMS Connect owner portal (portal.camsmgt.com) or the CAMS app. Send complete plans... what, where, size, materials, and colors. Incomplete requests are automatically denied. If the ARC does not approve or deny a complete application within 60 days, the request is deemed approved, but the work still has to follow the Declaration.</div></div>
+  </div>
 </div>
 
 <script>
@@ -1025,6 +1183,108 @@ var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHe
                 emergency: loadEmergency, schools: loadSchools, services: loadServices,
                 helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend,
                 updates: loadUpdates, packages: loadPackages };
+
+// ---------- HOME WARRANTY CHECKLIST (check marks saved on this phone) ----------
+(function(){
+  var KEY = "krWarrantyV1";
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch(e) { saved = {}; }
+  var boxes = document.querySelectorAll("#screen-warranty input[data-chk]");
+  function paint(){
+    var counts = {};
+    boxes.forEach(function(b){
+      var st = b.getAttribute("data-chk").split("-")[0];
+      counts[st] = counts[st] || [0,0];
+      counts[st][1]++;
+      if (b.checked) counts[st][0]++;
+    });
+    document.querySelectorAll("[data-prog]").forEach(function(el){
+      var c = counts[el.getAttribute("data-prog")] || [0,0];
+      el.textContent = c[0] + " of " + c[1] + " checked";
+    });
+  }
+  boxes.forEach(function(b){
+    if (saved[b.getAttribute("data-chk")]) b.checked = true;
+    b.addEventListener("change", function(){
+      if (b.checked) saved[b.getAttribute("data-chk")] = 1; else delete saved[b.getAttribute("data-chk")];
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e) {}
+      paint();
+    });
+  });
+  paint();
+  var rst = document.getElementById("wReset");
+  if (rst) rst.addEventListener("click", function(){
+    saved = {};
+    try { localStorage.removeItem(KEY); } catch(e) {}
+    boxes.forEach(function(b){ b.checked = false; });
+    paint();
+    window.scrollTo(0,0);
+  });
+})();
+
+// ---------- HOA "CAN I DO THIS?" ----------
+var QA_RULES = [
+ {k:["fence","fencing","chain link","privacy fence"], a:"<b>Not without approval first.</b> No fence or fencing-type barrier of any kind may be built without prior written consent from the Architectural Review Committee (ARC). Uncoated chain link and barbed wire fences can never be approved.<br><b>What to do:</b> submit an Architectural Review Request Form through the CAMS Connect portal with the fence type, height, material, color, and location, and wait for written approval before building."},
+ {k:["shed","outbuilding","storage building","storage shed"], a:"<b>Approval needed.</b> A shed or outbuilding must be for residential use, built of the same or substantially identical materials as the house, architecturally compatible, set back at least to the rear wall of the house, and inside the side setbacks... and it needs prior written ARC approval.<br><b>What to do:</b> send the ARC your plans (size, materials, colors, location) through the CAMS Connect portal before you buy or build anything."},
+ {k:["pool","swimming","hot tub","jacuzzi"], a:"<b>It depends on the kind.</b> Above-ground pools are banned outright, no exceptions. An in-ground pool, outside jacuzzi, or hot tub needs prior written ARC consent.<br><b>What to do:</b> for an in-ground pool or hot tub, submit an Architectural Review Request Form through the CAMS Connect portal and wait for written approval."},
+ {k:["chicken","livestock","goat","poultry","exotic","pig","hen"], a:"<b>No.</b> Livestock, poultry, and exotic animals of any kind may not be raised, bred, or kept on any lot. That includes chickens.<br><b>Good to know:</b> ordinary household pets are fine... up to 3 per lot (see the pet answer)."},
+ {k:["dog","cat","pet","leash"], a:"<b>Yes, within limits.</b> Up to 3 household pets (dogs, cats, or other usual household pets) per lot. Pets may not be kept or bred for any commercial purpose, and every animal must be leashed outside the house or a fenced-in area. A pet the association finds dangerous, vicious, or a nuisance can be ordered removed. Dog houses and pens need ARC-approved plans first.<br><b>What to do:</b> for a dog house or pen, submit plans to the ARC through the CAMS Connect portal."},
+ {k:["paint","color","repaint","shutter"], a:"<b>Approval needed.</b> No change to any exterior color, finish, or texture... house, roof, or fence... without ARC approval first. That includes repainting in a different color.<br><b>What to do:</b> submit the color and where it will be used on an Architectural Review Request Form through the CAMS Connect portal."},
+ {k:["solar","panel"], a:"<b>Approval needed.</b> Solar panels and other energy-conservation equipment are allowed only if the ARC determines they are an integral, harmonious part of the structure's design.<br><b>What to do:</b> submit your plans to the ARC through the CAMS Connect portal before signing anything with an installer."},
+ {k:["rv","boat","trailer","camper","motorhome","motor home","park"], a:"<b>Not overnight.</b> RVs, boats, trailers, campers, motor homes, commercial vehicles, motorcycles, and off-road vehicles may not be kept, stored, or parked overnight on any street or lot, except inside a garage with the door closed. The one exception: temporary, non-recurring parking for up to 48 hours. Passenger cars, SUVs, and light trucks without commercial markings may park in driveways.<br><b>What to do:</b> arrange storage outside the neighborhood for anything longer than 48 hours."},
+ {k:["repair","mechanic","oil change","work on my car","fix my car"], a:"<b>Not on the lot.</b> No major or extended repair or overhaul of any vehicle, boat, or trailer may be done on the lots, and vehicle assembly or messy hobbies may only be done inside an enclosed garage.<br><b>What to do:</b> take it to a shop, or keep the work inside your closed garage."},
+ {k:["trash","garbage","bin","recycling"], a:"<b>Only the evening before pickup.</b> Garbage and recycling cans must be located or screened so they are concealed from view of neighboring streets and property, except on the evening before a pick-up. Trash must be removed at least once a week, and burning trash or debris is never allowed.<br><b>What to do:</b> store cans in the garage or behind a screen, and put them out the evening before your pickup day."},
+ {k:["christmas","lights","decoration","halloween","inflatable","flamingo"], a:"<b>Only in the window.</b> Seasonal decorative lights are allowed from Thanksgiving to New Year's Day only, and Christmas is the only holiday with a decoration window in the covenants. Year-round, artificial vegetation and plastic animal decorations (the covenants' example is pink flamingos) are not allowed, and exterior sculpture, fountains, flags, bird baths, and bird houses need ARC approval.<br><b>What to do:</b> plan to have seasonal lights down by New Year's Day."},
+ {k:["sign","yard sign"], a:"<b>Not without consent.</b> No signs of any kind without prior written ARC consent, except: one professionally lettered For Sale or For Rent sign (max 4 sq ft, max 4 ft above ground), professional security signs, and legally required signs. The association can remove a non-conforming sign without notice.<br><b>What to do:</b> for any other sign, ask the ARC first through the CAMS Connect portal."},
+ {k:["garden","vegetable","hammock","trampoline","play equipment","playground","basketball"], a:"<b>Front yard needs approval.</b> Vegetable gardens, hammocks, statuary, and play equipment may not be placed in the front yard unless the ARC has approved the type and location. The exception: basketball goals are allowed beside the driveway. The covenants do not name trampolines specifically... if one would sit in the front yard, treat it as play equipment and get approval first.<br><b>What to do:</b> submit the item and its location to the ARC through the CAMS Connect portal."},
+ {k:["tree","cut down","remove a"], a:"<b>Consent needed for bigger trees.</b> No tree over 4 inches in diameter (about 12.5 inches around, measured 4.5 feet up) may be removed without prior written consent. Exceptions: dead or diseased trees, and trees within 10 feet of a drainage area, septic field, sidewalk, residence, or driveway.<br><b>What to do:</b> if the tree does not fit an exception, request consent through CAMS before cutting."},
+ {k:["rent","rental","airbnb","lease","tenant","vrbo"], a:"<b>Long-term only.</b> Leases must be for residential purposes with a minimum term of 12 months... no short-term rentals. The lease must give the tenant a copy of the Declaration and rules, the owner is responsible for the tenant's violations, and the Board can require the owner to submit the lease and may approve or deny it.<br><b>What to do:</b> before renting, send the lease to the association through CAMS."},
+ {k:["business","home office","customers","sell from"], a:"<b>Only invisibly.</b> No business activity outside the home at all. A home office is allowed only if it is entirely inside the dwelling, with no sign or any other evidence of business activity, and no retail business or customers coming to the home.<br><b>What to do:</b> keep the business entirely inside, with nothing visible from outside and no customer visits."},
+ {k:["antenna","satellite","dish","starlink"], a:"<b>Screened and at the rear.</b> Exterior antennas and satellite dishes must be screened and located at the rear of the home to minimize visual impact and be unseen from the streets, as long as that does not block an acceptable signal or cause unreasonable delay or cost. No antenna or dish over 1 meter is ever permitted."},
+ {k:["clothesline"], a:"<b>No.</b> No exterior clotheslines of any type are permitted."},
+ {k:["air conditioner","window unit","foil","reflective"], a:"<b>Two different answers.</b> Window air-conditioning units are allowed only with ARC permission, and never where visible from the front of the lot or an adjoining street. Foil or other reflective material on windows is never allowed, for sunscreens, blinds, shades, or any other purpose."},
+ {k:["gun","firearm","bb gun","pellet","bow","target practice","hunting","shoot"], a:"<b>No.</b> Firearms may not be used or discharged in the subdivision, except in self-defense. The rule includes BB guns, pellet guns, bows and arrows, and sling shots. There is no target practice and no hunting of any type anywhere in the subdivision."},
+ {k:["mailbox"], a:"<b>Kiosk only.</b> Mail is delivered by centralized box units (the mailbox kiosks) installed by the Declarant and maintained by the association. Individual mailbox setups are not permitted."},
+ {k:["dues","assessment","hoa fee","fine","fined","how much"], a:"<b>The money rules.</b> The maximum annual assessment is $900 per lot, and it can rise no more than 10% per year without a member vote. New owners pay a $200 working capital contribution at closing. An assessment not paid within 30 days of its due date accrues interest at 10% per year, and assessments are a lien on the lot. Fines follow the North Carolina Planned Community Act; the Declaration does not set a dollar amount."},
+ {k:["speaker","noise","loud","amplifier","horn"], a:"<b>Keep it inside.</b> No speakers, horns, whistles, sirens, bells, amplifiers, or other sound devices on the exterior of any lot, except devices used exclusively for security. And generally, nothing may be done that disturbs the peace, quiet, safety, comfort, or serenity of neighbors."},
+ {k:["addition","deck","patio","porch","build","extend","renovat"], a:"<b>Approval first, always.</b> No exterior construction, alteration, addition, erection, or landscaping of any kind without prior written ARC approval of the plans and specifications (nature, kind, shape, height, materials, color, texture, location). No work may start until the approval is in writing, and incomplete requests are automatically denied.<br><b>What to do:</b> submit a complete Architectural Review Request Form through the CAMS Connect portal. If the ARC does not decide a complete application within 60 days, it is deemed approved, but the work still has to follow the Declaration."},
+ {k:["mulch","landscap","edging","flower bed","hose reel"], a:"<b>Approval needed.</b> Landscaping changes count as exterior alterations, so they need prior written ARC approval... that includes things like new edging, mulch changes, and hose reel enclosures.<br><b>What to do:</b> submit an Architectural Review Request Form through the CAMS Connect portal describing the change, materials, and colors."},
+ {k:["flag"], a:"<b>Approval needed.</b> Flags are on the list of exterior items (with sculpture, fountains, bird baths, and bird houses) that must be approved by the ARC before they are placed.<br><b>What to do:</b> submit the flag and its mounting location to the ARC through the CAMS Connect portal."},
+ {k:["garage door"], a:"<b>Keep it closed.</b> Garage doors must be kept closed when the garage is not in use, and every home must keep at least a 2-car garage... a garage may not be shrunk below 2-car size."},
+ {k:["window"], a:"<b>Mostly about two things.</b> Window air-conditioning units need ARC permission and may never be visible from the front of the lot, and foil or reflective material on windows is never allowed. Other window changes are exterior alterations, which need prior written ARC approval.<br><b>What to do:</b> for a window change, submit an Architectural Review Request Form through the CAMS Connect portal."}
+];
+var QA_TOPICS = ["Fence","Shed","Pool","Paint color","Chickens","RV parking","Christmas lights","Trash cans","Solar panels","Sign","Tree removal","Renting"];
+(function(){
+  var input = document.getElementById("qaInput");
+  var ans = document.getElementById("qaAns");
+  var topics = document.getElementById("qaTopics");
+  if (!input || !ans) return;
+  QA_TOPICS.forEach(function(t){
+    var c = document.createElement("span");
+    c.className = "chip"; c.style.cursor = "pointer"; c.textContent = t;
+    c.addEventListener("click", function(){ input.value = t; qaAsk(); });
+    topics.appendChild(c);
+  });
+  function qaAsk(){
+    var q = (input.value || "").toLowerCase().trim();
+    if (!q) return;
+    var best = null, bestScore = 0;
+    QA_RULES.forEach(function(r){
+      var score = 0;
+      r.k.forEach(function(k){ if (q.indexOf(k) !== -1) score += k.length; });
+      if (score > bestScore) { bestScore = score; best = r; }
+    });
+    ans.style.display = "block";
+    if (best) { ans.innerHTML = best.a; }
+    else {
+      ans.innerHTML = "<b>I do not have that one.</b> The answer is not in the Kerns Ridge covenants I know. Check the full rules on this page, and for anything on the outside of your home, the safe move is to ask the ARC through the CAMS Connect portal before you start... unapproved work can be stopped and removed at your expense.";
+    }
+    ans.scrollIntoView({block:"nearest", behavior:"smooth"});
+  }
+  document.getElementById("qaBtn").addEventListener("click", qaAsk);
+  input.addEventListener("keydown", function(e){ if (e.key === "Enter") { e.preventDefault(); qaAsk(); } });
+})();
+
 </script>
 <div id="lotPop" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;background:#fff;border-top:3px solid #12275F;border-radius:16px 16px 0 0;box-shadow:0 -6px 28px rgba(0,0,0,.3);padding:16px;max-height:72vh;overflow-y:auto">
   <div id="lotPopBody"></div>
