@@ -691,6 +691,7 @@ function showLot(n){
   var h = '<div class="top"><span class="lot">Lot ' + esc(n) + '</span>' +
     (d && d.addr ? '<span class="addr">' + esc(d.addr) + '</span>' : '') + '</div>';
   if (d && d.name) h += '<div class="name">' + esc(d.name) + '</div>';
+  if (krFacts[n]) h += lotFactsHTML(krFacts[n]);
   if (d && d.photo) h += '<img class="dirphoto" src="https://drive.google.com/thumbnail?id=' + esc(d.photo) + '&sz=w800" alt="Family photo">';
   var chips = "";
   if (d && /yes/i.test(d.candy)) chips += '<span class="chip">🎃 Handing out candy</span>';
@@ -700,7 +701,6 @@ function showLot(n){
   if (d && d.fb.length) h += '<div class="teams">🏈 ' + esc(d.fb.join(" · ")) + '</div>';
   if (d && d.bb.length) h += '<div class="teams">🏀 ' + esc(d.bb.join(" · ")) + '</div>';
   if (!d || (!d.name && !d.addr)) h += '<div class="det">No info added for this lot yet.</div>';
-  if (krFacts[n]) h += lotFactsHTML(krFacts[n]);
   document.getElementById("lotPopBody").innerHTML = h;
   document.getElementById("lotPop").style.display = "block";
 }
