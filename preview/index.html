@@ -152,16 +152,14 @@
       <button class="btn" data-go="directory">🏠 Directory</button>
       <button class="btn" data-go="events">📅 Local Events</button>
       <button class="btn" data-go="updates">📣 Updates</button>
-      <button class="btn" data-go="lend">🤝 Lend &amp; Borrow</button>
-      <button class="btn" data-go="forsale">🏷️ For Sale</button>
       <button class="btn" data-go="lostfound">🔍 Lost &amp; Found</button>
+      <button class="btn wide" data-go="market">🛒 For Sale, Lend &amp; Borrow, Help Wanted</button>
       <button class="btn" data-go="emergency">🚨 Emergencies</button>
       <button class="btn" data-go="services">🔧 Services</button>
       <button class="btn" data-go="schools">🎓 Schools</button>
-      <button class="btn" data-go="helpwanted">💼 Help Wanted</button>
+      <button class="btn" data-go="winners">🏆 Winners Circle</button>
       <button class="btn wide" data-go="warranty">🛡️ Home Warranty</button>
       <button class="btn wide" data-go="hoa">📋 HOA Rules</button>
-      <button class="btn wide" data-go="winners">🏆 Winners Circle</button>
       <button class="btn wide" data-go="votes">🗳️ Community Competitions</button>
       <button class="btn wide" id="notifyBtn" style="background:#12275f;color:#fff;border-color:#12275f">🔔 Notify Me</button>
     </div>
@@ -211,15 +209,23 @@
     <div id="updList"><div class="msg">Loading...</div></div>
   </div>
 
-  <!-- LEND & BORROW -->
-  <div class="screen" id="screen-lend">
+  <!-- FOR SALE / LEND & BORROW / HELP WANTED (one page) -->
+  <div class="screen" id="screen-market">
     <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Borrow from neighbors. Message them to arrange pickup. Bring things back clean and on time.</div></div>
+    <div class="card"><div class="det">Buying, selling, borrowing, lending, and hiring... all in one place. Message the seller, lender, or poster on Facebook Messenger to arrange the details. Borrowing something? Bring it back clean and on time.</div></div>
+    <div class="sect">🏷️ FOR SALE</div>
+    <div id="saleList"><div class="msg">Loading...</div></div>
+    <div class="sect">🎁 FREE STUFF &amp; CURB ALERTS</div>
+    <div id="freeList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener">➕ List something</a></div>
     <div class="sect">🙋 HAPPY TO LEND</div>
     <div id="lendList"><div class="msg">Loading...</div></div>
     <div class="sect">🔎 LOOKING TO BORROW</div>
     <div id="borrowList"><div class="msg">Loading...</div></div>
     <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLScd-Iu57D5WekRZRmRfkmeWDk1Eio9EizM0MmUaB_Li1a3P9w/viewform" target="_blank" rel="noopener">➕ Add yours — lend, give away, or borrow</a></div>
+    <div class="sect">💼 HELP WANTED</div>
+    <div id="hwList"><div class="msg">Loading...</div></div>
+    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSe0iHBjI4YzqkWtoYx5eGpwC0jHYd-tYUNkha2plJXa0YZptA/viewform" target="_blank" rel="noopener">➕ Post a job / ask for help</a></div>
   </div>
 
   <!-- EMERGENCY -->
@@ -236,17 +242,6 @@
     <div id="svcBanner"></div>
     <div class="card"><div class="det">Businesses your neighbors recommend. To add one, post it in the Kerns Ridge Facebook group.</div></div>
     <div id="svcList"><div class="msg">Loading...</div></div>
-  </div>
-
-  <!-- FOR SALE -->
-  <div class="screen" id="screen-forsale">
-    <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Neighbors selling to neighbors. Message the seller on Facebook Messenger to arrange pickup. Free stuff is below.</div></div>
-    <div class="sect">🏷️ FOR SALE</div>
-    <div id="saleList"><div class="msg">Loading...</div></div>
-    <div class="sect">🎁 FREE STUFF &amp; CURB ALERTS</div>
-    <div id="freeList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener">➕ List something</a></div>
   </div>
 
   <!-- LOST & FOUND (everything: pets, packages, items) -->
@@ -269,14 +264,6 @@
     <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Public, private, and charter schools near Kerns Ridge, plus state scholarships. Tuition is each school's published rate. Confirm current rates with the school.</div></div>
     <div id="schList"><div class="msg">Loading...</div></div>
-  </div>
-
-  <!-- HELP WANTED -->
-  <div class="screen" id="screen-helpwanted">
-    <button class="back" data-go="home">Home</button>
-    <div class="card"><div class="det">Jobs posted by neighbors. To be listed, tap the button below or post in the Kerns Ridge Facebook group.</div></div>
-    <div id="hwList"><div class="msg">Loading...</div></div>
-    <div class="foot"><a class="postbtn" href="https://docs.google.com/forms/d/e/1FAIpQLSe0iHBjI4YzqkWtoYx5eGpwC0jHYd-tYUNkha2plJXa0YZptA/viewform" target="_blank" rel="noopener">➕ Post a job / ask for help</a></div>
   </div>
 
   <!-- WINNERS -->
@@ -777,6 +764,7 @@ function buildPlotMap(){
   fetch("kr-parcels.geojson?v=20261119c").then(function(r){ return r.json(); }).then(function(data){
     krFeatures = data.features;
     data.features.forEach(function(f){ if (f.properties.lot) krFacts[f.properties.lot] = f.properties; });
+    if (dirData && dirData.length) renderDir();
     document.getElementById("dirMap").innerHTML = '<div id="plotMap"></div>';
     var sat = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { attribution:"Esri World Imagery", maxZoom:19 });
     var street = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution:"OpenStreetMap", maxZoom:19 });
@@ -844,7 +832,9 @@ function dirCard(d){
   if (/yes/i.test(d.candy)) chips += '<span class="chip">🎃 Handing out candy</span>';
   if (/yes/i.test(d.cams))  chips += '<span class="chip">📹 Cameras</span>';
   if (/yes/i.test(d.lights)) chips += '<span class="chip">🎄 Christmas lights display</span>';
-  return '<div class="card"><div class="top"><span class="lot">Lot ' + esc(d.lot) + '</span>' +
+  var f = krFacts[String(d.lot)];
+  var sold = (f && f.status === "sold") ? ' <span class="chip">Sold</span>' : '';
+  return '<div class="card"><div class="top"><span class="lot">Lot ' + esc(d.lot) + '</span>' + sold +
     (d.addr ? '<span class="addr">' + esc(d.addr) + '</span>' : '') + '</div>' +
     (d.name ? '<div class="name">' + esc(d.name) + '</div>' : '') +
     (d.photo ? '<img class="dirphoto" src="https://drive.google.com/thumbnail?id=' + esc(d.photo) + '&sz=w800" alt="Family photo">' : '') +
@@ -1300,9 +1290,9 @@ var loadPackages = once(function(){
   }).catch(function(){ errBox(document.getElementById("pkgList"), "package posts"); });
 });
 
-var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, forsale: loadForSale, lostfound: function(){ loadPets(); loadPackages(); loadLostFound(); },
+var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, market: function(){ loadForSale(); loadLend(); loadHelpWanted(); }, lostfound: function(){ loadPets(); loadPackages(); loadLostFound(); },
                 emergency: loadEmergency, schools: loadSchools, services: loadServices,
-                helpwanted: loadHelpWanted, winners: loadWinners, lend: loadLend,
+                winners: loadWinners,
                 updates: loadUpdates };
 
 // ---------- HOME WARRANTY CHECKLIST (check marks saved on this phone) ----------
