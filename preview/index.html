@@ -195,7 +195,7 @@
     <button class="back" data-go="home">Home</button>
     <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
     <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div id="dirMap"><div class="msg">Loading...</div></div>
-    <div class="legend"><span class="lgi"><span class="sw" style="background:#FFC327"></span>Neighbor info added</span><span class="lgi"><span class="sw" style="background:#2563EB"></span>Sold, no info yet</span><span class="lgi"><span class="sw" style="background:#8A94A6"></span>Not sold yet</span><span class="lgi"><span class="sw" style="background:#12275F"></span>Pool House</span></div>
+    <div class="legend"><span class="lgi"><span class="sw" style="background:#FFC327"></span>App user</span><span class="lgi"><span class="sw" style="background:#2563EB"></span>Sold</span><span class="lgi"><span class="sw" style="background:#8A94A6"></span>For sale</span><span class="lgi"><span class="sw" style="background:#12275F"></span>Pool House</span></div>
     <div class="fnote" style="margin-top:9px">Lot lines, sizes, and sale status come from Rowan County records and are approximate. Tap a lot to see its size, frontage, and lot lines. Zoom in to see lot numbers, and in close for the length of each lot line.</div></div>
     <input class="search" id="dirSearch" type="search" placeholder="Search name, address, or lot #" autocomplete="off">
     <div class="count" id="dirCount"></div>
@@ -754,9 +754,10 @@ function fmtNum(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
 function lotFactsHTML(p){
   if (!p || !p.sqft) return "";
   var st = "";
-  if (p.status === "sold") st = '<div class="frow"><span class="stDot" style="background:#2563EB"></span><b>Sold</b></div>';
+  if (lotHasInfo(p.lot)) st = '<div class="frow"><span class="stDot" style="background:#FFC327"></span><b>App user</b></div>';
+  else if (p.status === "sold") st = '<div class="frow"><span class="stDot" style="background:#2563EB"></span><b>Sold</b></div>';
   else if (p.status === "forsale") st = '<div class="frow"><span class="stDot" style="background:#8A94A6"></span><b>For sale</b> — builder-owned home</div>';
-  else if (p.status === "lot") st = '<div class="frow"><span class="stDot" style="background:#8A94A6"></span><b>Not sold yet</b> — still owned by the builder</div>';
+  else if (p.status === "lot") st = '<div class="frow"><span class="stDot" style="background:#8A94A6"></span><b>For sale</b> — still owned by the builder</div>';
   var h = '<div class="facts">' + st +
     '<div class="frow">Lot size: <b>' + fmtNum(p.sqft) + ' sq ft</b> (' + p.ac + ' acres)</div>';
   if (p.front) h += '<div class="frow">About <b>' + p.front + ' ft</b> of street frontage, about <b>' + p.depth + ' ft</b> deep</div>';
