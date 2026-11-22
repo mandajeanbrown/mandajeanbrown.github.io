@@ -25,10 +25,16 @@
   .screen{display:none}
   .screen.on{display:block}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
-  /* Home screen: all buttons fit on one phone screen, no scrolling */
-  #screen-home.on{display:flex;flex-direction:column;height:calc(100dvh - 88px)}
-  #screen-home .grid{flex:1;grid-auto-rows:1fr;gap:10px;min-height:0}
-  #screen-home .btn{min-height:0;padding:10px;font-size:15.5px;line-height:1.25}
+  /* Home screen: a menu of rows with icons and descriptions, not a button grid */
+  #screen-home .grid{display:flex;flex-direction:column;gap:10px}
+  #screen-home .btn{min-height:0;padding:11px 14px;border-radius:16px;justify-content:flex-start;text-align:left;gap:12px}
+  #screen-home .btn .ic{flex:0 0 auto;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px}
+  #screen-home .btn .tx{display:flex;flex-direction:column;gap:1px;min-width:0}
+  #screen-home .btn .t{font-size:16px;font-weight:700;line-height:1.2}
+  #screen-home .btn .d{font-size:12.5px;font-weight:400;color:#5A6B84;line-height:1.3}
+  #screen-home .btn .chev{margin-left:auto;color:#B6C2D2;font-size:24px;font-weight:400;flex:0 0 auto}
+  #screen-home .btn.blue{justify-content:center;text-align:center;padding:16px 14px}
+  #screen-home #notifyBtn{justify-content:center;text-align:center;padding:16px 14px}
   .btn{display:flex;align-items:center;justify-content:center;text-align:center;gap:6px;
        background:#fff;border:none;border-radius:20px;color:#1c2430;box-shadow:0 1px 2px rgba(16,24,40,.06),0 6px 18px rgba(16,24,40,.07);
        font-size:16px;font-weight:700;padding:18px 10px;text-decoration:none;cursor:pointer;min-height:64px;width:100%;
@@ -149,18 +155,18 @@
   <div class="screen on" id="screen-home">
     <div class="grid">
       <button class="btn wide blue" data-go="newhere">🆕 New Here? Start Here</button>
-      <button class="btn" data-go="directory">🏠 Directory</button>
-      <button class="btn" data-go="events">📅 Local Events</button>
-      <button class="btn" data-go="updates">📣 Updates</button>
-      <button class="btn" data-go="lostfound">🔍 Lost &amp; Found</button>
-      <button class="btn wide" data-go="market">🛒 For Sale, Lend &amp; Borrow, Help Wanted</button>
-      <button class="btn" data-go="emergency">🚨 Emergencies</button>
-      <button class="btn" data-go="services">🔧 Services</button>
-      <button class="btn" data-go="schools">🎓 Schools</button>
-      <button class="btn" data-go="winners">🏆 Winners Circle</button>
-      <button class="btn wide" data-go="warranty">🛡️ Home Warranty</button>
-      <button class="btn wide" data-go="hoa">📋 HOA Rules</button>
-      <button class="btn wide" data-go="votes">🗳️ Community Competitions</button>
+      <button class="btn" data-go="directory"><span class="ic" style="background:#E3ECFD">🏠</span><span class="tx"><span class="t">Directory</span><span class="d">Who lives where, on the lot map</span></span><span class="chev">›</span></button>
+      <button class="btn" data-go="events"><span class="ic" style="background:#FDECEC">📅</span><span class="tx"><span class="t">Local Events</span><span class="d">What's on in Kerns Ridge and around town</span></span><span class="chev">›</span></button>
+      <button class="btn" data-go="updates"><span class="ic" style="background:#FFF1DB">📣</span><span class="tx"><span class="t">Updates</span><span class="d">Trash, water, street lights, and roads</span></span><span class="chev">›</span></button>
+      <button class="btn" data-go="lostfound"><span class="ic" style="background:#E6F4EA">🔍</span><span class="tx"><span class="t">Lost &amp; Found</span><span class="d">Pets, packages, and items</span></span><span class="chev">›</span></button>
+      <button class="btn wide" data-go="market"><span class="ic" style="background:#F3E8FD">🛒</span><span class="tx"><span class="t">For Sale, Lend &amp; Borrow, Help Wanted</span><span class="d">Buy, borrow, and hire neighbors</span></span><span class="chev">›</span></button>
+      <button class="btn" data-go="emergency"><span class="ic" style="background:#FDE8E8">🚨</span><span class="tx"><span class="t">Emergencies</span><span class="d">Call 911 from the app, plus local numbers</span></span><span class="chev">›</span></button>
+      <button class="btn" data-go="services"><span class="ic" style="background:#E8EEF4">🔧</span><span class="tx"><span class="t">Services</span><span class="d">Businesses your neighbors recommend</span></span><span class="chev">›</span></button>
+      <button class="btn" data-go="schools"><span class="ic" style="background:#FFF6DB">🎓</span><span class="tx"><span class="t">Schools</span><span class="d">Nearby schools and scholarships</span></span><span class="chev">›</span></button>
+      <button class="btn" data-go="winners"><span class="ic" style="background:#FFF1DB">🏆</span><span class="tx"><span class="t">Winners Circle</span><span class="d">Our competition winners</span></span><span class="chev">›</span></button>
+      <button class="btn wide" data-go="warranty"><span class="ic" style="background:#E3ECFD">🛡️</span><span class="tx"><span class="t">Home Warranty</span><span class="d">The manual and your walk-through checklist</span></span><span class="chev">›</span></button>
+      <button class="btn wide" data-go="hoa"><span class="ic" style="background:#EDF3E4">📋</span><span class="tx"><span class="t">HOA Rules</span><span class="d">What needs approval, and what is not allowed</span></span><span class="chev">›</span></button>
+      <button class="btn wide" data-go="votes"><span class="ic" style="background:#FDE8F3">🗳️</span><span class="tx"><span class="t">Community Competitions</span><span class="d">Vote for your favorites</span></span><span class="chev">›</span></button>
       <button class="btn wide" id="notifyBtn" style="background:#12275f;color:#fff;border-color:#12275f">🔔 Notify Me</button>
     </div>
     <div class="foot">Everything opens right here in the app.</div>
