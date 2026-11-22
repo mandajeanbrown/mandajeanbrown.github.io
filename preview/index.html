@@ -27,7 +27,7 @@
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
   /* Home screen: a menu of rows with icons and descriptions, not a button grid */
   #screen-home .grid{display:flex;flex-direction:column;gap:10px}
-  #screen-home .btn{min-height:0;padding:11px 14px;border-radius:16px;justify-content:flex-start;text-align:left;gap:12px}
+  #screen-home .btn{min-height:0;padding:11px 14px;border-radius:8px;justify-content:flex-start;text-align:left;gap:12px}
   #screen-home .btn .ic{flex:0 0 auto;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px}
   #screen-home .btn .tx{display:flex;flex-direction:column;gap:1px;min-width:0}
   #screen-home .btn .t{font-size:16px;font-weight:700;line-height:1.2}
@@ -94,6 +94,9 @@
   .krBaseCtl button{border:2px solid #A9C6EE;background:#fff;color:#1c2430;font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px;cursor:pointer}
   .krBaseCtl button.on{background:#2563EB;border-color:#2563EB;color:#fff}
   .facts{margin-top:9px;border-top:1px solid #E3E9F2;padding-top:8px}
+  .legend{display:flex;flex-wrap:wrap;gap:7px 16px;margin-top:10px}
+  .lgi{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#1c2430}
+  .sw{width:14px;height:14px;border-radius:4px;border:1px solid #12275F;flex:0 0 auto}
   .facts .frow{font-size:14px;color:#1c2430;line-height:1.55}
   .stDot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:1px}
   .fnote{font-size:12px;color:#5A6B84;margin-top:5px;line-height:1.45}
@@ -191,7 +194,9 @@
   <div class="screen" id="screen-directory">
     <button class="back" data-go="home">Home</button>
     <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
-    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div class="det">Real lot lines from Rowan County records. Tap a lot to see its size, street frontage, and whether it has sold. Yellow lots have neighbor info added. Blue lots are sold too... those neighbors just have not added their info yet. Gray lots are still owned by the builder... they have not sold yet. Zoom in to see lot numbers. Zoom in close, or tap a lot, to see the length of each lot line.</div><div id="dirMap"><div class="msg">Loading...</div></div></div>
+    <div class="card" style="padding:10px"><div class="ttl">🗺️ Neighborhood Map</div><div id="dirMap"><div class="msg">Loading...</div></div>
+    <div class="legend"><span class="lgi"><span class="sw" style="background:#FFC327"></span>Neighbor info added</span><span class="lgi"><span class="sw" style="background:#2563EB"></span>Sold, no info yet</span><span class="lgi"><span class="sw" style="background:#8A94A6"></span>Not sold yet</span><span class="lgi"><span class="sw" style="background:#12275F"></span>Pool House</span></div>
+    <div class="fnote" style="margin-top:9px">Lot lines, sizes, and sale status come from Rowan County records and are approximate. Tap a lot to see its size, frontage, and lot lines. Zoom in to see lot numbers, and in close for the length of each lot line.</div></div>
     <input class="search" id="dirSearch" type="search" placeholder="Search name, address, or lot #" autocomplete="off">
     <div class="count" id="dirCount"></div>
     <div id="dirList"><div class="msg">Loading the directory...</div></div>
@@ -325,8 +330,8 @@
   <div class="screen" id="screen-warranty">
     <button class="back" data-go="home">Home</button>
     <div class="card"><div class="ttl">🛡️ Your First-Year Home Warranty</div>
-      <div class="det">Most Kerns Ridge homes came with a Maverick home warranty through the builder, Adams Homes. The big one is the <b>workmanship and materials</b> coverage: it ends 12 months after your closing date, and anything you want covered has to be found and reported before that date.</div>
-      <div class="det">You do not have to check everything the week before your deadline. This page breaks the full walkthrough into five short stages spread across your first year. Check items off as you go... your check marks are saved on this phone.</div>
+      <div class="det">Your <b>workmanship and materials</b> coverage ends 12 months after closing... anything you want covered has to be reported before then.</div>
+      <div class="det">No need to cram it into the last week. Five short checklists spread the walkthrough across your first year... check items off as you go, and your progress saves on this phone.</div>
       <a class="postbtn" href="https://drive.google.com/file/d/1J7GPrGtwfIAwRyfLbEEjhzVUzP5CFQhF/view" target="_blank" rel="noopener">📖 Open the Warranty Manual</a>
     </div>
     <div class="warn"><div class="bttl">⚠️ SOME FIXES ARE ONE-TIME ONLY</div>
