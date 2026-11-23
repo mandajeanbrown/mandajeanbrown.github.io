@@ -117,6 +117,7 @@
   #evCal .calD.sel .dot{background:#F0E4C9}
   #evCal .calFoot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;font-size:12.5px;color:#6B7686}
   #evCal .calClear{border:1.5px solid #DECFA8;background:linear-gradient(180deg,#F0E4C9,#DECFA8);color:#4E3B26;border-radius:999px;padding:4px 11px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+  #screen-home [data-go="market"] .t{white-space:nowrap;font-size:14px}
   .warn{background:#FEF3F2;border:1.5px solid #F3B7B2;border-radius:20px;padding:16px;margin:0 0 12px}
   .warn .ttl{color:#8B1A1A}
   .warn .bttl{font-size:clamp(11px, 3.6vw, 14px);font-weight:700;color:#8B1A1A;white-space:nowrap}
@@ -228,7 +229,6 @@
       <button class="btn" data-go="updates"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.8 10.4v3.2h2.6l9.8 5V5.4l-9.8 5H3.8Z"/><path d="M7 13.8v3.9a1.7 1.7 0 0 0 3.4 0v-2.6"/><path d="M18.8 9.2a3.6 3.6 0 0 1 0 5.6"/></svg></span><span class="tx"><span class="t">Neighborhood News</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="lostfound"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.4"/><path d="M15.8 15.8 20.4 20.4"/></svg></span><span class="tx"><span class="t">Lost &amp; Found</span><span class="d">Pets, packages, and items</span></span><span class="chev">›</span></button>
       <button class="btn wide" data-go="market"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.8 8h12.4l-1.1 12.2H6.9L5.8 8Z"/><path d="M9 10.2V6.8a3 3 0 0 1 6 0v3.4"/></svg></span><span class="tx"><span class="t">For Sale, Lend &amp; Borrow, Help Wanted</span><span class="d">Buy, borrow, and hire neighbors</span></span><span class="chev">›</span></button>
-      <button class="btn" data-go="emergency"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.2 21 19.6H3Z"/><path d="M12 9.8v4.4"/><path d="M12 17.3v.1"/></svg></span><span class="tx"><span class="t">Emergencies</span><span class="d">Tap to call 911 or local help</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="services"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.4v2.9M12 17.7v2.9M3.4 12h2.9M17.7 12h2.9M5.9 5.9l2 2M16.1 16.1l2 2M18.1 5.9l-2 2M7.9 16.1l-2 2"/></svg></span><span class="tx"><span class="t">Services</span><span class="d">Businesses your neighbors recommend</span></span><span class="chev">›</span></button>
       
       
@@ -248,7 +248,7 @@
     <button class="nhLink" data-go="hoa"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.6" y="5" width="12.8" height="15.6" rx="1.8"/><rect x="9.2" y="3.2" width="5.6" height="3.4" rx="1.2"/><path d="M8.8 11.4h6.4M8.8 14.8h6.4"/></svg></span><span class="nhLt"><span class="nhT">Homeowners Association (HOA)</span><span class="nhD">Declaration of Covenants &amp; Restrictions</span></span><span class="nhChev">›</span></button>
       <button class="nhLink" data-go="warranty"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 19 5.6v5.2c0 4.6-2.9 7.9-7 9.8-4.1-1.9-7-5.2-7-9.8V5.6Z"/><path d="M9.2 11.6l2 2 3.6-3.9"/></svg></span><span class="nhLt"><span class="nhT">Home Warranty</span><span class="nhD">Your warranty manual and checklist</span></span><span class="nhChev">›</span></button>
       <div class="sect sectToggle bigToggle"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>Local Numbers &amp; Info<span class="sectArrow">▸</span></div>
-    <div class="sectBody" style="display:none"><div id="nhList"><div class="msg">Loading...</div></div></div>
+    <div class="sectBody" style="display:none"><a class="big911" href="tel:911">🚨 Life-threatening emergency? Call 911</a><div id="emList"><div class="msg">Loading...</div></div><div id="nhList"><div class="msg">Loading...</div></div></div>
       <button class="nhLink" data-go="schools"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.2C10 4.6 6.9 4.2 4 4.6v13.2c2.9-.4 6 0 8 1.6 2-1.6 5.1-2 8-1.6V4.6c-2.9-.4-6 0-8 1.6Z"/><path d="M12 6.2v13.2"/></svg></span><span class="nhLt"><span class="nhT">Schools</span><span class="nhD">Nearby schools and scholarships</span></span><span class="nhChev">›</span></button>
     <div class="sect sectToggle bigToggle"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></span>Trash &amp; Bulk Pickup<span class="sectArrow">▸</span></div>
     <div class="sectBody" style="display:none"><div id="nhTrash"><div class="msg">Loading...</div></div></div>
@@ -337,13 +337,6 @@
   </div>
 
   <!-- EMERGENCY -->
-  <div class="screen" id="screen-emergency">
-    
-    <a class="big911" href="tel:911">🚨 Life-threatening emergency? Call 911</a>
-    <div class="card"><div class="det">For everything that is not an emergency. Tap a number to call.</div></div>
-    <div id="emList"><div class="msg">Loading...</div></div>
-  </div>
-
   <!-- SERVICES -->
   <div class="screen" id="screen-services">
     
@@ -1406,8 +1399,8 @@ var loadPackages = once(function(){
   }).catch(function(){ errBox(document.getElementById("pkgList"), "package posts"); });
 });
 
-var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, market: function(){ loadForSale(); loadLend(); loadHelpWanted(); }, lostfound: function(){ loadPets(); loadPackages(); loadLostFound(); },
-                emergency: loadEmergency, schools: loadSchools, services: loadServices,
+var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: function(){ loadNewHere(); loadEmergency(); }, market: function(){ loadForSale(); loadLend(); loadHelpWanted(); }, lostfound: function(){ loadPets(); loadPackages(); loadLostFound(); },
+                schools: loadSchools, services: loadServices,
                 hoa: loadFaq,
                 updates: function(){ loadUpdates(); loadWinners(); } };
 
