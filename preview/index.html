@@ -47,6 +47,7 @@
   .welcomeCard .d{font-size:13px;font-weight:400;color:#5A6B84;line-height:1.3;white-space:nowrap}
   .welcomeCard .t2{font-size:14px;font-weight:600;font-style:italic;color:#8A764E}
   .paren{display:inline-block;background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;border-radius:999px;padding:1px 8px;font-size:13px;font-weight:700;font-style:normal;white-space:nowrap;vertical-align:2px}
+  #screen-newhere .paren{background:none;color:inherit;padding:0;font-size:inherit;font-weight:inherit;vertical-align:baseline}
   #screen-directory a.postbtn{background:linear-gradient(180deg,#F0E4C9,#DECFA8);color:#4E3B26}
   .welcomeCard .chev{margin-left:auto;color:#B6C2D2;font-size:24px;font-weight:400;flex:0 0 auto}
   .welcomeCard:active{filter:brightness(.97);transform:scale(.985)}
@@ -84,11 +85,12 @@
   #screen-hoa .hTtl{display:flex;align-items:center;gap:10px}
   #screen-hoa .hIc{flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:linear-gradient(180deg,#F0E4C9,#DECFA8);color:#4E3B26;display:inline-flex;align-items:center;justify-content:center}
   #screen-hoa .hIc svg{width:20px;height:20px}
-  #screen-market .mkLink{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:linear-gradient(135deg,#1E3D24,#2E5339);border:0;border-radius:14px;padding:10px 16px;margin:0 0 10px;box-shadow:0 3px 10px rgba(30,61,36,.28);cursor:pointer;font-family:inherit;text-decoration:none;color:#fff}
-  #screen-market .mkIc{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 1px 2px rgba(0,0,0,.25)}
-  #screen-market .mkIc svg{width:17px;height:17px}
-  #screen-market .mkT{font-size:16px;font-weight:700;color:#fff;line-height:1.2}
-  #screen-market .mkChev{margin-left:auto;color:#F0E4C9;font-size:20px}
+  #screen-market .mkLink{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:0;border-radius:8px;padding:9px 14px;margin:0 0 10px;box-shadow:0 1px 2px rgba(16,24,40,.06),0 6px 18px rgba(16,24,40,.07);cursor:pointer;font-family:inherit;text-decoration:none;color:#1c2430}
+  #screen-market .mkIc{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 1px 2px rgba(122,106,79,.25)}
+  #screen-market .mkIc svg{width:19px;height:19px}
+  #screen-market .mkT{font-size:16px;font-weight:700;color:#1c2430;line-height:1.2}
+  #screen-market .mkChev{margin-left:auto;color:#B6C2D2;font-size:24px}
+  #screen-lostfound #lfList{margin:0 0 14px}
   #screen-lostfound .lfLink{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:0;border-radius:14px;padding:10px 16px;margin:0 0 10px;box-shadow:0 1px 4px rgba(31,38,32,.07);cursor:pointer;font-family:inherit;text-decoration:none;color:inherit}
   #screen-lostfound .lfIc{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 1px 2px rgba(122,106,79,.25)}
   #screen-lostfound .lfIc svg{width:17px;height:17px}
@@ -98,7 +100,7 @@
   #screen-newhere .nhT{display:block;font-size:16px;font-weight:700;color:#22301F;line-height:1.2}
   #screen-newhere .nhD{display:block;font-size:13px;color:#6B7686;white-space:nowrap;margin-top:1px}
   #screen-newhere .nhChev{margin-left:auto;color:#9AA5B1;font-size:20px}
-  #screen-newhere .pill{background:linear-gradient(180deg,#4F7D5C,#3C6349);box-shadow:0 2px 8px rgba(60,99,73,.28)}
+  #screen-newhere .pill{background:linear-gradient(180deg,#4F7D5C,#3C6349);color:#fff;border:none;box-shadow:0 2px 8px rgba(60,99,73,.28)}
   #screen-newhere .togHead .pill{padding:4px 11px;font-size:13px}
   #screen-newhere .togHead .t2{font-size:14px;font-weight:600;font-style:italic;color:#8A764E}
   #screen-newhere .sect{margin:0 0 10px}
@@ -189,9 +191,13 @@
   .qaAns{background:#EEF4FB;border-radius:16px;padding:14px 15px;font-size:14px;line-height:1.55;margin-top:12px;display:none}
   .qaRow{display:flex;gap:8px;margin-top:10px}
   .qaRow .search{flex:1;margin:0}
+  .mpRow{display:flex;align-items:center;gap:12px;background:#F4F5F1;border-radius:12px;padding:13px 15px;margin:0 0 8px;text-decoration:none;color:inherit}
+  .mpT{font-size:16px;font-weight:700}
+  .mpChev{margin-left:auto;color:#9AA5B1;font-size:20px}
+  #mpCancel{display:block;width:100%;margin-top:4px;background:none;border:none;font-family:inherit;font-size:16px;font-weight:700;color:#8A4B2F;padding:10px;cursor:pointer}
   .qaGo{background:linear-gradient(135deg,#1E3D24,#2E5339);color:#fff;border:none;border-radius:999px;font-size:16px;font-weight:700;padding:0 22px;cursor:pointer;box-shadow:0 4px 14px rgba(30,61,36,.32)}
   .topicRow{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
-  .topicRow .chip{background:linear-gradient(180deg,#4F7D5C,#3C6349);color:#fff;box-shadow:0 2px 8px rgba(60,99,73,.28)}
+  .topicRow .chip{background:linear-gradient(180deg,#EDF4ED,#DCE9DE);color:#2E5339;border:1px solid #BFD6C2;box-shadow:0 1px 4px rgba(60,99,73,.14)}
   #screen-hoa .faqCat{font-weight:700;font-size:16px;margin:14px 0 2px;color:#1E3D24;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;-webkit-tap-highlight-color:transparent}
   #screen-hoa .faqItem{border-top:1px solid #E4E7E0;padding:9px 0}
   #screen-hoa .faqQ{font-weight:600;font-size:15px;line-height:1.35;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
@@ -256,7 +262,7 @@
   <div class="screen" id="screen-newhere">
     
     <img class="banner" src="https://drive.google.com/thumbnail?id=1qKIwQZLorjtHEIjrccT3oyFRCAmtLrX0&sz=w1200" alt="Welcome home">
-    <div class="card"><div class="ttl togHead"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c.6-3 2.8-4.5 5.5-4.5s4.9 1.5 5.5 4.5"/><circle cx="17" cy="9.5" r="2.6"/><path d="M16.5 15.2c2.3.2 3.7 1.6 4.1 4"/></svg></span>Facebook <span class="paren">(Private Group)</span><a class="pill" style="margin-left:auto" href="https://www.facebook.com/groups/1951332269107873/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Join</a><span class="sectArrow">▸</span></div>
+    <div class="card"><div class="ttl togHead"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c.6-3 2.8-4.5 5.5-4.5s4.9 1.5 5.5 4.5"/><circle cx="17" cy="9.5" r="2.6"/><path d="M16.5 15.2c2.3.2 3.7 1.6 4.1 4"/></svg></span><span>Facebook <span class="paren">(Private Group)</span></span><a class="pill" style="margin-left:auto" href="https://www.facebook.com/groups/1951332269107873/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Join</a><span class="sectArrow">▸</span></div>
       <div class="togBody" style="display:none">
       <div class="taskRow"><div class="taskMain"><div class="taskT">Kerns Ridge Salisbury</div><div class="taskD">A private group where neighbors connect. You can also follow it in the Forum app, which gathers all your Facebook groups in one place.</div></div></div>
       <div class="chips"><a class="chip" style="text-decoration:none" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.facebook.ember&hl=en_US">▶️ Google Play app</a><a class="chip" style="text-decoration:none" target="_blank" rel="noopener" href="https://apps.apple.com/us/app/forum-a-facebook-app/id6758308862">🍎 App Store app</a></div>
@@ -287,6 +293,15 @@
     
     <div id="evCal"></div>
     <div id="evList"><div class="msg">Loading events...</div></div>
+    <div id="mapPick" style="display:none;position:fixed;inset:0;background:rgba(20,30,22,.45);z-index:60;align-items:flex-end;justify-content:center">
+      <div style="background:#fff;border-radius:18px 18px 0 0;width:100%;max-width:480px;padding:16px 16px 22px;box-shadow:0 -6px 24px rgba(0,0,0,.25)">
+        <div class="ttl" style="margin-bottom:10px">Open in Maps</div>
+        <a class="mpRow" id="mpApple" href="#" target="_blank" rel="noopener"><span class="mpT">Apple Maps</span><span class="mpChev">›</span></a>
+        <a class="mpRow" id="mpGoogle" href="#" target="_blank" rel="noopener"><span class="mpT">Google Maps</span><span class="mpChev">›</span></a>
+        <a class="mpRow" id="mpWaze" href="#" target="_blank" rel="noopener"><span class="mpT">Waze</span><span class="mpChev">›</span></a>
+        <button id="mpCancel" type="button">Cancel</button>
+      </div>
+    </div>
     <div class="foot">New events are added every Monday. Confirm details before you head out... they can change.</div>
   </div>
 
@@ -319,8 +334,7 @@
     <a class="mkLink" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener"><span class="mkIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 3.5H11l9.5 9.5-7.5 7.5L3.5 11V3.5Z"/><circle cx="8" cy="8" r="1.6"/></svg></span><span class="mkT">For Sale <span class="paren">(tap to list yours)</span></span><span class="mkChev">›</span></a>
     <div id="saleList"><div class="msg">Loading...</div></div>
     <div id="freeList"><div class="msg">Loading...</div></div>
-    <a class="mkLink" href="https://docs.google.com/forms/d/e/1FAIpQLScd-Iu57D5WekRZRmRfkmeWDk1Eio9EizM0MmUaB_Li1a3P9w/viewform" target="_blank" rel="noopener"><span class="mkIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h12.5L13 4.5"/><path d="M20 16H7.5L11 19.5"/></svg></span><span class="mkT">Lend, Give Away, or Borrow <span class="paren">(tap to add yours)</span></span><span class="mkChev">›</span></a>
-    <div id="lendList"><div class="msg">Loading...</div></div>
+    <a class="mkLink" href="https://docs.google.com/forms/d/e/1FAIpQLScd-Iu57D5WekRZRmRfkmeWDk1Eio9EizM0MmUaB_Li1a3P9w/viewform" target="_blank" rel="noopener"><span class="mkIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h12.5L13 4.5"/><path d="M20 16H7.5L11 19.5"/></svg></span><span class="mkT">Give Away or Borrow <span class="paren">(tap to add yours)</span></span><span class="mkChev">›</span></a>
     <div id="borrowList"><div class="msg">Loading...</div></div>
     <a class="mkLink" href="https://docs.google.com/forms/d/e/1FAIpQLSe0iHBjI4YzqkWtoYx5eGpwC0jHYd-tYUNkha2plJXa0YZptA/viewform" target="_blank" rel="noopener"><span class="mkIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.8v2.9l2.2.4v-3.7l-2.2.4Z"/><path d="M5.7 10.4 18.5 5v14l-12.8-5.4"/><path d="M8.5 14.2v2.6a2.2 2.2 0 0 0 4.4 0v-1.5"/></svg></span><span class="mkT">Help Wanted <span class="paren">(tap to post)</span></span><span class="mkChev">›</span></a>
     <div id="hwList"><div class="msg">Loading...</div></div>
@@ -337,9 +351,7 @@
 
   <!-- LOST & FOUND (everything: pets, packages, items) -->
   <div class="screen" id="screen-lostfound">
-    <img class="banner" src="https://drive.google.com/thumbnail?id=1xJPhtZwhXaGVnLV5BHtq3qUvBY5lpjUR&sz=w1100" alt="A lost and found crate on a porch, with a found dog">
-    
-    <div class="card"><div class="det">Lost something, or found something? It's all in one list here — pets, packages, and everything else. Message the owner or finder on Facebook Messenger to arrange the handoff. Items are posted with their photos. For pets and packages, swap photos on Messenger.</div></div>
+    <div class="heroCard"><img class="heroImg" src="https://drive.google.com/thumbnail?id=1xJPhtZwhXaGVnLV5BHtq3qUvBY5lpjUR&sz=w1100" alt="A lost and found crate on a porch, with a found dog"><div class="heroBody"><div class="det">Lost something, or found something? It's all in one list here — pets, packages, and everything else. Use Facebook Messenger for communication. Items are posted with their photos; for pets and packages, swap photos on Messenger.</div></div></div>
     <div id="lfList"><div class="msg">Loading...</div></div>
     <a class="lfLink" href="https://docs.google.com/forms/d/e/1FAIpQLSeULpC4p_VfkzaMRzdHvgKhja-cxYQbvOdD1Qw8iMzinL7oLg/viewform" target="_blank" rel="noopener"><span class="lfIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.8" cy="8" r="1.7"/><circle cx="10.4" cy="5.6" r="1.7"/><circle cx="14.6" cy="5.6" r="1.7"/><circle cx="18" cy="8.6" r="1.7"/><path d="M12.4 11.2c2.9 0 5.2 2.3 5.2 4.6 0 1.6-1.2 2.7-2.8 2.7-1 0-1.7-.5-2.4-.5s-1.4.5-2.4.5c-1.6 0-2.8-1.1-2.8-2.7 0-2.3 2.3-4.6 5.2-4.6Z"/></svg></span><span class="lfT">Post a lost or found pet</span><span class="lfChev">›</span></a>
     <a class="lfLink" href="https://docs.google.com/forms/d/e/1FAIpQLSczple8ahqgJtdB311EZIMldUKEGoxjTRHVfP-XP0X8Dx_YbA/viewform" target="_blank" rel="noopener"><span class="lfIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.3 12 3l8.5 4.3v9.4L12 21l-8.5-4.3V7.3Z"/><path d="M3.5 7.3 12 11.8l8.5-4.5"/><path d="M12 11.8V21"/></svg></span><span class="lfT">Post a lost or found package</span><span class="lfChev">›</span></a>
@@ -949,7 +961,7 @@ function renderEvList(){
       encodeURIComponent(r[1] || "") + '" target="_blank" rel="noopener">\uD83D\uDCCB RSVP for this event</a>' : '';
     return '<div class="card ev"><span class="date">' + esc(r[0]) + (r[2] ? ' \u00B7 ' + esc(r[2]) : '') + '</span>' +
       '<div class="ttl">' + esc(r[1]) + '</div>' +
-      (r[3] ? '<div class="sub">\uD83D\uDCCD ' + esc(r[3]) + '</div>' : '') +
+      (r[3] ? '<div class="sub"><a class="evAddr" data-q="' + encodeURIComponent(r[3]) + '" href="https://maps.apple.com/?q=' + encodeURIComponent(r[3]) + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">' + esc(r[3]) + '</a></div>' : '') +
       (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + rsvp + '</div>';
   }).join("");
 }
@@ -987,6 +999,20 @@ document.addEventListener("click", function(e){
   if (e.target.closest("#evCal [data-clear]")) { evFilter = null; renderCal(); renderEvList(); return; }
   var day = e.target.closest("#evCal [data-day]");
   if (day) { var k = day.getAttribute("data-day"); evFilter = (evFilter === k) ? null : k; renderCal(); renderEvList(); }
+});
+function openMapPick(q){
+  document.getElementById("mpApple").href = "https://maps.apple.com/?q=" + q;
+  document.getElementById("mpGoogle").href = "https://www.google.com/maps/search/?api=1&query=" + q;
+  document.getElementById("mpWaze").href = "https://waze.com/ul?q=" + q;
+  document.getElementById("mapPick").style.display = "flex";
+}
+function closeMapPick(){ document.getElementById("mapPick").style.display = "none"; }
+document.addEventListener("click", function(e){
+  if (!e.target.closest) return;
+  var a = e.target.closest(".evAddr");
+  if (a) { e.preventDefault(); openMapPick(a.getAttribute("data-q")); return; }
+  if (e.target.id === "mpCancel" || e.target.id === "mapPick") closeMapPick();
+  else if (e.target.closest && e.target.closest(".mpRow")) closeMapPick();
 });
 var loadEvents = once(function(){
   fetchSheet("Local Events", "A4:E300").then(function(rows){
@@ -1167,8 +1193,7 @@ var loadHelpWanted = once(function(){
   fetchSheet("Help Wanted", "A4:D40").then(function(rows){
     var real = rows.filter(function(r){ return r[1]; });
     if (!real.length) {
-      document.getElementById("hwList").innerHTML =
-        '<div class="msg">Nothing here yet. Be the first to post one.</div>';
+      document.getElementById("hwList").innerHTML = "";
       return;
     }
     document.getElementById("hwList").innerHTML = real.map(function(r){
@@ -1229,7 +1254,7 @@ var loadWinners = once(function(){
 /* ---------- Lend & Borrow ---------- */
 function lendCards(rows, kind){
   var real = rows.filter(function(r){ return r[0] && !/^nothing here yet/i.test(r[0]); });
-  if (!real.length) return '<div class="msg">Nothing here yet. Add yours with the button below.</div>';
+  if (!real.length) return '';
   return real.map(function(r){
     var chips = "";
     if (kind === "lend" && r[1]) chips += '<span class="chip">' + esc(r[1]) + '</span>';
@@ -1245,9 +1270,6 @@ function lendCards(rows, kind){
   }).join("");
 }
 var loadLend = once(function(){
-  fetchSheet("Lend & Borrow", "A5:G17").then(function(rows){
-    document.getElementById("lendList").innerHTML = lendCards(rows, "lend");
-  }).catch(function(){ errBox(document.getElementById("lendList"), "lend listings"); });
   fetchSheet("Lend & Borrow", "A31:G90").then(function(rows){
     document.getElementById("borrowList").innerHTML = lendCards(rows, "borrow");
   }).catch(function(){ errBox(document.getElementById("borrowList"), "borrow requests"); });
@@ -1269,8 +1291,7 @@ var loadForSale = once(function(){
   fetchSheet("For Sale", "A5:H80").then(function(rows){
     var real = rows.filter(function(r){ return r[0] && !/nothing here yet/i.test(r[0]); });
     if (!real.length) {
-      document.getElementById("saleList").innerHTML =
-        '<div class="msg">Nothing for sale yet. List something with the button below.</div>';
+      document.getElementById("saleList").innerHTML = "";
       return;
     }
     document.getElementById("saleList").innerHTML = real.map(function(r){
