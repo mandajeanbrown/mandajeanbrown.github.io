@@ -135,7 +135,6 @@
   #evCal .calD.sel .dot{background:#F0E4C9}
   #evCal .calFoot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;font-size:13px;color:#6B7686}
   #evCal .calClear{border:1.5px solid #DECFA8;background:linear-gradient(180deg,#F0E4C9,#DECFA8);color:#4E3B26;border-radius:999px;padding:4px 11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
-  #screen-home [data-go="market"] .t{white-space:nowrap;font-size:14px}
   .warn{background:#FEF3F2;border:1.5px solid #F3B7B2;border-radius:20px;padding:16px;margin:0 0 12px}
   .warn .ttl{color:#8B1A1A}
   .warn .bttl{font-size:clamp(12px, 4vw, 16px);font-weight:700;color:#8B1A1A;white-space:nowrap}
@@ -250,7 +249,7 @@
       <button class="btn" data-go="events"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.8" width="16" height="14.2" rx="2"/><path d="M4 10.4h16M8.2 3.6v4M15.8 3.6v4"/></svg></span><span class="tx"><span class="t">Local Events</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="updates"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.8 10.4v3.2h2.6l9.8 5V5.4l-9.8 5H3.8Z"/><path d="M7 13.8v3.9a1.7 1.7 0 0 0 3.4 0v-2.6"/><path d="M18.8 9.2a3.6 3.6 0 0 1 0 5.6"/></svg></span><span class="tx"><span class="t">Neighborhood News</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="lostfound"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.4"/><path d="M15.8 15.8 20.4 20.4"/></svg></span><span class="tx"><span class="t">Lost &amp; Found</span></span><span class="chev">›</span></button>
-      <button class="btn wide" data-go="market"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.8 8h12.4l-1.1 12.2H6.9L5.8 8Z"/><path d="M9 10.2V6.8a3 3 0 0 1 6 0v3.4"/></svg></span><span class="tx"><span class="t">Sell, Lend, Borrow, Help Wanted</span></span><span class="chev">›</span></button>
+      <button class="btn wide" data-go="market"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.8 8h12.4l-1.1 12.2H6.9L5.8 8Z"/><path d="M9 10.2V6.8a3 3 0 0 1 6 0v3.4"/></svg></span><span class="tx"><span class="t">Sell, Give Away, Borrow, Help Wanted</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="services"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.4v2.9M12 17.7v2.9M3.4 12h2.9M17.7 12h2.9M5.9 5.9l2 2M16.1 16.1l2 2M18.1 5.9l-2 2M7.9 16.1l-2 2"/></svg></span><span class="tx"><span class="t">Services &amp; Recommendations</span></span><span class="chev">›</span></button>
       
       
@@ -330,7 +329,7 @@
 
   <!-- FOR SALE / LEND & BORROW / HELP WANTED (one page) -->
   <div class="screen" id="screen-market">
-    <div class="heroCard"><img class="heroImg" src="https://drive.google.com/thumbnail?id=1ECCHKRI5vvUDX7D9-kUEzvJzQQ_SZdrt&sz=w1100" alt="Neighbors selling, lending, and helping out"><div class="heroBody"><div class="det">Buying, selling, borrowing, lending, and hiring... all in one place. Message the seller, lender, or poster on Facebook Messenger to arrange the details.</div></div></div>
+    <div class="heroCard"><img class="heroImg" src="https://drive.google.com/thumbnail?id=1ECCHKRI5vvUDX7D9-kUEzvJzQQ_SZdrt&sz=w1100" alt="Neighbors selling, giving things away, and helping out"><div class="heroBody"><div class="det">Buying, selling, giving, borrowing, and hiring... all in one place. Message the seller or poster on Facebook Messenger to arrange the details.</div></div></div>
     <a class="mkLink" href="https://docs.google.com/forms/d/e/1FAIpQLSdGp5aSaLreOirlwBkD4QU04AB9WOVqjsIvtd99qgT56qMTSA/viewform" target="_blank" rel="noopener"><span class="mkIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 3.5H11l9.5 9.5-7.5 7.5L3.5 11V3.5Z"/><circle cx="8" cy="8" r="1.6"/></svg></span><span class="mkT">For Sale <span class="paren">(tap to list yours)</span></span><span class="mkChev">›</span></a>
     <div id="saleList"><div class="msg">Loading...</div></div>
     <div id="freeList"><div class="msg">Loading...</div></div>
