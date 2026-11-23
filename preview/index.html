@@ -42,8 +42,8 @@
   .welcomeCard .ic{flex:0 0 auto;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px}
   .welcomeCard .tx{display:flex;flex-direction:column;gap:1px;min-width:0}
   .welcomeCard .t{font-size:16px;font-weight:700;line-height:1.2;color:#1c2430}
-  .welcomeCard .d{font-size:12.5px;font-weight:400;color:#5A6B84;line-height:1.3}
-  .welcomeCard .t2{font-size:13.5px;font-weight:600;color:#8A764E;line-height:1.25}
+  .welcomeCard .d{font-size:12.5px;font-weight:400;color:#5A6B84;line-height:1.3;white-space:nowrap}
+  .welcomeCard .t2{font-size:14px;font-weight:600;font-style:italic;color:#8A764E}
   .welcomeCard .chev{margin-left:auto;color:#B6C2D2;font-size:24px;font-weight:400;flex:0 0 auto}
   .welcomeCard:active{filter:brightness(.97);transform:scale(.985)}
   #screen-home #notifyBtn{justify-content:center;text-align:center;padding:16px 14px}
@@ -63,14 +63,11 @@
   .sect:first-of-type{margin-top:10px}
   .search{width:100%;font-size:17px;padding:14px 18px;border:1.5px solid #E2E6EC;border-radius:999px;margin:6px 0 4px;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.05)}
   .count{font-size:13px;color:#5A6B84;margin:6px 4px 10px}
-  #screen-newhere .sqgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-  #screen-newhere .sqbtn{background:#fff;border:1px solid #E3E1D8;border-radius:16px;padding:18px 10px 15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;box-shadow:0 2px 8px rgba(16,24,40,.06);cursor:pointer;font-family:inherit;aspect-ratio:1/1}
-  #screen-newhere .sqbtn .ic{width:56px;height:56px;border-radius:15px;background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 1px 2px rgba(122,106,79,.25)}
-  #screen-newhere .sqbtn .ic svg{width:29px;height:29px}
-  #screen-newhere .sqbtn .t{font-size:16.5px;font-weight:700;line-height:1.25;color:#1c2430;text-align:center}
-  #screen-newhere .sqbtn.open{border-color:#8A764E;box-shadow:0 0 0 2px rgba(138,118,78,.35),0 2px 8px rgba(16,24,40,.06)}
-  #screen-newhere .nhPanel{display:none}
-  #screen-newhere .nhPanel.open{display:block}
+  #screen-newhere .togHead{display:flex;align-items:center;gap:10px}
+  #screen-newhere .sectToggle{display:flex;align-items:center;gap:10px}
+  #screen-newhere .sectArrow{float:none;margin-left:auto}
+  #screen-newhere .nhIc{flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 1px 2px rgba(122,106,79,.25)}
+  #screen-newhere .nhIc svg{width:20px;height:20px}
   .card{background:#fff;border:none;border-radius:20px;padding:16px;margin:0 0 12px;box-shadow:0 1px 2px rgba(16,24,40,.05),0 8px 22px rgba(16,24,40,.06)}
   .card .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
   .lot{font-weight:800;font-size:16px;color:#12275f}
@@ -187,7 +184,7 @@
   <!-- HOME -->
   <div class="screen on" id="screen-home">
     <div class="grid">
-      <button class="welcomeCard" data-go="newhere"><img src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign"><span class="wcRow"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.2 12 4l8 7.2"/><path d="M6.2 9.6V20h11.6V9.6"/><path d="M10 20v-5h4v5"/></svg></span><span class="tx"><span class="t">Welcome Home</span><span class="t2">Start Here</span><span class="d">Answers to common questions for neighbors just moving in</span></span><span class="chev">›</span></span></button>
+      <button class="welcomeCard" data-go="newhere"><img src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign"><span class="wcRow"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.2 12 4l8 7.2"/><path d="M6.2 9.6V20h11.6V9.6"/><path d="M10 20v-5h4v5"/></svg></span><span class="tx"><span class="t">Welcome Home <span class="t2">Start Here</span></span><span class="d">Answers for neighbors just moving in</span></span><span class="chev">›</span></span></button>
       <button class="btn" data-go="directory"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.2S5.8 15.6 5.8 9.9a6.2 6.2 0 0 1 12.4 0c0 5.7-6.2 11.3-6.2 11.3Z"/><circle cx="12" cy="9.9" r="2.4"/></svg></span><span class="tx"><span class="t">Directory</span><span class="d">Who lives where, on the lot map</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="events"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.8" width="16" height="14.2" rx="2"/><path d="M4 10.4h16M8.2 3.6v4M15.8 3.6v4"/></svg></span><span class="tx"><span class="t">Local Events</span><span class="d">What's on in Kerns Ridge and around town</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="updates"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.8 10.4v3.2h2.6l9.8 5V5.4l-9.8 5H3.8Z"/><path d="M7 13.8v3.9a1.7 1.7 0 0 0 3.4 0v-2.6"/><path d="M18.8 9.2a3.6 3.6 0 0 1 0 5.6"/></svg></span><span class="tx"><span class="t">Updates</span><span class="d">Trash, water, street lights, and roads</span></span><span class="chev">›</span></button>
@@ -208,23 +205,21 @@
   <div class="screen" id="screen-newhere">
     <button class="back" data-go="home">Home</button>
     <img class="banner" src="https://drive.google.com/thumbnail?id=1qKIwQZLorjtHEIjrccT3oyFRCAmtLrX0&sz=w1200" alt="Welcome home">
-    <div class="sqgrid">
-      <button class="sqbtn" data-nhp="nhp-util"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2.5 5 13.5h5.2L9.4 21.5l8.6-11h-5.4Z"/></svg></span><span class="t">Utilities</span></button>
-      <button class="sqbtn" data-nhp="nhp-fb"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c.6-3 2.8-4.5 5.5-4.5s4.9 1.5 5.5 4.5"/><circle cx="17" cy="9.5" r="2.6"/><path d="M16.5 15.2c2.3.2 3.7 1.6 4.1 4"/></svg></span><span class="t">Facebook Group</span></button>
-      <button class="sqbtn" data-nhp="nhp-local"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span class="t">Local Numbers &amp; Info</span></button>
-      <button class="sqbtn" data-nhp="nhp-trash"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></span><span class="t">Trash &amp; Bulk Pickup</span></button>
-    </div>
-    <div class="nhPanel" id="nhp-util"><div class="card">
+    <div class="card"><div class="ttl togHead"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2.5 5 13.5h5.2L9.4 21.5l8.6-11h-5.4Z"/></svg></span>Utilities<span class="sectArrow">▸</span></div>
+      <div class="togBody" style="display:none">
       <div class="taskRow"><div class="taskMain"><div class="taskT">Water &amp; sewer... City of Salisbury</div><div class="taskD">Set up your account with city customer service at (704) 638-5300.</div></div><a class="pill" href="https://salisburync.gov/Government/Customer-Service" target="_blank" rel="noopener">Website</a></div>
       <div class="taskRow"><div class="taskMain"><div class="taskT">Electric... Duke Energy</div><div class="taskD">Start service in your name, ideally before move-in day so the power is never off.</div></div><a class="pill" href="https://www.duke-energy.com/home" target="_blank" rel="noopener">Website</a></div>
       <div class="taskRow"><div class="taskMain"><div class="taskT">Trash... Town of East Spencer</div><div class="taskD">Garbage is a town account, billed by the town. Call Town Hall to set it up at (704) 636-7111. Our pickup day is Monday... have your barrel out the night before.</div></div><a class="pill" href="https://eastspencer.gov" target="_blank" rel="noopener">Website</a></div>
       </div></div>
-    <div class="nhPanel" id="nhp-fb"><div class="card">
+    <div class="card"><div class="ttl togHead"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c.6-3 2.8-4.5 5.5-4.5s4.9 1.5 5.5 4.5"/><circle cx="17" cy="9.5" r="2.6"/><path d="M16.5 15.2c2.3.2 3.7 1.6 4.1 4"/></svg></span>Kerns Ridge on Facebook<span class="sectArrow">▸</span></div>
+      <div class="togBody" style="display:none">
       <div class="taskD">Neighbors also chat day to day in the private Facebook group. Everything in this app works without Facebook... the group is just the other place neighbors post.</div>
       <a class="pill" href="https://www.facebook.com/groups/1951332269107873/" target="_blank" rel="noopener">Join</a>
       </div></div>
-    <div class="nhPanel" id="nhp-local"><div id="nhList"><div class="msg">Loading...</div></div></div>
-    <div class="nhPanel" id="nhp-trash"><div id="nhTrash"><div class="msg">Loading...</div></div></div>
+    <div class="sect sectToggle bigToggle"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>Local Numbers &amp; Info<span class="sectArrow">▸</span></div>
+    <div class="sectBody" style="display:none"><div id="nhList"><div class="msg">Loading...</div></div></div>
+    <div class="sect sectToggle bigToggle"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></span>Trash &amp; Bulk Pickup<span class="sectArrow">▸</span></div>
+    <div class="sectBody" style="display:none"><div id="nhTrash"><div class="msg">Loading...</div></div></div>
   </div>
 
   <!-- DIRECTORY -->
@@ -989,13 +984,20 @@ function storeChips(who, playCell, iosCell){
 
 /* ---------- New Here ---------- */
 var loadNewHere = once(function(){
-  document.querySelectorAll("#screen-newhere .sqbtn").forEach(function(b){
-    b.addEventListener("click", function(){
-      var panel = document.getElementById(b.getAttribute("data-nhp"));
-      var wasOpen = panel.classList.contains("open");
-      document.querySelectorAll("#screen-newhere .nhPanel").forEach(function(p){ p.classList.remove("open"); });
-      document.querySelectorAll("#screen-newhere .sqbtn").forEach(function(x){ x.classList.remove("open"); });
-      if (!wasOpen) { panel.classList.add("open"); b.classList.add("open"); setTimeout(function(){ panel.scrollIntoView({behavior:"smooth", block:"start"}); }, 60); }
+  document.querySelectorAll("#screen-newhere .sectToggle").forEach(function(h){
+    h.addEventListener("click", function(){
+      var body = h.nextElementSibling;
+      var closed = body.style.display === "none";
+      body.style.display = closed ? "" : "none";
+      h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
+    });
+  });
+  document.querySelectorAll("#screen-newhere .togHead").forEach(function(h){
+    h.addEventListener("click", function(){
+      var body = h.nextElementSibling;
+      var closed = body.style.display === "none";
+      body.style.display = closed ? "" : "none";
+      h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
     });
   });
   fetchSheet("New Here?", "A15:F31").then(function(rows){
