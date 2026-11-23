@@ -74,6 +74,7 @@
   .heroImg{display:block;width:100%;aspect-ratio:2/1;object-fit:cover}
   .heroBody{padding:11px 14px}
   #screen-warranty .heroImg{object-position:center 30%}
+  #screen-warranty .dateIn{width:100%;box-sizing:border-box;padding:11px 12px;font-size:16px;border:1.5px solid #C9CFC2;border-radius:10px;background:#FBFBF8;color:#1c2430;margin:2px 0 8px}
   #screen-hoa .hTtl{display:flex;align-items:center;gap:10px}
   #screen-hoa .hIc{flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:linear-gradient(180deg,#F0E4C9,#DECFA8);color:#4E3B26;display:inline-flex;align-items:center;justify-content:center}
   #screen-hoa .hIc svg{width:20px;height:20px}
@@ -380,6 +381,11 @@
     <div class="card"><div class="ttl">Important things to remember</div>
       <div class="det">Systems coverage (electrical, plumbing, heating and cooling) runs <b>2 years</b> from closing.</div>
       <div class="det">Major structural coverage runs <b>10 years</b> from closing.</div>
+    </div>
+    <div class="card"><div class="ttl">Your closing date</div>
+      <div class="det">Enter the date you closed on your home and the checklist below lines up with your dates. We will send a push reminder when each stage comes due.</div>
+      <input type="date" class="dateIn" id="wClose" aria-label="Your closing date">
+      <div class="det" id="wCloseMsg"></div>
     </div>
     <div class="sect">STAGE 1 · MOVE-IN WEEK</div>
     <div class="card">
@@ -1348,6 +1354,61 @@ var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHe
     });
   });
   paint();
+
+  // ----- closing date: saved on this phone; stage headers show real dates;
+  // ----- the date is also tagged on the phone's push subscription so the
+  // ----- reminder job can send a push when each stage comes due.
+  var DKEY = "krWarrantyClose";
+  var MONTHS = [0, 3, 6, 9, 11];
+  var sects = document.querySelectorAll("#screen-warranty .sect");
+  sects.forEach(function(el){ el.setAttribute("data-base", el.textContent); });
+  function addMonths(d, m){
+    var day = d.getDate();
+    var t = new Date(d.getFullYear(), d.getMonth() + m, 1);
+    var last = new Date(t.getFullYear(), t.getMonth() + 1, 0).getDate();
+    t.setDate(Math.min(day, last));
+    return t;
+  }
+  function fmt(d){ return d.toLocaleDateString("en-US", {month:"short", day:"numeric", year:"numeric"}); }
+  function tagClose(val){
+    try {
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      window.OneSignalDeferred.push(function(OneSignal){
+        try {
+          if (val) OneSignal.User.addTag("w_close", val); else OneSignal.User.removeTag("w_close");
+        } catch(e) {}
+      });
+    } catch(e) {}
+  }
+  var dIn = document.getElementById("wClose");
+  var dMsg = document.getElementById("wCloseMsg");
+  function applyDates(){
+    var val = dIn ? dIn.value : "";
+    if (!val) {
+      sects.forEach(function(el){ el.textContent = el.getAttribute("data-base"); });
+      if (dMsg) dMsg.textContent = "";
+      return;
+    }
+    var parts = val.split("-");
+    var close = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+    if (isNaN(close.getTime())) return;
+    sects.forEach(function(el, i){
+      el.textContent = el.getAttribute("data-base") + " \u00B7 " + fmt(addMonths(close, MONTHS[i] || 0)).toUpperCase();
+    });
+    if (dMsg) dMsg.innerHTML = "Your first-year coverage ends <b>" + fmt(addMonths(close, 12)) + "</b>. Stage dates above are counted from your closing date.";
+  }
+  if (dIn) {
+    var dv = "";
+    try { dv = localStorage.getItem(DKEY) || ""; } catch(e) {}
+    if (dv) { dIn.value = dv; tagClose(dv); }
+    applyDates();
+    dIn.addEventListener("change", function(){
+      try { if (dIn.value) localStorage.setItem(DKEY, dIn.value); else localStorage.removeItem(DKEY); } catch(e) {}
+      tagClose(dIn.value || "");
+      applyDates();
+    });
+  }
+
   var rst = document.getElementById("wReset");
   if (rst) rst.addEventListener("click", function(){
     saved = {};
