@@ -105,6 +105,18 @@
   .phone{display:inline-block;font-size:17px;font-weight:800;color:#12275f;text-decoration:none;margin-top:3px}
   .weblink{color:#1B5FBF;font-weight:600;text-decoration:none;word-break:break-all}
   .ev .date{display:inline-block;font-weight:800;font-size:13.5px;color:#4E3B26;background:linear-gradient(180deg,#F0E4C9,#DECFA8);border-radius:999px;padding:5px 12px;margin-bottom:8px}
+  #evCal .calHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  #evCal .calTitle{font-weight:800;font-size:15px;color:#1c2430}
+  #evCal .calNav{border:1.5px solid #DECFA8;background:linear-gradient(180deg,#F0E4C9,#DECFA8);color:#4E3B26;border-radius:999px;width:32px;height:32px;font-size:17px;line-height:1;cursor:pointer;font-family:inherit}
+  #evCal .calGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+  #evCal .calDow{font-size:11px;font-weight:700;color:#8A94A6;text-align:center;padding:3px 0}
+  #evCal .calD{position:relative;border:0;background:transparent;font-family:inherit;font-size:13.5px;padding:7px 0 10px;border-radius:999px;cursor:pointer;color:#1c2430}
+  #evCal .calD .dot{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:#B98A2F}
+  #evCal .calD.today{box-shadow:inset 0 0 0 1.5px #4F7D5C;font-weight:700}
+  #evCal .calD.sel{background:linear-gradient(180deg,#4F7D5C,#3C6349);color:#fff;font-weight:700}
+  #evCal .calD.sel .dot{background:#F0E4C9}
+  #evCal .calFoot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;font-size:12.5px;color:#6B7686}
+  #evCal .calClear{border:1.5px solid #DECFA8;background:linear-gradient(180deg,#F0E4C9,#DECFA8);color:#4E3B26;border-radius:999px;padding:4px 11px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
   .warn{background:#FEF3F2;border:1.5px solid #F3B7B2;border-radius:20px;padding:16px;margin:0 0 12px}
   .warn .ttl{color:#8B1A1A}
   .warn .bttl{font-size:clamp(11px, 3.6vw, 14px);font-weight:700;color:#8B1A1A;white-space:nowrap}
@@ -218,11 +230,8 @@
       <button class="btn wide" data-go="market"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.8 8h12.4l-1.1 12.2H6.9L5.8 8Z"/><path d="M9 10.2V6.8a3 3 0 0 1 6 0v3.4"/></svg></span><span class="tx"><span class="t">For Sale, Lend &amp; Borrow, Help Wanted</span><span class="d">Buy, borrow, and hire neighbors</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="emergency"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.2 21 19.6H3Z"/><path d="M12 9.8v4.4"/><path d="M12 17.3v.1"/></svg></span><span class="tx"><span class="t">Emergencies</span><span class="d">Tap to call 911 or local help</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="services"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.4v2.9M12 17.7v2.9M3.4 12h2.9M17.7 12h2.9M5.9 5.9l2 2M16.1 16.1l2 2M18.1 5.9l-2 2M7.9 16.1l-2 2"/></svg></span><span class="tx"><span class="t">Services</span><span class="d">Businesses your neighbors recommend</span></span><span class="chev">›</span></button>
-      <button class="btn" data-go="schools"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.2C10 4.6 6.9 4.2 4 4.6v13.2c2.9-.4 6 0 8 1.6 2-1.6 5.1-2 8-1.6V4.6c-2.9-.4-6 0-8 1.6Z"/><path d="M12 6.2v13.2"/></svg></span><span class="tx"><span class="t">Schools</span><span class="d">Nearby schools and scholarships</span></span><span class="chev">›</span></button>
-      <button class="btn" data-go="winners"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 4.4h9.6v4.8a4.8 4.8 0 0 1-9.6 0V4.4Z"/><path d="M7.2 6H4.8c0 2.4 1 3.6 2.7 3.8M16.8 6h2.4c0 2.4-1 3.6-2.7 3.8"/><path d="M12 14v3.2M8.6 20h6.8M12 17.2c-1 0-1.6 1-1.7 2.8h3.4c-.1-1.8-.7-2.8-1.7-2.8Z"/></svg></span><span class="tx"><span class="t">Winners Circle</span><span class="d">Our competition winners</span></span><span class="chev">›</span></button>
       
       
-      <button class="btn wide" data-go="votes"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.4" y="4.4" width="15.2" height="15.2" rx="3"/><path d="M8.6 12.4l2.4 2.4 4.6-5"/></svg></span><span class="tx"><span class="t">Community Competitions</span><span class="d">Vote for your favorites</span></span><span class="chev">›</span></button>
       <button class="btn wide" id="notifyBtn" style="background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;border-color:#DECFA8"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#4E3B26" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px" aria-hidden="true"><path d="M17.8 15.9c-.8-.7-1.2-1.5-1.2-2.9v-3a4.6 4.6 0 1 0-9.2 0v3c0 1.4-.4 2.2-1.2 2.9h11.6Z"/><path d="M10.2 19a1.9 1.9 0 0 0 3.6 0"/><path d="M12 5.4V4"/></svg> Notify Me</button>
     </div>
   </div>
@@ -240,6 +249,7 @@
       <button class="nhLink" data-go="warranty"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 19 5.6v5.2c0 4.6-2.9 7.9-7 9.8-4.1-1.9-7-5.2-7-9.8V5.6Z"/><path d="M9.2 11.6l2 2 3.6-3.9"/></svg></span><span class="nhLt"><span class="nhT">Home Warranty</span><span class="nhD">Your warranty manual and checklist</span></span><span class="nhChev">›</span></button>
       <div class="sect sectToggle bigToggle"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>Local Numbers &amp; Info<span class="sectArrow">▸</span></div>
     <div class="sectBody" style="display:none"><div id="nhList"><div class="msg">Loading...</div></div></div>
+      <button class="nhLink" data-go="schools"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.2C10 4.6 6.9 4.2 4 4.6v13.2c2.9-.4 6 0 8 1.6 2-1.6 5.1-2 8-1.6V4.6c-2.9-.4-6 0-8 1.6Z"/><path d="M12 6.2v13.2"/></svg></span><span class="nhLt"><span class="nhT">Schools</span><span class="nhD">Nearby schools and scholarships</span></span><span class="nhChev">›</span></button>
     <div class="sect sectToggle bigToggle"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></span>Trash &amp; Bulk Pickup<span class="sectArrow">▸</span></div>
     <div class="sectBody" style="display:none"><div id="nhTrash"><div class="msg">Loading...</div></div></div>
     
@@ -260,10 +270,12 @@
   <div class="screen" id="screen-events">
     
     <div id="spotWrap">
-      <div class="card" style="padding:10px"><img class="flyerimg" data-go="spotlight" src="https://drive.google.com/thumbnail?id=1tqeFtdZ0sbz_n1dAkvUXTfmzd4KwMgqw&sz=w1100" alt="Downtown main street">
-      <div class="ttl" style="margin-top:8px">City of East Spencer — November News</div>
-      <div class="sub">Tap the picture to read it.</div></div>
+      <div class="card" style="padding:10px"><img class="flyerimg" data-go="spotlight" style="margin-top:0" src="https://drive.google.com/thumbnail?id=1tqeFtdZ0sbz_n1dAkvUXTfmzd4KwMgqw&sz=w1100" alt="Downtown main street"></div>
+      <div class="card"><div class="ttl">City of East Spencer — November News</div>
+      <div class="sub">Tap the picture to read it.</div>
+      <div class="det">Local events within a 20-minute drive of Kerns Ridge.</div></div>
     </div>
+    <div id="evCal"></div>
     <div id="evList"><div class="msg">Loading events...</div></div>
     <div class="foot">New events are added every Monday. Confirm details before you head out... they can change.</div>
   </div>
@@ -292,6 +304,22 @@
     
     <div class="card"><div class="det">The latest on street lights, water, trash, and roads.</div></div>
     <div id="updList"><div class="msg">Loading...</div></div>
+    <div class="sect">WINNERS CIRCLE</div>
+    <div class="card"><div class="det">Every neighborhood champion, from cook-offs to contests.</div></div>
+    <div id="winList"><div class="msg">Loading...</div></div>
+    <div class="sect">COMMUNITY COMPETITIONS</div>
+    <div class="card"><div class="det">Vote in this year's competitions. Tap one to open its ballot.</div></div>
+    <div class="grid">
+      <button class="btn" data-go="form" data-form="halloween">🎃 Halloween Vote</button>
+      <button class="btn" data-go="form" data-form="christmas">🎄 Christmas Vote</button>
+      <button class="btn" data-go="form" data-form="garden">🌸 Flower Garden Vote</button>
+      <button class="btn" data-go="form" data-form="lawn">⛳ Golf Course Lawn Vote</button>
+      <button class="btn" data-go="form" data-form="porch">🚪 Porch / Front Door Vote</button>
+      <button class="btn" data-go="form" data-form="petcostume">🐶 Pet Costume Vote</button>
+      <button class="btn" data-go="form" data-form="street">🏘️ Holiday Street Vote</button>
+      <button class="btn" data-go="form" data-form="photo">📸 Photo of the Year Vote</button>
+    </div>
+    <div class="foot">Ballots are anonymous... one vote per household, please.</div>
   </div>
 
   <!-- FOR SALE / LEND & BORROW / HELP WANTED (one page) -->
@@ -343,30 +371,6 @@
   </div>
 
   <!-- WINNERS -->
-  <div class="screen" id="screen-winners">
-    
-    <div class="card"><div class="det">Every neighborhood champion, from cook-offs to contests.</div></div>
-    <div id="winList"><div class="msg">Loading...</div></div>
-  </div>
-
-  <!-- VOTES -->
-  <div class="screen" id="screen-votes">
-    
-    <div class="card"><div class="det">Vote in this year's competitions. Winners are crowned in the Winners Circle. Tap one to open its ballot.</div></div>
-    <div class="grid">
-      <button class="btn" data-go="form" data-form="halloween">🎃 Halloween Vote</button>
-      <button class="btn" data-go="form" data-form="christmas">🎄 Christmas Vote</button>
-      <button class="btn" data-go="form" data-form="garden">🌸 Flower Garden Vote</button>
-      <button class="btn" data-go="form" data-form="lawn">⛳ Golf Course Lawn Vote</button>
-      <button class="btn" data-go="form" data-form="porch">🚪 Porch / Front Door Vote</button>
-      <button class="btn" data-go="form" data-form="petcostume">🐶 Pet Costume Vote</button>
-      <button class="btn" data-go="form" data-form="street">🏘️ Holiday Street Vote</button>
-      <button class="btn" data-go="form" data-form="photo">📸 Photo of the Year Vote</button>
-    </div>
-    <div class="foot">Ballots are anonymous... one vote per household, please.</div>
-  </div>
-
-
   <!-- HOME WARRANTY -->
   <div class="screen" id="screen-warranty">
     
@@ -921,6 +925,66 @@ function renderDir(){
 document.getElementById("dirSearch").addEventListener("input", function(){ if (dirData) renderDir(); });
 
 /* ---------- Events ---------- */
+var evAll = [], evFilter = null, evMonth = null;
+function evKey(d){ return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+function evFilterLabel(){
+  return new Date(evFilter + "T12:00:00").toLocaleDateString("en-US", {weekday:"short", month:"short", day:"numeric"});
+}
+function renderEvList(){
+  var list = evFilter ? evAll.filter(function(e){ return e.key === evFilter; }) : evAll;
+  var el = document.getElementById("evList");
+  if (!list.length) {
+    el.innerHTML = evFilter ? '<div class="msg">No events on ' + evFilterLabel() + '.</div>'
+                            : '<div class="msg">No events listed right now.</div>';
+    return;
+  }
+  el.innerHTML = list.map(function(e){
+    var r = e.r;
+    var hasDate = !!e.key;
+    var isKR = /kerns ridge/i.test(r[3] || "");
+    var rsvp = (hasDate && isKR) ? '<a class="postbtn" href="' + RSVP_FORM + '?' + RSVP_EVENT_ENTRY + '=' +
+      encodeURIComponent(r[1] || "") + '" target="_blank" rel="noopener">\uD83D\uDCCB RSVP for this event</a>' : '';
+    return '<div class="card ev"><span class="date">' + esc(r[0]) + (r[2] ? ' \u00B7 ' + esc(r[2]) : '') + '</span>' +
+      '<div class="ttl">' + esc(r[1]) + '</div>' +
+      (r[3] ? '<div class="sub">\uD83D\uDCCD ' + esc(r[3]) + '</div>' : '') +
+      (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + rsvp + '</div>';
+  }).join("");
+}
+function renderCal(){
+  var wrap = document.getElementById("evCal");
+  if (!wrap) return;
+  var now = new Date();
+  if (!evMonth) evMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  var y = evMonth.getFullYear(), m = evMonth.getMonth();
+  var startDay = new Date(y, m, 1).getDay();
+  var days = new Date(y, m + 1, 0).getDate();
+  var evSet = {};
+  evAll.forEach(function(e){ if (e.key) evSet[e.key] = 1; });
+  var todayK = evKey(now);
+  var html = '<div class="card"><div class="calHead"><button class="calNav" data-nav="-1" aria-label="Previous month">\u2039</button>' +
+    '<div class="calTitle">' + new Date(y, m, 1).toLocaleDateString("en-US", {month:"long", year:"numeric"}) + '</div>' +
+    '<button class="calNav" data-nav="1" aria-label="Next month">\u203A</button></div><div class="calGrid">';
+  ["S","M","T","W","T","F","S"].forEach(function(d){ html += '<div class="calDow">' + d + '</div>'; });
+  for (var i = 0; i < startDay; i++) html += '<span></span>';
+  for (var dn = 1; dn <= days; dn++) {
+    var k = evKey(new Date(y, m, dn));
+    var cls = "calD" + (k === todayK ? " today" : "") + (evFilter === k ? " sel" : "");
+    html += '<button class="' + cls + '" data-day="' + k + '">' + dn + (evSet[k] ? '<span class="dot"></span>' : '') + '</button>';
+  }
+  html += '</div>';
+  if (evFilter) html += '<div class="calFoot"><span>Showing events for ' + evFilterLabel() + '</span><button class="calClear" data-clear="1">Show all</button></div>';
+  else html += '<div class="calFoot"><span>Tap a date to see only that day\'s events.</span></div>';
+  html += '</div>';
+  wrap.innerHTML = html;
+}
+document.addEventListener("click", function(e){
+  if (!e.target.closest) return;
+  var nav = e.target.closest("#evCal [data-nav]");
+  if (nav) { evMonth = new Date(evMonth.getFullYear(), evMonth.getMonth() + (+nav.getAttribute("data-nav")), 1); renderCal(); return; }
+  if (e.target.closest("#evCal [data-clear]")) { evFilter = null; renderCal(); renderEvList(); return; }
+  var day = e.target.closest("#evCal [data-day]");
+  if (day) { var k = day.getAttribute("data-day"); evFilter = (evFilter === k) ? null : k; renderCal(); renderEvList(); }
+});
 var loadEvents = once(function(){
   /* Spotlight teaser is static markup in the Events screen; after Nov 30, 2026 it drops off on its own. */
   if (new Date() > new Date(2026, 10, 30, 23, 59, 59)) {
@@ -928,23 +992,18 @@ var loadEvents = once(function(){
   }
   fetchSheet("Local Events", "A4:E300").then(function(rows){
     var today = new Date(); today.setHours(0, 0, 0, 0);
-    var evs = rows.filter(function(r){
+    evAll = rows.filter(function(r){
       if (!r[1]) return false;
       var d = Date.parse(String(r[0] || "").replace(/^[A-Za-z]+,\s*/, ""));
-      if (isNaN(d)) return true; /* no date (recurring) — always show */
+      if (isNaN(d)) return true; /* no date (recurring) \u2014 always show */
       return d >= today.getTime(); /* drop events before today */
+    }).map(function(r){
+      var d = Date.parse(String(r[0] || "").replace(/^[A-Za-z]+,\s*/, ""));
+      return { r: r, key: isNaN(d) ? null : evKey(new Date(d)) };
     });
-    document.getElementById("evList").innerHTML = evs.map(function(r){
-      var hasDate = !!Date.parse(String(r[0] || "").replace(/^[A-Za-z]+,\s*/, ""));
-      var isKR = /kerns ridge/i.test(r[3] || "");
-      var rsvp = (hasDate && isKR) ? '<a class="postbtn" href="' + RSVP_FORM + '?' + RSVP_EVENT_ENTRY + '=' +
-        encodeURIComponent(r[1] || "") + '" target="_blank" rel="noopener">📋 RSVP for this event</a>' : '';
-      return '<div class="card ev"><span class="date">' + esc(r[0]) + (r[2] ? ' · ' + esc(r[2]) : '') + '</span>' +
-        '<div class="ttl">' + esc(r[1]) + '</div>' +
-        (r[3] ? '<div class="sub">📍 ' + esc(r[3]) + '</div>' : '') +
-        (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') + rsvp + '</div>';
-    }).join("") || '<div class="msg">No events listed right now.</div>';
-  }).catch(function(){ errBox(document.getElementById("evList"), "events"); });
+    renderCal();
+    renderEvList();
+  }).catch(function(){ renderCal(); errBox(document.getElementById("evList"), "events"); });
 });
 
 /* App-store links: the sheet only exposes the word "Download" to the app,
@@ -1323,8 +1382,8 @@ var loadPackages = once(function(){
 
 var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, market: function(){ loadForSale(); loadLend(); loadHelpWanted(); }, lostfound: function(){ loadPets(); loadPackages(); loadLostFound(); },
                 emergency: loadEmergency, schools: loadSchools, services: loadServices,
-                winners: loadWinners, hoa: loadFaq,
-                updates: loadUpdates };
+                hoa: loadFaq,
+                updates: function(){ loadUpdates(); loadWinners(); } };
 
 // ---------- HOME WARRANTY CHECKLIST (check marks saved on this phone) ----------
 (function(){
