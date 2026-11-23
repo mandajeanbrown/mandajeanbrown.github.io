@@ -161,7 +161,7 @@
   .qaRow .search{flex:1;margin:0}
   .qaGo{background:linear-gradient(135deg,#2563EB,#1D4FB8);color:#fff;border:none;border-radius:999px;font-size:16px;font-weight:700;padding:0 22px;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,.32)}
   .topicRow{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
-  #screen-hoa .faqCat{font-weight:700;font-size:15px;margin:14px 0 2px;color:#1E3D24}
+  #screen-hoa .faqCat{font-weight:700;font-size:15px;margin:14px 0 2px;color:#1E3D24;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;-webkit-tap-highlight-color:transparent}
   #screen-hoa .faqItem{border-top:1px solid #E4E7E0;padding:9px 0}
   #screen-hoa .faqQ{font-weight:600;font-size:14.5px;line-height:1.35;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
   #screen-hoa .faqA{font-size:13.5px;line-height:1.5;color:#33475B;padding-top:6px}
@@ -455,9 +455,11 @@
       <div class="topicRow" id="qaTopics"></div>
       <div class="qaAns" id="qaAns"></div>
     </div>
-    <div class="card"><div class="ttl">Frequently Asked Questions</div>
-      <div class="det">Answers from CAMS, our HOA management company, kept in step with their homeowner FAQ. Tap a question to read the answer.</div>
+    <div class="card"><div class="ttl togHead" id="faqHead">Frequently Asked Questions<span class="sectArrow">\u25B8</span></div>
+      <div id="faqBody" style="display:none">
+      <div class="det">Answers from CAMS, our HOA management company, kept in step with their homeowner FAQ. Tap a category, then tap a question to read the answer.</div>
       <div id="faqList"><div class="msg">Loading...</div></div>
+      </div>
     </div>
     
     
@@ -1366,14 +1368,33 @@ function loadFaq(){
     if (!data.length) { el.innerHTML = '<div class="msg">No questions yet.</div>'; return; }
     var html = "", lastCat = null;
     data.forEach(function(r){
-      if (r[0] !== lastCat) { lastCat = r[0]; html += '<div class="faqCat">' + esc(r[0]) + '</div>'; }
+      if (r[0] !== lastCat) { if (lastCat !== null) html += "</div>"; lastCat = r[0]; html += '<div class="faqCat"><span>' + esc(r[0]) + '</span><span class="faqArrow">\u25B8</span></div><div class="faqCatBody" style="display:none">'; }
       html += '<div class="faqItem"><div class="faqQ"><span>' + esc(r[1]) + '</span><span class="faqArrow">\u25B8</span></div><div class="faqA" style="display:none">' + esc(r[2]).replace(/\n/g, "<br>") + '</div></div>';
     });
+    if (lastCat !== null) html += "</div>";
     el.innerHTML = html;
   }).catch(function(){ errBox(el, "the CAMS questions"); });
 }
 document.addEventListener("click", function(e){
-  var q = e.target && e.target.closest ? e.target.closest(".faqQ") : null;
+  if (!e.target || !e.target.closest) return;
+  var head = e.target.closest("#faqHead");
+  if (head) {
+    var fb = document.getElementById("faqBody");
+    var fc = fb.style.display === "none";
+    fb.style.display = fc ? "" : "none";
+    var fa = head.querySelector(".sectArrow"); if (fa) fa.textContent = fc ? "\u25BE" : "\u25B8";
+    return;
+  }
+  var cat = e.target.closest(".faqCat");
+  if (cat) {
+    var cb = cat.nextElementSibling;
+    if (!cb) return;
+    var cc = cb.style.display === "none";
+    cb.style.display = cc ? "" : "none";
+    var ca = cat.querySelector(".faqArrow"); if (ca) ca.textContent = cc ? "\u25BE" : "\u25B8";
+    return;
+  }
+  var q = e.target.closest(".faqQ");
   if (!q) return;
   var a = q.nextElementSibling;
   if (!a) return;
