@@ -56,8 +56,6 @@
   .sectToggle.bigToggle{font-size:17px;font-weight:700;letter-spacing:0}
   .sectArrow{float:right;font-weight:700;color:#2563EB}
   .sect:first-of-type{margin-top:10px}
-  .back{display:inline-flex;align-items:center;gap:5px;width:auto;background:linear-gradient(135deg,#12275f,#1d3f86);border:none;color:#fff;font-size:14.5px;font-weight:700;padding:9px 15px 9px 11px;border-radius:999px;cursor:pointer;margin:0 0 14px;box-shadow:0 3px 10px rgba(18,39,95,.28)}
-  .back::before{content:"‹";font-size:19px;font-weight:700;line-height:1;position:relative;top:-1px}
   .search{width:100%;font-size:17px;padding:14px 18px;border:1.5px solid #E2E6EC;border-radius:999px;margin:6px 0 4px;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.05)}
   .count{font-size:13px;color:#5A6B84;margin:6px 4px 10px}
   .card{background:#fff;border:none;border-radius:20px;padding:16px;margin:0 0 12px;box-shadow:0 1px 2px rgba(16,24,40,.05),0 8px 22px rgba(16,24,40,.06)}
@@ -195,7 +193,6 @@
 
   <!-- NEW HERE -->
   <div class="screen" id="screen-newhere">
-    <button class="back" data-go="home">Home</button>
     <img class="banner" src="https://drive.google.com/thumbnail?id=1KPnDCTlqtHZaEEqwXucJSLlj25TbxMP8&sz=w1200" alt="Welcome home">
     <div class="card"><div class="ttl togHead">Utilities<span class="sectArrow">▸</span></div>
       <div class="togBody" style="display:none">
@@ -222,7 +219,6 @@
 
   <!-- DIRECTORY -->
   <div class="screen" id="screen-directory">
-    <button class="back" data-go="home">Home</button>
     <img class="banner" src="../entrance-banner.jpg" alt="Kerns Ridge entrance sign">
     <div class="card" style="padding:10px"><div class="legend"><span class="lgi"><span class="sw" style="background:#FFC327"></span>App user</span><span class="lgi"><span class="sw" style="background:#2563EB"></span>Sold</span><span class="lgi"><span class="sw" style="background:#8A94A6"></span>For sale</span><span class="lgi"><span class="sw" style="background:#12275F"></span>Pool House</span></div><div id="dirMap"><div class="msg">Loading...</div></div>
     <div class="fnote" style="margin-top:9px">Lot lines, sizes, and sale status come from Rowan County records and are approximate. Tap a lot to see its size, frontage, and lot lines. Zoom in to see lot numbers, and in close for the length of each lot line.</div></div>
@@ -234,7 +230,6 @@
 
   <!-- EVENTS -->
   <div class="screen" id="screen-events">
-    <button class="back" data-go="home">Home</button>
     <div id="spotWrap">
       <div class="sect">📣 SPOTLIGHT</div>
       <div class="card" style="padding:10px"><img class="flyerimg" data-go="spotlight" src="https://drive.google.com/thumbnail?id=1tqeFtdZ0sbz_n1dAkvUXTfmzd4KwMgqw&sz=w1100" alt="Downtown main street">
@@ -248,7 +243,6 @@
 
   <!-- SPOTLIGHT (tap-to-read) -->
   <div class="screen" id="screen-spotlight">
-    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="ttl">City of East Spencer — November News</div>
     <div class="det">From the Southern City Express, the town's November newsletter. East Spencer runs our trash service. The dates that matter most:</div>
     <div class="det"><b>Bulk pickup: Fri, Nov 13 &amp; Mon, Nov 30.</b> Call Town Hall before your date to get your address on the list.</div>
@@ -267,7 +261,6 @@
 
   <!-- UPDATES -->
   <div class="screen" id="screen-updates">
-    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">The latest on street lights, water, trash, and roads.</div></div>
     <div class="sect">📣 NEIGHBORHOOD UPDATES</div>
     <div id="updList"><div class="msg">Loading...</div></div>
@@ -275,7 +268,6 @@
 
   <!-- FOR SALE / LEND & BORROW / HELP WANTED (one page) -->
   <div class="screen" id="screen-market">
-    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Buying, selling, borrowing, lending, and hiring... all in one place. Message the seller, lender, or poster on Facebook Messenger to arrange the details. Borrowing something? Bring it back clean and on time.</div></div>
     <div class="sect">🏷️ FOR SALE</div>
     <div id="saleList"><div class="msg">Loading...</div></div>
@@ -294,7 +286,6 @@
 
   <!-- EMERGENCY -->
   <div class="screen" id="screen-emergency">
-    <button class="back" data-go="home">Home</button>
     <a class="big911" href="tel:911">🚨 Life-threatening emergency? Call 911</a>
     <div class="card"><div class="det">For everything that is not an emergency. Tap a number to call.</div></div>
     <div id="emList"><div class="msg">Loading...</div></div>
@@ -302,7 +293,6 @@
 
   <!-- SERVICES -->
   <div class="screen" id="screen-services">
-    <button class="back" data-go="home">Home</button>
     <div id="svcBanner"></div>
     <div class="card"><div class="det">Businesses your neighbors recommend. To add one, post it in the Kerns Ridge Facebook group.</div></div>
     <div id="svcList"><div class="msg">Loading...</div></div>
@@ -310,7 +300,6 @@
 
   <!-- LOST & FOUND (everything: pets, packages, items) -->
   <div class="screen" id="screen-lostfound">
-    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Lost something, or found something? Everything lost and found is on this one page... pets first, then packages, then everything else. Message the owner or finder on Facebook Messenger to arrange the handoff. Items are posted with their photos. For pets and packages, swap photos on Messenger.</div></div>
     <div class="sect">🐾 LOST &amp; FOUND PETS</div>
     <div id="petsList"><div class="msg">Loading...</div></div>
@@ -325,21 +314,18 @@
 
   <!-- SCHOOLS -->
   <div class="screen" id="screen-schools">
-    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Public, private, and charter schools near Kerns Ridge, plus state scholarships. Tuition is each school's published rate. Confirm current rates with the school.</div></div>
     <div id="schList"><div class="msg">Loading...</div></div>
   </div>
 
   <!-- WINNERS -->
   <div class="screen" id="screen-winners">
-    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Every neighborhood champion, from cook-offs to contests.</div></div>
     <div id="winList"><div class="msg">Loading...</div></div>
   </div>
 
   <!-- VOTES -->
   <div class="screen" id="screen-votes">
-    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="det">Vote in this year's competitions. Winners are crowned in the Winners Circle. Tap one to open its ballot.</div></div>
     <div class="grid">
       <button class="btn" data-go="form" data-form="halloween">🎃 Halloween Vote</button>
@@ -357,7 +343,6 @@
 
   <!-- HOME WARRANTY -->
   <div class="screen" id="screen-warranty">
-    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="ttl">🛡️ Your First-Year Home Warranty</div>
       <div class="det">Your <b>workmanship and materials</b> coverage ends 12 months after closing... anything you want covered has to be reported before then.</div>
       <div class="det">No need to cram it into the last week. Five short checklists spread the walkthrough across your first year... check items off as you go, and your progress saves on this phone.</div>
@@ -437,7 +422,6 @@
 
   <!-- HOA RULES -->
   <div class="screen" id="screen-hoa">
-    <button class="back" data-go="home">Home</button>
     <div class="card"><div class="ttl">📋 HOA Rules</div>
       <div class="det">A plain-language summary of the Kerns Ridge Declaration of Covenants, the document every owner agreed to at closing. If anything here ever differs, the recorded Declaration controls. The association is managed by CAMS.</div></div>
     <div class="card"><div class="ttl">🤔 Can I do this?</div>
