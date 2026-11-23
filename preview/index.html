@@ -103,7 +103,7 @@
   .teams{font-size:13px;color:#1c2430;margin-top:7px}
   .phone{display:inline-block;font-size:17px;font-weight:800;color:#12275f;text-decoration:none;margin-top:3px}
   .weblink{color:#1B5FBF;font-weight:600;text-decoration:none;word-break:break-all}
-  .ev .date{display:inline-block;font-weight:800;font-size:13.5px;color:#12275f;background:#EAF0FA;border-radius:999px;padding:5px 12px;margin-bottom:8px}
+  .ev .date{display:inline-block;font-weight:800;font-size:13.5px;color:#fff;background:linear-gradient(180deg,#4F7D5C,#3C6349);border-radius:999px;padding:5px 12px;margin-bottom:8px}
   .warn{background:#FEF3F2;border:1.5px solid #F3B7B2;border-radius:20px;padding:16px;margin:0 0 12px}
   .warn .ttl{color:#8B1A1A}
   .warn .bttl{font-size:clamp(11px, 3.6vw, 14px);font-weight:700;color:#8B1A1A;white-space:nowrap}
@@ -161,6 +161,11 @@
   .qaRow .search{flex:1;margin:0}
   .qaGo{background:linear-gradient(135deg,#2563EB,#1D4FB8);color:#fff;border:none;border-radius:999px;font-size:16px;font-weight:700;padding:0 22px;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,.32)}
   .topicRow{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+  #screen-hoa .faqCat{font-weight:700;font-size:15px;margin:14px 0 2px;color:#1E3D24}
+  #screen-hoa .faqItem{border-top:1px solid #E4E7E0;padding:9px 0}
+  #screen-hoa .faqQ{font-weight:600;font-size:14.5px;line-height:1.35;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
+  #screen-hoa .faqA{font-size:13.5px;line-height:1.5;color:#33475B;padding-top:6px}
+  #screen-hoa .faqArrow{color:#8A764E;flex:none}
 </style>
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
@@ -258,7 +263,6 @@
       <div class="ttl" style="margin-top:8px">City of East Spencer — November News</div>
       <div class="sub">Tap the picture to read it.</div></div>
     </div>
-    <div class="sect">UPCOMING AROUND EAST SPENCER &amp; SALISBURY</div>
     <div id="evList"><div class="msg">Loading events...</div></div>
     <div class="foot">New events are added every Monday. Confirm details before you head out... they can change.</div>
   </div>
@@ -449,6 +453,10 @@
       <div class="qaRow"><input class="search" id="qaInput" type="search" placeholder="Try: fence, chickens, shed, pool..." autocomplete="off"><button class="qaGo" id="qaBtn">Ask</button></div>
       <div class="topicRow" id="qaTopics"></div>
       <div class="qaAns" id="qaAns"></div>
+    </div>
+    <div class="card"><div class="ttl">Frequently Asked Questions</div>
+      <div class="det">Answers from CAMS, our HOA management company, kept in step with their homeowner FAQ. Tap a question to read the answer.</div>
+      <div id="faqList"><div class="msg">Loading...</div></div>
     </div>
     
     
@@ -1306,7 +1314,7 @@ var loadPackages = once(function(){
 
 var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHere, market: function(){ loadForSale(); loadLend(); loadHelpWanted(); }, lostfound: function(){ loadPets(); loadPackages(); loadLostFound(); },
                 emergency: loadEmergency, schools: loadSchools, services: loadServices,
-                winners: loadWinners,
+                winners: loadWinners, hoa: loadFaq,
                 updates: loadUpdates };
 
 // ---------- HOME WARRANTY CHECKLIST (check marks saved on this phone) ----------
@@ -1348,6 +1356,31 @@ var LOADERS = { directory: loadDirectory, events: loadEvents, newhere: loadNewHe
 })();
 
 // ---------- HOA "CAN I DO THIS?" ----------
+/* ---------- HOA FAQ (mirrors the CAMS homeowner FAQ) ---------- */
+function loadFaq(){
+  var el = document.getElementById("faqList");
+  if (!el) return;
+  fetchSheet("HOA FAQ", "A1:C1000").then(function(rows){
+    var data = rows.filter(function(r){ return r[0] && r[1]; });
+    if (!data.length) { el.innerHTML = '<div class="msg">No questions yet.</div>'; return; }
+    var html = "", lastCat = null;
+    data.forEach(function(r){
+      if (r[0] !== lastCat) { lastCat = r[0]; html += '<div class="faqCat">' + esc(r[0]) + '</div>'; }
+      html += '<div class="faqItem"><div class="faqQ"><span>' + esc(r[1]) + '</span><span class="faqArrow">\u25B8</span></div><div class="faqA" style="display:none">' + esc(r[2]).replace(/\n/g, "<br>") + '</div></div>';
+    });
+    el.innerHTML = html;
+  }).catch(function(){ errBox(el, "the CAMS questions"); });
+}
+document.addEventListener("click", function(e){
+  var q = e.target && e.target.closest ? e.target.closest(".faqQ") : null;
+  if (!q) return;
+  var a = q.nextElementSibling;
+  if (!a) return;
+  var closed = a.style.display === "none";
+  a.style.display = closed ? "" : "none";
+  var ar = q.querySelector(".faqArrow"); if (ar) ar.textContent = closed ? "\u25BE" : "\u25B8";
+});
+
 var QA_RULES = [
  {k:["fence","fencing","chain link","privacy fence"], a:"<b>Not without approval first.</b> No fence or fencing-type barrier of any kind may be built without prior written consent from the Architectural Review Committee (ARC). Uncoated chain link and barbed wire fences can never be approved.<br><b>What to do:</b> submit an Architectural Review Request Form through the CAMS Connect portal with the fence type, height, material, color, and location, and wait for written approval before building."},
  {k:["shed","outbuilding","storage building","storage shed"], a:"<b>Approval needed.</b> A shed or outbuilding must be for residential use, built of the same or substantially identical materials as the house, architecturally compatible, set back at least to the rear wall of the house, and inside the side setbacks... and it needs prior written ARC approval.<br><b>What to do:</b> send the ARC your plans (size, materials, colors, location) through the CAMS Connect portal before you buy or build anything."},
