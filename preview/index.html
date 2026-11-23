@@ -92,13 +92,19 @@
   #screen-services .svcIc svg{width:20px;height:20px}
   #screen-updates .paper{background:#FDFBF4;border:1px solid #E0D9C3;border-radius:8px;padding:18px 16px 8px;box-shadow:0 1px 2px rgba(16,24,40,.06),0 6px 18px rgba(16,24,40,.07);margin:0 0 16px}
   #screen-updates .paperName{font-family:Georgia,'Times New Roman',serif;font-size:31px;font-weight:900;text-align:center;color:#191510;line-height:1.05;letter-spacing:.01em}
-  #screen-updates .paperMeta{display:flex;justify-content:space-between;gap:8px;border-top:4px double #191510;border-bottom:1.5px solid #191510;padding:5px 1px;margin-top:11px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#4c4636}
+  #screen-updates .paperMeta{display:flex;justify-content:space-between;gap:6px;border-top:4px double #191510;border-bottom:1.5px solid #191510;padding:5px 1px;margin-top:11px;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#4c4636}
+  #screen-updates .paperMeta span{white-space:nowrap}
   #screen-updates .story{padding:14px 0 13px;border-bottom:1px solid #DCD5BE}
   #screen-updates .story:last-child{border-bottom:none;padding-bottom:8px}
   #screen-updates .headline{font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:800;line-height:1.22;margin:0 0 5px;color:#191510}
   #screen-updates .story.lead .headline{font-size:24px}
   #screen-updates .byline{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#8A764E;margin:0 0 6px}
   #screen-updates .storyBody{font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.55;color:#2E2A20;margin:0}
+  #screen-updates .story{overflow:hidden}
+  #screen-updates p.storyBody + p.storyBody{margin-top:9px}
+  #screen-updates .storyPic{float:right;width:46%;margin:5px 0 8px 12px;border-radius:8px}
+  #screen-updates #winList{margin:0 0 14px}
+  #screen-updates .grid .btn.cur{background:linear-gradient(180deg,#1E3D24,#2E5339);color:#fff;border:none}
   #screen-updates .paper .msg{background:none;border:none;box-shadow:none;font-family:Georgia,serif;font-style:italic;text-align:center;color:#5c5644;padding:14px 4px}
   #screen-market .mkIc{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 1px 2px rgba(122,106,79,.25)}
   #screen-market .mkIc svg{width:19px;height:19px}
@@ -201,13 +207,21 @@
   .chk input{width:23px;height:23px;flex:0 0 auto;margin:1px 0 0;accent-color:#3C6349}
   .chk span{font-size:14px;line-height:1.45}
   .chk small{display:block;color:#5A6B84;font-size:13px;margin-top:2px;line-height:1.4}
-  .qaAns{background:#EEF4FB;border-radius:16px;padding:14px 15px;font-size:14px;line-height:1.55;margin-top:12px;display:none}
   .qaRow{display:flex;gap:8px;margin-top:10px}
   .qaRow .search{flex:1;margin:0}
   .mpRow{display:flex;align-items:center;gap:12px;background:#F4F5F1;border-radius:12px;padding:13px 15px;margin:0 0 8px;text-decoration:none;color:inherit}
   .mpT{font-size:16px;font-weight:700}
   .mpChev{margin-left:auto;color:#9AA5B1;font-size:20px}
   #mpCancel{display:block;width:100%;margin-top:4px;background:none;border:none;font-family:inherit;font-size:16px;font-weight:700;color:#8A4B2F;padding:10px;cursor:pointer}
+  .ollieAv{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid #BFD6C2;flex:none;background:#F5EFE6}
+  .qaThread{display:flex;flex-direction:column;gap:9px;max-height:340px;overflow-y:auto;padding:12px;border:1px solid #DFE8DF;border-radius:14px;background:#FBFCF9;margin-top:12px}
+  .msgRow{display:flex;gap:8px;align-items:flex-start}
+  .msgRow.me{justify-content:flex-end}
+  .bub{max-width:82%;padding:9px 12px;border-radius:16px;font-size:14px;line-height:1.45}
+  .bub.ollie{background:linear-gradient(180deg,#EDF4ED,#DCE9DE);color:#23402C;border-bottom-left-radius:6px}
+  .bub.me{background:linear-gradient(135deg,#1E3D24,#2E5339);color:#fff;border-bottom-right-radius:6px}
+  .bubAv{width:32px;height:32px;border-radius:50%;object-fit:cover;flex:none;border:1.5px solid #BFD6C2;background:#F5EFE6}
+  .bub.typing{color:#5B7263;letter-spacing:3px;font-weight:700}
   .qaGo{background:linear-gradient(135deg,#1E3D24,#2E5339);color:#fff;border:none;border-radius:999px;font-size:16px;font-weight:700;padding:0 22px;cursor:pointer;box-shadow:0 4px 14px rgba(30,61,36,.32)}
   .topicRow{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
   .topicRow .chip{background:linear-gradient(180deg,#EDF4ED,#DCE9DE);color:#2E5339;border:1px solid #BFD6C2;box-shadow:0 1px 4px rgba(60,99,73,.14)}
@@ -326,17 +340,17 @@
       <div class="paperMeta"><span>Kerns Ridge</span><span>Salisbury, NC</span><span id="paperDate"></span></div>
       <div id="updList"><div class="msg">Loading...</div></div>
     </div>
-    <img class="banner" src="https://drive.google.com/thumbnail?id=1cUuVyGpDzlbjTHjczhtQsQ5Eu-PvoPFE&sz=w1100" alt="Winners Circle">
+    <img class="banner" src="https://drive.google.com/thumbnail?id=1v6ql2_VM75IOkrtMsA8jB81WCoLPArB9&sz=w1100" alt="Champions">
     <div id="winList"><div class="msg">Loading...</div></div>
     <img class="banner" src="https://drive.google.com/thumbnail?id=1zmAXuDusMTyhpdktouM2tCCCOdz3oiFC&sz=w1100" alt="Community Competitions">
     <div class="grid">
+      <button class="btn cur" data-go="form" data-form="christmas">🎄 Christmas Vote</button>
+      <button class="btn cur" data-go="form" data-form="porch">🚪 Porch / Front Door Vote</button>
+      <button class="btn cur" data-go="form" data-form="street">🏘️ Holiday Street Vote</button>
       <button class="btn" data-go="form" data-form="halloween">🎃 Halloween Vote</button>
-      <button class="btn" data-go="form" data-form="christmas">🎄 Christmas Vote</button>
       <button class="btn" data-go="form" data-form="garden">🌸 Flower Garden Vote</button>
       <button class="btn" data-go="form" data-form="lawn">⛳ Golf Course Lawn Vote</button>
-      <button class="btn" data-go="form" data-form="porch">🚪 Porch / Front Door Vote</button>
       <button class="btn" data-go="form" data-form="petcostume">🐶 Pet Costume Vote</button>
-      <button class="btn" data-go="form" data-form="street">🏘️ Holiday Street Vote</button>
       <button class="btn" data-go="form" data-form="photo">📸 Photo of the Year Vote</button>
     </div>
   </div>
@@ -460,11 +474,12 @@
   <div class="screen" id="screen-hoa">
     
     <div class="heroCard"><img class="heroImg" src="https://drive.google.com/thumbnail?id=19o8-VFA57lXZXqFh6Ss9qtECZ1qGVwiT&sz=w1200" alt="Kerns Ridge street"><div class="heroBody"><div class="det">* Not an official CAMS publication. Visit <a href="https://portal.camsmgt.com" target="_blank" rel="noopener" style="color:#2563EB;text-decoration:underline">CAMS Management</a> for rulings and approvals.</div></div></div>
-    <div class="card"><div class="ttl hTtl"><span class="hIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.2C5.6 5.6 5 7.6 5 10c0 4.8 3 8.6 7 10 4-1.4 7-5.2 7-10 0-2.4-.6-4.4-2-5.8-.9 1-1.9 1.4-2.9 1.4-1.4 0-2.7-.6-4.2 0C9 5.6 8 5.2 7 4.2z"/><circle cx="9.3" cy="10.6" r="1.5"/><circle cx="14.7" cy="10.6" r="1.5"/><path d="M12 13.4l-1.1 1.5h2.2z"/></svg></span><span>Ask Ollie</span></div>
-      <div class="det">Type what you are thinking of doing and get the rule, plus what to do next.</div>
-      <div class="qaRow"><input class="search" id="qaInput" type="search" placeholder="Try: fence, chickens, shed, pool..." autocomplete="off"><button class="qaGo" id="qaBtn">Ask</button></div>
+    <div class="card"><div class="ttl hTtl"><img class="ollieAv" src="https://drive.google.com/thumbnail?id=1ycTLFfFbMRkldHNU5waXSbkJWSb_z4mf&sz=w200" alt="Ollie the owl"><span>Ask Ollie</span></div>
+      <div class="det">Chat with Ollie right here in the app. Ask what you are thinking of doing and get the rule, plus what to do next.</div>
+      <div class="qaThread" id="qaThread"></div>
       <div class="topicRow" id="qaTopics"></div>
-      <div class="qaAns" id="qaAns"></div>
+      <div class="qaRow"><input class="search" id="qaInput" type="search" placeholder="Try: fence, chickens, shed, pool..." autocomplete="off"><button class="qaGo" id="qaBtn">Ask</button></div>
+      
     </div>
     <div class="card"><div class="ttl togHead" id="faqHead">Frequently Asked Questions<span class="sectArrow">▸</span></div>
       <div id="faqBody" style="display:none">
@@ -1381,7 +1396,7 @@ var loadLostFoundAll = once(function(){
 /* ---------- Updates ---------- */
 var loadUpdates = once(function(){
   var pd = document.getElementById("paperDate");
-  if (pd) pd.textContent = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+  if (pd) pd.textContent = new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
   fetchSheet("Neighborhood Updates", "A4:D60").then(function(rows){
     var real = rows.filter(function(r){ return r[1]; });
     if (!real.length) {
@@ -1389,10 +1404,23 @@ var loadUpdates = once(function(){
         '<div class="msg">No news right now... everything is running like it should.</div>';
       return;
     }
+    var STORY_PICS = {};
+    STORY_PICS["trash pickup"] = "https://drive.google.com/thumbnail?id=1pA1esIetD3eLeVOkhk03R8rIgios2HMY&sz=w600";
+    STORY_PICS["town hall closed"] = "https://drive.google.com/thumbnail?id=1IwCWKcOXk7yIyp9fyAWpvUsgu3VHOrsL&sz=w600";
     document.getElementById("updList").innerHTML = real.map(function(r, i){
+      var body = "";
+      if (r[3]) {
+        var paras = String(r[3]).split(/\n\s*\n/).filter(function(s){ return s.trim(); });
+        var pic = STORY_PICS[(r[1] || "").toLowerCase()] || "";
+        var mid = Math.floor(paras.length / 2);
+        body = paras.map(function(txt, pi){
+          var img = (pic && pi === mid) ? '<img class="storyPic" src="' + pic + '" alt="">' : "";
+          return '<p class="storyBody">' + img + esc(txt) + '</p>';
+        }).join("");
+      }
       return '<article class="story' + (i === 0 ? " lead" : "") + '"><h3 class="headline">' + esc(r[1] || "") + '</h3>' +
         ((r[0] || r[2]) ? '<div class="byline">' + esc(r[0] || "") + (r[0] && r[2] ? " &nbsp;•&nbsp; " : "") + esc(r[2] || "") + '</div>' : '') +
-        (r[3] ? '<p class="storyBody">' + esc(r[3]) + '</p>' : '') + '</article>';
+        body + '</article>';
     }).join("");
   }).catch(function(){ errBox(document.getElementById("updList"), "updates"); });
 });
@@ -1575,32 +1603,53 @@ var QA_RULES = [
 var QA_TOPICS = ["Fence","Shed","Pool","Paint color","Chickens","RV parking","Christmas lights","Trash cans","Solar panels","Sign","Tree removal","Renting"];
 (function(){
   var input = document.getElementById("qaInput");
-  var ans = document.getElementById("qaAns");
+  var thread = document.getElementById("qaThread");
   var topics = document.getElementById("qaTopics");
-  if (!input || !ans) return;
-  QA_TOPICS.forEach(function(t){
+  if (!input || !thread) return;
+  var AV = "https://drive.google.com/thumbnail?id=1ycTLFfFbMRkldHNU5waXSbkJWSb_z4mf&sz=w100";
+  function scrollDown(){ thread.scrollTop = thread.scrollHeight; }
+  function ollieSay(html){
+    var row = document.createElement("div"); row.className = "msgRow";
+    row.innerHTML = '<img class="bubAv" src="' + AV + '" alt="Ollie"><div class="bub ollie">' + html + "</div>";
+    thread.appendChild(row); scrollDown(); return row;
+  }
+  function meSay(text){
+    var row = document.createElement("div"); row.className = "msgRow me";
+    var b = document.createElement("div"); b.className = "bub me"; b.textContent = text;
+    row.appendChild(b); thread.appendChild(row); scrollDown();
+  }
+  ollieSay("Well hello there, I'm <b>Ollie</b>. Ask me about fences, sheds, chickens, pools... if it is in the Kerns Ridge covenants, I will find it. If it is not, I will tell you who to ask.");
+  QA_TOPICS.forEach(function(tp){
     var c = document.createElement("span");
-    c.className = "chip"; c.style.cursor = "pointer"; c.textContent = t;
-    c.addEventListener("click", function(){ input.value = t; qaAsk(); });
+    c.className = "chip"; c.style.cursor = "pointer"; c.textContent = tp;
+    c.addEventListener("click", function(){ qaAsk(tp); });
     topics.appendChild(c);
   });
-  function qaAsk(){
-    var q = (input.value || "").toLowerCase().trim();
-    if (!q) return;
+  function answerFor(qRaw){
+    var q = (qRaw || "").toLowerCase().trim();
     var best = null, bestScore = 0;
     QA_RULES.forEach(function(r){
       var score = 0;
       r.k.forEach(function(k){ if (q.indexOf(k) !== -1) score += k.length; });
       if (score > bestScore) { bestScore = score; best = r; }
     });
-    ans.style.display = "block";
-    if (best) { ans.innerHTML = best.a; }
-    else {
-      ans.innerHTML = "<b>I do not have that one.</b> The answer is not in the Kerns Ridge covenants I know. Check the full rules on this page, and for anything on the outside of your home, the safe move is to ask the ARC through the CAMS Connect portal before you start... unapproved work can be stopped and removed at your expense.";
-    }
-    ans.scrollIntoView({block:"nearest", behavior:"smooth"});
+    if (best) return best.a;
+    return "<b>I do not have that one.</b> The answer is not in the Kerns Ridge covenants I know. Check the full rules on this page, and for anything on the outside of your home, the safe move is to ask the ARC through the CAMS Connect portal before you start... unapproved work can be stopped and removed at your expense.";
   }
-  document.getElementById("qaBtn").addEventListener("click", qaAsk);
+  function qaAsk(preset){
+    var text = (preset != null ? preset : (input.value || "")).trim();
+    if (!text) return;
+    meSay(text);
+    input.value = "";
+    var typing = ollieSay("...");
+    typing.querySelector(".bub").classList.add("typing");
+    setTimeout(function(){
+      typing.querySelector(".bub").classList.remove("typing");
+      typing.querySelector(".bub").innerHTML = answerFor(text);
+      scrollDown();
+    }, 450);
+  }
+  document.getElementById("qaBtn").addEventListener("click", function(){ qaAsk(); });
   input.addEventListener("keydown", function(e){ if (e.key === "Enter") { e.preventDefault(); qaAsk(); } });
 })();
 
