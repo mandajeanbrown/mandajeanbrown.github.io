@@ -149,10 +149,11 @@
     });
     var btn = document.getElementById("notifyBtn");
     if (!btn) return;
+    var BELL = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#4E3B26" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px" aria-hidden="true"><path d="M17.8 15.9c-.8-.7-1.2-1.5-1.2-2.9v-3a4.6 4.6 0 1 0-9.2 0v3c0 1.4-.4 2.2-1.2 2.9h11.6Z"/><path d="M10.2 19a1.9 1.9 0 0 0 3.6 0"/><path d="M12 5.4V4"/></svg> ';
     function paint(){
-      btn.textContent = OneSignal.User.PushSubscription.optedIn
-        ? "🔔 Notify Me: ON (tap to turn off)"
-        : "🔔 Notify Me";
+      btn.innerHTML = BELL + (OneSignal.User.PushSubscription.optedIn
+        ? "Notify Me: ON (tap to turn off)"
+        : "Notify Me");
     }
     paint();
     OneSignal.User.PushSubscription.addEventListener("change", paint);
