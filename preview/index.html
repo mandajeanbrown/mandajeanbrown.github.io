@@ -49,6 +49,10 @@
   .welcomeCard .chev{margin-left:auto;color:#B6C2D2;font-size:24px;font-weight:400;flex:0 0 auto}
   .welcomeCard:active{filter:brightness(.97);transform:scale(.985)}
   #screen-home #notifyBtn{justify-content:center;text-align:center;padding:16px 14px}
+  .ntSw{display:inline-block;width:42px;height:23px;border-radius:999px;background:#C4B590;position:relative;vertical-align:-6px;margin-left:10px;transition:background .2s;flex:none}
+  .ntSw .ntKnob{position:absolute;top:2.5px;left:3px;width:18px;height:18px;border-radius:50%;background:#FFFDF6;box-shadow:0 1px 3px rgba(60,45,20,.35);transition:left .2s}
+  .ntSw.on{background:linear-gradient(180deg,#4F7D5C,#3C6349)}
+  .ntSw.on .ntKnob{left:21px}
   .btn{display:flex;align-items:center;justify-content:center;text-align:center;gap:6px;
        background:#fff;border:none;border-radius:20px;color:#1c2430;box-shadow:0 1px 2px rgba(16,24,40,.06),0 6px 18px rgba(16,24,40,.07);
        font-size:16px;font-weight:700;padding:18px 10px;text-decoration:none;cursor:pointer;min-height:64px;width:100%;
@@ -195,9 +199,8 @@
     if (!btn) return;
     var BELL = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#4E3B26" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px" aria-hidden="true"><path d="M17.8 15.9c-.8-.7-1.2-1.5-1.2-2.9v-3a4.6 4.6 0 1 0-9.2 0v3c0 1.4-.4 2.2-1.2 2.9h11.6Z"/><path d="M10.2 19a1.9 1.9 0 0 0 3.6 0"/><path d="M12 5.4V4"/></svg> ';
     function paint(){
-      btn.innerHTML = BELL + (OneSignal.User.PushSubscription.optedIn
-        ? "Notify Me: ON (tap to turn off)"
-        : "Notify Me");
+      var on = OneSignal.User.PushSubscription.optedIn;
+      btn.innerHTML = BELL + "Notify Me" + '<span class="ntSw' + (on ? " on" : "") + '"><span class="ntKnob"></span></span>';
     }
     paint();
     OneSignal.User.PushSubscription.addEventListener("change", paint);
@@ -228,11 +231,11 @@
       <button class="btn" data-go="events"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.8" width="16" height="14.2" rx="2"/><path d="M4 10.4h16M8.2 3.6v4M15.8 3.6v4"/></svg></span><span class="tx"><span class="t">Local Events</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="updates"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.8 10.4v3.2h2.6l9.8 5V5.4l-9.8 5H3.8Z"/><path d="M7 13.8v3.9a1.7 1.7 0 0 0 3.4 0v-2.6"/><path d="M18.8 9.2a3.6 3.6 0 0 1 0 5.6"/></svg></span><span class="tx"><span class="t">Neighborhood News</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="lostfound"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.4"/><path d="M15.8 15.8 20.4 20.4"/></svg></span><span class="tx"><span class="t">Lost &amp; Found</span></span><span class="chev">›</span></button>
-      <button class="btn wide" data-go="market"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.8 8h12.4l-1.1 12.2H6.9L5.8 8Z"/><path d="M9 10.2V6.8a3 3 0 0 1 6 0v3.4"/></svg></span><span class="tx"><span class="t">For Sale, Lend &amp; Borrow, Help Wanted</span></span><span class="chev">›</span></button>
+      <button class="btn wide" data-go="market"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.8 8h12.4l-1.1 12.2H6.9L5.8 8Z"/><path d="M9 10.2V6.8a3 3 0 0 1 6 0v3.4"/></svg></span><span class="tx"><span class="t">Sell, Lend, Borrow, Help Wanted</span></span><span class="chev">›</span></button>
       <button class="btn" data-go="services"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.4v2.9M12 17.7v2.9M3.4 12h2.9M17.7 12h2.9M5.9 5.9l2 2M16.1 16.1l2 2M18.1 5.9l-2 2M7.9 16.1l-2 2"/></svg></span><span class="tx"><span class="t">Services</span></span><span class="chev">›</span></button>
       
       
-      <button class="btn wide" id="notifyBtn" style="background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;border-color:#DECFA8"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#4E3B26" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px" aria-hidden="true"><path d="M17.8 15.9c-.8-.7-1.2-1.5-1.2-2.9v-3a4.6 4.6 0 1 0-9.2 0v3c0 1.4-.4 2.2-1.2 2.9h11.6Z"/><path d="M10.2 19a1.9 1.9 0 0 0 3.6 0"/><path d="M12 5.4V4"/></svg> Notify Me</button>
+      <button class="btn wide" id="notifyBtn" style="background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;border-color:#DECFA8"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#4E3B26" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px" aria-hidden="true"><path d="M17.8 15.9c-.8-.7-1.2-1.5-1.2-2.9v-3a4.6 4.6 0 1 0-9.2 0v3c0 1.4-.4 2.2-1.2 2.9h11.6Z"/><path d="M10.2 19a1.9 1.9 0 0 0 3.6 0"/><path d="M12 5.4V4"/></svg> Notify Me<span class="ntSw"><span class="ntKnob"></span></span></button>
     </div>
   </div>
 
