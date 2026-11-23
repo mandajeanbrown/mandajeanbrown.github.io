@@ -28,8 +28,8 @@
   .screen.on{display:block}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
   /* Home screen: a menu of rows with icons and descriptions, not a button grid */
-  #screen-home .grid{display:flex;flex-direction:column;gap:10px}
-  #screen-home .btn{min-height:0;padding:11px 14px;border-radius:8px;justify-content:flex-start;text-align:left;gap:12px}
+  #screen-home .grid{display:flex;flex-direction:column;gap:8px}
+  #screen-home .btn{min-height:0;padding:9px 14px;border-radius:8px;justify-content:flex-start;text-align:left;gap:12px}
   #screen-home .btn .ic{flex:0 0 auto;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px}
   #screen-home .ic{background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 1px 2px rgba(122,106,79,.25)}
   #screen-home .ic svg{width:22px;height:22px;display:block}
@@ -48,8 +48,8 @@
   .welcomeCard .t2{font-size:14px;font-weight:600;font-style:italic;color:#8A764E}
   .welcomeCard .chev{margin-left:auto;color:#B6C2D2;font-size:24px;font-weight:400;flex:0 0 auto}
   .welcomeCard:active{filter:brightness(.97);transform:scale(.985)}
-  #screen-home #notifyBtn{justify-content:center;text-align:center;padding:16px 14px}
-  .ntSw{display:inline-block;width:42px;height:23px;border-radius:999px;background:#C4B590;position:relative;vertical-align:-6px;margin-left:10px;transition:background .2s;flex:none}
+  #screen-home #notifyBtn{justify-content:center;text-align:center;padding:12px 14px}
+  .ntSw{display:inline-block;width:42px;height:23px;border-radius:999px;background:linear-gradient(180deg,#C84040,#A52A2A);position:relative;vertical-align:-6px;margin-left:10px;transition:background .2s;flex:none}
   .ntSw .ntKnob{position:absolute;top:2.5px;left:3px;width:18px;height:18px;border-radius:50%;background:#FFFDF6;box-shadow:0 1px 3px rgba(60,45,20,.35);transition:left .2s}
   .ntSw.on{background:linear-gradient(180deg,#4F7D5C,#3C6349)}
   .ntSw.on .ntKnob{left:21px}
@@ -82,15 +82,15 @@
   #screen-hoa .hTtl{display:flex;align-items:center;gap:10px}
   #screen-hoa .hIc{flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:linear-gradient(180deg,#F0E4C9,#DECFA8);color:#4E3B26;display:inline-flex;align-items:center;justify-content:center}
   #screen-hoa .hIc svg{width:20px;height:20px}
-  #screen-newhere .nhLink{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:0;border-radius:14px;padding:13px 16px;margin:0 0 12px;box-shadow:0 1px 4px rgba(31,38,32,.07);cursor:pointer;font-family:inherit}
+  #screen-newhere .nhLink{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:0;border-radius:14px;padding:10px 16px;margin:0 0 10px;box-shadow:0 1px 4px rgba(31,38,32,.07);cursor:pointer;font-family:inherit}
   #screen-newhere .nhT{display:block;font-size:16.5px;font-weight:700;color:#22301F}
   #screen-newhere .nhD{display:block;font-size:13px;color:#6B7686;white-space:nowrap;margin-top:1px}
   #screen-newhere .nhChev{margin-left:auto;color:#9AA5B1;font-size:20px}
   #screen-newhere .pill{background:linear-gradient(180deg,#4F7D5C,#3C6349);box-shadow:0 2px 8px rgba(60,99,73,.28)}
   #screen-newhere .togHead .pill{padding:4px 11px;font-size:12.5px}
   #screen-newhere .togHead .t2{font-size:14px;font-weight:600;font-style:italic;color:#8A764E}
-  #screen-newhere .sect{margin:0 0 12px}
-  #screen-newhere .sectBody{margin:0 0 12px}
+  #screen-newhere .sect{margin:0 0 10px}
+  #screen-newhere .sectBody{margin:0 0 10px}
   #screen-newhere .banner{margin:0 0 12px}
   .card{background:#fff;border:none;border-radius:8px;padding:11px 14px;margin:0 0 10px;box-shadow:0 1px 2px rgba(16,24,40,.05),0 8px 22px rgba(16,24,40,.06)}
   .card .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
@@ -248,11 +248,11 @@
       <div class="taskRow"><div class="taskMain"><div class="taskT">Kerns Ridge Salisbury</div><div class="taskD">A private group where neighbors connect. You can also follow it in the Forum app, which gathers all your Facebook groups in one place.</div></div></div>
       <div class="chips"><a class="chip" style="text-decoration:none" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.facebook.ember&hl=en_US">▶️ Google Play app</a><a class="chip" style="text-decoration:none" target="_blank" rel="noopener" href="https://apps.apple.com/us/app/forum-a-facebook-app/id6758308862">🍎 App Store app</a></div>
       </div></div>
-    <button class="nhLink" data-go="hoa"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.6" y="5" width="12.8" height="15.6" rx="1.8"/><rect x="9.2" y="3.2" width="5.6" height="3.4" rx="1.2"/><path d="M8.8 11.4h6.4M8.8 14.8h6.4"/></svg></span><span class="nhLt"><span class="nhT">Homeowners Association (HOA)</span><span class="nhD">Declaration of Covenants &amp; Restrictions</span></span><span class="nhChev">›</span></button>
-      <button class="nhLink" data-go="warranty"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 19 5.6v5.2c0 4.6-2.9 7.9-7 9.8-4.1-1.9-7-5.2-7-9.8V5.6Z"/><path d="M9.2 11.6l2 2 3.6-3.9"/></svg></span><span class="nhLt"><span class="nhT">Home Warranty</span><span class="nhD">Your warranty manual and checklist</span></span><span class="nhChev">›</span></button>
+    <button class="nhLink" data-go="hoa"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.6" y="5" width="12.8" height="15.6" rx="1.8"/><rect x="9.2" y="3.2" width="5.6" height="3.4" rx="1.2"/><path d="M8.8 11.4h6.4M8.8 14.8h6.4"/></svg></span><span class="nhLt"><span class="nhT">Homeowners Association (HOA)</span></span><span class="nhChev">›</span></button>
+      <button class="nhLink" data-go="warranty"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 19 5.6v5.2c0 4.6-2.9 7.9-7 9.8-4.1-1.9-7-5.2-7-9.8V5.6Z"/><path d="M9.2 11.6l2 2 3.6-3.9"/></svg></span><span class="nhLt"><span class="nhT">Home Warranty</span></span><span class="nhChev">›</span></button>
       <div class="sect sectToggle bigToggle"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>Local Numbers &amp; Info<span class="sectArrow">▸</span></div>
     <div class="sectBody" style="display:none"><a class="big911" href="tel:911">🚨 Life-threatening emergency? Call 911</a><div id="emList"><div class="msg">Loading...</div></div><div id="nhList"><div class="msg">Loading...</div></div></div>
-      <button class="nhLink" data-go="schools"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.2C10 4.6 6.9 4.2 4 4.6v13.2c2.9-.4 6 0 8 1.6 2-1.6 5.1-2 8-1.6V4.6c-2.9-.4-6 0-8 1.6Z"/><path d="M12 6.2v13.2"/></svg></span><span class="nhLt"><span class="nhT">Schools</span><span class="nhD">Nearby schools and scholarships</span></span><span class="nhChev">›</span></button>
+      <button class="nhLink" data-go="schools"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.2C10 4.6 6.9 4.2 4 4.6v13.2c2.9-.4 6 0 8 1.6 2-1.6 5.1-2 8-1.6V4.6c-2.9-.4-6 0-8 1.6Z"/><path d="M12 6.2v13.2"/></svg></span><span class="nhLt"><span class="nhT">Schools</span></span><span class="nhChev">›</span></button>
     <div class="sect sectToggle bigToggle"><span class="nhIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></span>Trash &amp; Bulk Pickup<span class="sectArrow">▸</span></div>
     <div class="sectBody" style="display:none"><div id="nhTrash"><div class="msg">Loading...</div></div></div>
     
