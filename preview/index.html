@@ -1293,30 +1293,31 @@ var loadWinners = once(function(){
         (rows[li+2] ? '<div class="det">' + esc(rows[li+2][0]) + '</div>' : '') +
         (rows[li+1][5] ? '<img class="winphoto" src="https://drive.google.com/thumbnail?id=' + esc(rows[li+1][5]) + '&sz=w800" alt="Winner photo">' : '') + '</div>';
     }
+    var latestText = "";
+    if (li >= 0 && rows[li+1]) latestText = ((rows[li+1][0]||"") + " " + ((rows[li+2]||[])[0]||"")).toLowerCase();
     var hi = findRow("HALL OF FAME");
     if (hi >= 0) {
       for (var i = hi + 2; i < rows.length; i++) {
         var r = rows[i];
         if (!r[0] || (r[0]||"").indexOf("COMING UP") >= 0) break;
         if (r[1] === "Competition") continue;
+        if (r[1] && r[2] && latestText.indexOf((r[1]||"").toLowerCase()) >= 0 && latestText.indexOf((r[2]||"").toLowerCase()) >= 0) continue;
         html += '<div class="card"><div class="ttl">🏆 ' + esc(r[1]||"") + ' — ' + esc(r[2]||"") + '</div>' +
           '<div class="chips"><span class="chip">📅 ' + esc(r[0]) + '</span></div>' +
           (r[4] ? '<div class="det">' + esc(r[4]) + '</div>' : '') +
           (r[5] ? '<img class="winphoto" src="https://drive.google.com/thumbnail?id=' + esc(r[5]) + '&sz=w800" alt="Winner photo">' : '') + '</div>';
       }
     }
+    var RUNNING = [/christmas/i, /porch/i, /holiday street/i, /photo of the year/i];
     var ci = findRow("COMING UP");
     if (ci >= 0) {
       for (var j = ci + 1; j < rows.length; j++) {
         var c = rows[j];
         if (!c[0]) continue;
+        if (!RUNNING.some(function(rx){ return rx.test(c[1]||""); })) continue;
         var voteUrl = "", voteEmoji = "";
-        if (/halloween/i.test(c[1]||"")) { voteUrl = FORMS.halloween; voteEmoji = "🎃"; }
         if (/christmas/i.test(c[1]||"")) { voteUrl = FORMS.christmas; voteEmoji = "🎄"; }
-        if (/flower garden/i.test(c[1]||"")) { voteUrl = FORMS.garden; voteEmoji = "🌸"; }
-        if (/golf course lawn/i.test(c[1]||"")) { voteUrl = FORMS.lawn; voteEmoji = "⛳"; }
         if (/porch/i.test(c[1]||"")) { voteUrl = FORMS.porch; voteEmoji = "🚪"; }
-        if (/pet costume/i.test(c[1]||"")) { voteUrl = FORMS.petcostume; voteEmoji = "🐶"; }
         if (/holiday street/i.test(c[1]||"")) { voteUrl = FORMS.street; voteEmoji = "🏘️"; }
         if (/photo of the year/i.test(c[1]||"")) { voteUrl = FORMS.photo; voteEmoji = "📸"; }
         html += '<div class="card"><div class="ttl">' + esc(c[1]||"") + '</div>' +
