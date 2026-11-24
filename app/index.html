@@ -144,6 +144,8 @@
   .winTtl{display:flex;align-items:center;gap:10px}
   .wic{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 1px 2px rgba(122,106,79,.25);display:inline-flex;align-items:center;justify-content:center}
   .wic svg{width:19px;height:19px}
+  #screen-updates .voteHead{cursor:pointer;-webkit-tap-highlight-color:transparent}
+  #screen-updates .voteHead .sectArrow{float:none;margin-left:auto}
   .flyerimg{width:100%;display:block;border-radius:16px;margin-top:10px;border:none;box-shadow:0 2px 10px rgba(16,24,40,.10)}
   .chip.blue{background:linear-gradient(145deg,#F0E4C9,#DECFA8);color:#4E3B26}
   .teams{font-size:13px;color:#1c2430;margin-top:7px}
@@ -863,6 +865,10 @@ function showParcel(f){
   document.getElementById("lotPop").style.display = "block";
 }
 function buildPlotMap(){
+  document.getElementById("lotPopClose").addEventListener("click", function(e){
+    e.preventDefault();
+    document.getElementById("lotPop").style.display = "none";
+  });
   if (krMap) { setTimeout(function(){ krMap.invalidateSize(); }, 250); return; }
   if (typeof L === "undefined") { buildMap(); return; }
   fetch("kr-parcels.geojson?v=20261119c").then(function(r){ return r.json(); }).then(function(data){
@@ -1312,7 +1318,7 @@ var loadWinners = once(function(){
           (r[5] ? '<img class="winphoto" src="https://drive.google.com/thumbnail?id=' + esc(r[5]) + '&sz=w800" alt="Winner photo">' : '') + '</div>';
       }
     }
-    var RUNNING = [/christmas/i, /porch/i, /holiday street/i, /photo of the year/i];
+    var RUNNING = [/christmas/i, /holiday street/i];
     var ci = findRow("COMING UP");
     if (ci >= 0) {
       for (var j = ci + 1; j < rows.length; j++) {
@@ -1324,13 +1330,24 @@ var loadWinners = once(function(){
         if (/porch/i.test(c[1]||"")) { voteUrl = FORMS.porch; voteIco = ICO_DOOR; }
         if (/holiday street/i.test(c[1]||"")) { voteUrl = FORMS.street; voteIco = ICO_STREET; }
         if (/photo of the year/i.test(c[1]||"")) { voteUrl = FORMS.photo; voteIco = ICO_CAMERA; }
-        html += '<div class="card"><div class="ttl winTtl"><span class="wic">' + voteIco + '</span><span>' + esc(c[1]||"") + '</span></div>' +
-          (c[0] ? '<div class="chips"><span class="chip">' + esc(c[0]) + '</span></div>' : '') +
+        html += '<div class="card"><div class="ttl winTtl voteHead"><span class="wic">' + voteIco + '</span><span>' + esc(c[1]||"") + '</span>' +
+          (c[0] ? '<span class="chip">' + esc(c[0]) + '</span>' : '') +
+          '<span class="sectArrow">▸</span></div>' +
+          '<div class="voteBody" style="display:none">' +
           (c[2] ? '<div class="det">' + esc((c[2]||"").replace(/\s*-\s*tap to vote\s*$/i, "")) + '</div>' : '') +
-          (voteUrl ? '<a class="postbtn" href="' + voteUrl + '" target="_blank" rel="noopener">' + ICO_BALLOT + 'Tap to vote</a>' : '') + '</div>';
+          (voteUrl ? '<a class="postbtn" href="' + voteUrl + '" target="_blank" rel="noopener">' + ICO_BALLOT + 'Tap to vote</a>' : '') + '</div></div>';
       }
     }
-    document.getElementById("winList").innerHTML = html || '<div class="msg">Nothing here yet.</div>';
+    var wl = document.getElementById("winList");
+    wl.innerHTML = html || '<div class="msg">Nothing here yet.</div>';
+    wl.querySelectorAll(".voteHead").forEach(function(h){
+      h.addEventListener("click", function(){
+        var body = h.nextElementSibling;
+        var closed = body.style.display === "none";
+        body.style.display = closed ? "" : "none";
+        h.querySelector(".sectArrow").textContent = closed ? "▾" : "▸";
+      });
+    });
   }).catch(function(){ errBox(document.getElementById("winList"), "winners"); });
 });
 
