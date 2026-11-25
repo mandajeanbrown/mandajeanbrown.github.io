@@ -948,7 +948,7 @@ var loadDirectory = once(function(){
 var LOT_AWARDS = {"103": "Chili Cook-Off"};
 function photoWithAward(d){
   var img = '<img class="dirphoto" src="https://drive.google.com/thumbnail?id=' + esc(d.photo) + '&sz=w800" alt="Family photo">';
-  if (LOT_AWARDS[String(d.lot)]) return '<div class="photoWrap"><div class="ribbon1">1st Place</div>' + img + '</div>';
+  if (LOT_AWARDS[String(d.lot)]) return '<div class="photoWrap"><div class="ribbon1">' + esc(LOT_AWARDS[String(d.lot)]) + ' Champion</div>' + img + '</div>';
   return img;
 }
 function dirCard(d){
